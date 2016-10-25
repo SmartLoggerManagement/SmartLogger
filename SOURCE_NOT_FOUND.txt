@@ -1,0 +1,2 @@
+Use to display branch on repository.
+This branch contains futur source code of SmartLogger.
