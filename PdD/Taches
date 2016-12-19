@@ -1,0 +1,11 @@
+Itération n°1 -  - :
+-> Installer Spark
+-> Implanter l'interface ILearner
+-> Réaliser un type concret de Learner, basé sur des algorithmes
+-> Doter le module d'un sous-système d'entrée (pour fournir des données).
+-> Associer un dispositif de sortie.
+-> Etalonner le module à l'aide d'un jeu initial
+-> Tester les performances des fonctionalités de prédiction et d'analyse
+
+Itération n°2 -  - :
+-> 
