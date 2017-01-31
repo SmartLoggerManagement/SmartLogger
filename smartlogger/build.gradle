@@ -10,6 +10,9 @@ repositories {
 }
 
 dependencies {
+    compile 'org.scala-lang:scala-library:2.11.1'
+    compile "org.scalatest:scalatest_2.10:1.9.1"
+
     runtime group: 'org.springframework', name: 'spring-core', version: '2.5'
     runtime 'org.springframework:spring-core:2.5',
             'org.springframework:spring-aop:2.5'
@@ -26,5 +29,11 @@ dependencies {
     }
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "org.scala-lang:scala-library:2.11.1"
 }
 
+task listJars {
+    doLast {
+        configurations.compile.each { File file -> println file.name }
+    }
+}

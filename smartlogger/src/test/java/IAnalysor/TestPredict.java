@@ -1,9 +1,11 @@
+package java.IAnalysor;
+
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
-public class TestGetWeights {
-   @Test
-   private Analyser analy = new Analyser();
+public class TestPredict {
+   /*private IAnalyzer analy = new StubAnalyzer();
    //Require erroneous Data
    private Collection<E> errData;
    //Require data logs for testing
@@ -16,18 +18,18 @@ public class TestGetWeights {
       
    }
 
-   public void testTypeCorrespondance() {
+   public void testTypeCorrespondance() {
       analy.predict(data);
    	assertTrue(true, analy.data instanceof Collection<E>);
    }
 
    public void testSentType() {
       analy.predict(data);
-      assertTrue(true, analy.predict(data) instanceof RDD[double]);
+      assertTrue(true, analy.predict(data) instanceof RDD[]);
    }
 
    public void testErrorData() {
-      assertEquals(analy.predict)
+      assertEquals(analy.predict);
    }
 
    public void testEfficiency() {
@@ -43,5 +45,5 @@ public class TestGetWeights {
       analy.predict(bigData);
       endTime = System.currentTimeMillis();
       System.out.println("Big Data patch predicting: " + (endTime - startTime) + " milliseconds");
-   }
+   }*/
 }
