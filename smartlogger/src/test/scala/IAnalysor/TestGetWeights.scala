@@ -1,18 +1,19 @@
 package scala.IAnalysor
 
+import org.scalatest.junit.JUnitRunner
+import org.scalatest.{FlatSpec, Matchers}
+
 import scala.ML.StubAnalyzer
 
-/**
-  * Created by Kero76 on 31/01/17.
-  */
-class TestGetWeights {
+@RunWith(classOf[JUnitRunner])
+class TestGetWeights extends FlatSpec with Matchers {
   private val analyzer = new StubAnalyzer
 
   def testNull() {
-    assertFalse(analyzer.weights == null)
+    assert(analyzer.weights == null)
   }
 
   def testSentType() {
-    assertTrue(true, analyzer.getWeights.isInstanceOf[Seq[Any]])
+    assert(analyzer.getWeights.isInstanceOf[String])
   }
 }

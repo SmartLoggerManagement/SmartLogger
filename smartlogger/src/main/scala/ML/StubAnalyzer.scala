@@ -5,16 +5,16 @@ package scala.ML
   */
 class StubAnalyzer extends IAnalyzer {
   var weights:Seq[Any] = _
-  override def train (data: Seq[String]): Unit = {
+  override def train (data: Seq[(Long, String, Double)]): Unit = {
 
   }
 
-  override def predict (data: Seq[String]): Unit = {
-
+  override def predict (data: Seq[(Long, String)]): Seq[(Long, String, Double)] = {
+    return null
   }
 
-  override def getWeights(): Seq[Any] = {
-      weights
+  override def getWeights(): String = {
+    return null
   }
 
   override def setWeights(data: Seq[Any]): Unit = {
