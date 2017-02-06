@@ -1,0 +1,14 @@
+products:
+   src/main/scala/ML/IAnalyzer.scala -> build/classes/main/scala/ML/IAnalyzer.class
+   src/main/scala/ML/StubAnalyzer.scala -> build/classes/main/scala/ML/StubAnalyzer.class
+binary dependencies:
+   src/main/scala/ML/IAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.1/dd235d04037dc6f4b6090257872dd35359a563ce/scala-library-2.12.1.jar
+   src/main/scala/ML/IAnalyzer.scala -> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+   src/main/scala/ML/StubAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.1/dd235d04037dc6f4b6090257872dd35359a563ce/scala-library-2.12.1.jar
+   src/main/scala/ML/StubAnalyzer.scala -> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+source dependencies:
+   src/main/scala/ML/StubAnalyzer.scala -> src/main/scala/ML/IAnalyzer.scala
+external dependencies:
+class names:
+   src/main/scala/ML/IAnalyzer.scala -> scala.ML.IAnalyzer
+   src/main/scala/ML/StubAnalyzer.scala -> scala.ML.StubAnalyzer

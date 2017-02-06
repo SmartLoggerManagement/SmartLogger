@@ -1,0 +1,10 @@
+products:
+   src/test/scala/IAnalysor/StubAnalyzerTest.scala -> build/classes/test/StubAnalyzerTest.class
+binary dependencies:
+   src/test/scala/IAnalysor/StubAnalyzerTest.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar
+   src/test/scala/IAnalysor/StubAnalyzerTest.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scalactic/scalactic_2.12/3.0.1/1d893666e3561505729e33a3ee124e22fbfed774/scalactic_2.12-3.0.1.jar
+   src/test/scala/IAnalysor/StubAnalyzerTest.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scalatest/scalatest_2.12/3.0.1/3a9dcb5a4308c4fd0f7424b5676f6fbf21c85131/scalatest_2.12-3.0.1.jar
+source dependencies:
+external dependencies:
+class names:
+   src/test/scala/IAnalysor/StubAnalyzerTest.scala -> StubAnalyzerTest

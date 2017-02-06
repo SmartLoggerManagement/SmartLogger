@@ -10,18 +10,19 @@ repositories {
 }
 
 dependencies {
-    compile 'org.scala-lang:scala-library:2.11.1'
-    compile "org.scalatest:scalatest_2.11:1.9.1"
+    compile 'org.scala-lang:scala-library:2.12.1'
+    compile "org.scalatest:scalatest_2.12:3.0.1"
     compile 'com.sparkjava:spark-core:2.2'
 
-    testCompile "org.scala-lang:scala-library:2.11.1"
-    testCompile 'org.scalatest:scalatest_2.11:3.0.1'
+    testCompile "org.scala-lang:scala-library:2.12.1"
+    testCompile "org.scalatest:scalatest_2.12:3.0.1"
+    testCompile 'junit:junit:4.12'
 }
 
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/ML/StubAnalyzer']
+            srcDirs = ['src/main/scala/ML']
         }
     }
     test {
