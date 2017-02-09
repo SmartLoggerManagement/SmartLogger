@@ -15,11 +15,24 @@ dependencies {
     compile 'org.apache.spark:spark-core_2.11:2.1.0'
     compile 'org.apache.spark:spark-mllib_2.11:2.1.0'
 
+    compile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
+    compile 'com.typesafe.akka:akka-http_2.11:10.0.3'
+    compile 'com.typesafe.akka:akka-http-testkit_2.11:10.0.3'
+    compile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
+    compile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
+    compile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
+
     testCompile "org.scala-lang:scala-library:2.12.1"
     testCompile "org.scalatest:scalatest_2.12:3.0.1"
     testCompile 'junit:junit:4.12'
     testCompile 'org.apache.spark:spark-core_2.11:2.1.0'
     testCompile 'org.apache.spark:spark-mllib_2.11:2.1.0'
+    testCompile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
+    testCompile 'com.typesafe.akka:akka-http_2.11:10.0.3'
+    testCompile 'com.typesafe.akka:akka-http-testkit_2.11:10.0.3'
+    testCompile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
+    testCompile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
+    testCompile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
 }
 
 sourceSets {
