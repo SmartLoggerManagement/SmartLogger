@@ -1,14 +1,22 @@
 products:
    src/main/scala/ML/IAnalyzer.scala -> build/classes/main/scala/ML/IAnalyzer.class
-   src/main/scala/ML/StubAnalyzer.scala -> build/classes/main/scala/ML/StubAnalyzer.class
+   src/main/scala/ML/SmartAnalyzer.scala -> build/classes/main/SmartAnalyzer$$typecreator1$1.class
+   src/main/scala/ML/SmartAnalyzer.scala -> build/classes/main/SmartAnalyzer$$typecreator2$1.class
+   src/main/scala/ML/SmartAnalyzer.scala -> build/classes/main/SmartAnalyzer.class
 binary dependencies:
    src/main/scala/ML/IAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.1/dd235d04037dc6f4b6090257872dd35359a563ce/scala-library-2.12.1.jar
    src/main/scala/ML/IAnalyzer.scala -> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
-   src/main/scala/ML/StubAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.1/dd235d04037dc6f4b6090257872dd35359a563ce/scala-library-2.12.1.jar
-   src/main/scala/ML/StubAnalyzer.scala -> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+   src/main/scala/ML/SmartAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.apache.spark/spark-catalyst_2.11/2.1.0/2909639984ae26ec9e77bbf45b7a4ccd601afebe/spark-catalyst_2.11-2.1.0.jar
+   src/main/scala/ML/SmartAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.apache.spark/spark-mllib_2.11/2.1.0/a749cf984c6d2e41b271204b5a33378667495838/spark-mllib_2.11-2.1.0.jar
+   src/main/scala/ML/SmartAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.apache.spark/spark-sql_2.11/2.1.0/4306080bcebabbd2d33b67bb5323961aa90f0424/spark-sql_2.11-2.1.0.jar
+   src/main/scala/ML/SmartAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.12.1/dd235d04037dc6f4b6090257872dd35359a563ce/scala-library-2.12.1.jar
+   src/main/scala/ML/SmartAnalyzer.scala -> /home/madzinah/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.12.0/980f68c6ca4fcf9d70c142160108ddfeaee0787a/scala-reflect-2.12.0.jar
+   src/main/scala/ML/SmartAnalyzer.scala -> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
 source dependencies:
-   src/main/scala/ML/StubAnalyzer.scala -> src/main/scala/ML/IAnalyzer.scala
+   src/main/scala/ML/SmartAnalyzer.scala -> src/main/scala/ML/IAnalyzer.scala
 external dependencies:
 class names:
    src/main/scala/ML/IAnalyzer.scala -> scala.ML.IAnalyzer
-   src/main/scala/ML/StubAnalyzer.scala -> scala.ML.StubAnalyzer
+   src/main/scala/ML/SmartAnalyzer.scala -> SmartAnalyzer
+   src/main/scala/ML/SmartAnalyzer.scala -> SmartAnalyzer$$typecreator1$1
+   src/main/scala/ML/SmartAnalyzer.scala -> SmartAnalyzer$$typecreator2$1

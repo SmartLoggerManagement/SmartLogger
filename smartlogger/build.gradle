@@ -12,11 +12,14 @@ repositories {
 dependencies {
     compile 'org.scala-lang:scala-library:2.12.1'
     compile "org.scalatest:scalatest_2.12:3.0.1"
-    compile 'com.sparkjava:spark-core:2.2'
+    compile 'org.apache.spark:spark-core_2.11:2.1.0'
+    compile 'org.apache.spark:spark-mllib_2.11:2.1.0'
 
     testCompile "org.scala-lang:scala-library:2.12.1"
     testCompile "org.scalatest:scalatest_2.12:3.0.1"
     testCompile 'junit:junit:4.12'
+    testCompile 'org.apache.spark:spark-core_2.11:2.1.0'
+    testCompile 'org.apache.spark:spark-mllib_2.11:2.1.0'
 }
 
 sourceSets {

@@ -6,8 +6,4 @@ trait IAnalyzer {
 
     def predict (data: Seq[(Long, String)]): Seq[(Long, String, Double)]
 
-    def getWeights: String
-
-    def setWeights(data: Seq[Any]): Unit
-
 }
