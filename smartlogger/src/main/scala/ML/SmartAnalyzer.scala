@@ -1,3 +1,5 @@
+import java.rmi.NotBoundException
+
 import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.ml.classification._
 import org.apache.spark.ml.feature._
@@ -16,7 +18,9 @@ M <: ProbabilisticClassificationModel[Vector, M]]
     var model:PipelineModel = _
 
     override def train(data: Seq[(Long, String, Double)]): Unit = {
-
+        if (data == null) {
+          throw new IllegalArgumentException("data shouldn't be null")
+        }
         // Creating the DataFrame of the data
         val spark = SparkSession
           .builder()
@@ -44,6 +48,12 @@ M <: ProbabilisticClassificationModel[Vector, M]]
     }
 
     override def predict (data: Seq[(Long, String)]): Seq[(Long, String, Double)] = {
+        if (model == null) {
+          throw new NotBoundException("The SmartAnalyzer didn't train before")
+        }
+        if (data == null) {
+          throw new IllegalArgumentException("data shouldn't be null")
+        }
 
         // Creating the DataFrame of the data
         val spark = SparkSession

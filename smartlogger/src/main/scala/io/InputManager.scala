@@ -5,10 +5,7 @@ import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl._
 
-/**
-  *
-  * @author
-  * @since SmartLogger 0.1
+/**SmartLogger 0.1
   * @version
   */
 class InputManager {
@@ -16,7 +13,7 @@ class InputManager {
 
   // Modifie les données => Transforme contenu.
 
-  // Envoie les odnnées au ML.
+  // Envoie les données au ML.
 
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
@@ -27,6 +24,6 @@ class InputManager {
   val bindingFuture: Future[Http.ServerBinding] =
     serverSource.to(Sink.foreach { connection => // foreach materializes the source
       println("Accepted new connection from " + connection.remoteAddress)
-      // ... and then actually handle the connection
+      // ... and then
     }).run()
 }
