@@ -1,5 +1,4 @@
-import org.apache.spark.ml.classification.{NaiveBayes, NaiveBayesModel}
-import org.apache.spark.ml.feature.CountVectorizer
+import org.apache.spark.ml.classification.NaiveBayes
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
@@ -11,7 +10,7 @@ class SmartAnalyzerTest extends FunSuite {
     * expected behaviour : illegal argument exception
     */
     test("testTrainNull") {
-      val analy = new SmartAnalyzer(new NaiveBayes())
+      val analy = new SmartAnalyzer(new NaiveBayes)
         try {
           analy.train(null)
           fail("The test should throw an IllegalArgumentException")

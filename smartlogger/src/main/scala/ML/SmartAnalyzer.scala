@@ -23,9 +23,11 @@ M <: ProbabilisticClassificationModel[Vector, M]]
         }
         // Creating the DataFrame of the data
         val spark = SparkSession
-          .builder()
+          .builder
+          .master("local")
           .appName("SmartLogger")
           .getOrCreate()
+
         val document = spark.createDataFrame(data)
           .toDF("id", "text", "label")
 
@@ -57,7 +59,8 @@ M <: ProbabilisticClassificationModel[Vector, M]]
 
         // Creating the DataFrame of the data
         val spark = SparkSession
-          .builder()
+          .builder
+          .master("local")
           .appName("SmartLogger")
           .getOrCreate()
         val document = spark.createDataFrame(data)
@@ -78,7 +81,7 @@ M <: ProbabilisticClassificationModel[Vector, M]]
              if (prediction >= 2.0) {
                  println(id + ":" + text + ":" + prediction)
              }
-            sequence = sequence.+:((id, text, prediction))
+            sequence = sequence.:+((id, text, prediction))
         }
 
         return sequence
