@@ -1,22 +1,21 @@
 import org.apache.spark.ml.classification.NaiveBayes
 import org.junit.runner.RunWith
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class SmartAnalyzerTest extends FunSuite {
+class SmartAnalyzerTest extends FunSuite with Matchers {
 
     /* testing train(null)
     * expected behaviour : illegal argument exception
     */
-    test("testTrainNull") {
+    test("test train with null object") {
       val analy = new SmartAnalyzer(new NaiveBayes)
         try {
           analy.train(null)
           fail("The test should throw an IllegalArgumentException")
         } catch {
-          case exception:IllegalArgumentException => assert(true)
-          case e:Exception => assert(false)
+          case exception:IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
         }
     }
 
@@ -24,7 +23,7 @@ class SmartAnalyzerTest extends FunSuite {
     *expected behavior : illegal argument exception
      */
 
-    test("testTrainNullParam2") {
+    test("Test train with null message at null") {
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
         (0L, "X totally sucks :-(", 0.0),
@@ -35,8 +34,7 @@ class SmartAnalyzerTest extends FunSuite {
         analy.train(seq)
         fail("The test should throw an IllegalArgumentException")
       } catch {
-        case exception:IllegalArgumentException => assert(true)
-        case e:Exception => assert(false)
+        case exception:IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
       }
     }
 
@@ -68,9 +66,9 @@ class SmartAnalyzerTest extends FunSuite {
       analy.train(seq)
       try {
         analy.predict(null)
-        assert(false)
+        fail("Prediction not working with null seq at predict")
       } catch {
-        case exception:IllegalArgumentException => assert(true)
+        case exception:IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
         case e:Exception => assert(false)
       }
     }
@@ -78,24 +76,24 @@ class SmartAnalyzerTest extends FunSuite {
   *expected behavior : illegal argument exception
    */
 
-  test("testPredictNullParam2") {
+  test("test Predict with pattern at null") {
     val analy = new SmartAnalyzer(new NaiveBayes)
     val seq = Seq.apply(
       (0L, "X totally sucks :-(", 0.0),
       (1L, "Today was kind of meh", 1.0),
       (2L, "I'm so happy :-)", 2.0)
     )
+    analy.train(seq)
     val predi = Seq.apply(
       (4L, null),
       (5L, "i burned my bacon :-("),
       (6L, "the movie is kind of meh")
     )
-    analy.train(seq)
     try {
       analy.predict(predi)
       assert(false)
     } catch {
-      case exception:IllegalArgumentException => assert(true)
+      case exception:IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
       case e:Exception => assert(false)
     }
   }
@@ -103,18 +101,19 @@ class SmartAnalyzerTest extends FunSuite {
     /*Testing predict(seq) giving always the same result
     *expected behavior : predict(seq) == predict(seq)
      */
-    test("testPredictSameRes") {
+    test("test Predict Same Result") {
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
         (0L, "X totally sucks :-(", 0.0),
         (1L, "Today was kind of meh", 1.0),
         (2L, "I'm so happy :-)", 2.0)
       )
+      analy.train(seq)
       val predi = Seq.apply(
         (0L, "X totally sucks :-("),
         (1L, "Today was kind of meh"),
         (2L, "I'm so happy :-)")
       )
-      assert(analy.predict(predi) == seq)
+      analy.predict(predi) should equal(seq)
     }
 }

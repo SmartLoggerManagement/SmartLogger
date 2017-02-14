@@ -16,7 +16,7 @@ import com.typesafe.config.ConfigFactory
 class InputManager extends InputManagerInterface {
 
   override def connect(): Unit = {
-    WebServer.startServer("localhost", 8080, ServerSettings(ConfigFactory.load))
+    //WebServer.startServer("localhost", 8080, ServerSettings(ConfigFactory.load))
   }
 
   override def disconnect(): Unit ={
@@ -49,13 +49,16 @@ class InputManager extends InputManagerInterface {
   object WebServer extends HttpApp {
     def route: Route =
       path("smartlogger") {
-        put {
+            // At replace.
+            get {
+              complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
+            }
+          }
+        /*put {
           entity(as[Message]) { message =>
             complete("The message was :" + message)
           }
 
-        }
-      }
-  }
-
+        }*/
+    }
   }

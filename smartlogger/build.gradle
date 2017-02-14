@@ -16,7 +16,6 @@ dependencies {
     compile 'org.apache.spark:spark-mllib_2.11:2.1.0'
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: '2.8.6'
 
-
     compile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
     compile 'com.typesafe.akka:akka-http_2.11:10.0.3'
     compile 'com.typesafe.akka:akka-http-testkit_2.11:10.0.3'
@@ -30,9 +29,6 @@ dependencies {
     testCompile 'org.apache.spark:spark-core_2.11:2.1.0'
     testCompile 'org.apache.spark:spark-mllib_2.11:2.1.0'
     testCompile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: '2.8.6'
-
-
-
 
     testCompile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http_2.11:10.0.3'

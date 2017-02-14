@@ -7,7 +7,7 @@ class InputManagerTest extends FunSuite {
 
   test("testConnect") {
     println("test\n")
-    var im: InputManager = new InputManager
+    val im: InputManager = new InputManager
     im.connect()
     Thread.sleep(10000)
   }
