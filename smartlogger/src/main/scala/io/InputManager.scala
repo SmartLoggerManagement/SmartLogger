@@ -1,11 +1,9 @@
-package smartlogger.src.main.scala.io
-
-import scala.concurrent.Future
-import akka.actor.ActorSystem
-import akka.http.scaladsl.Http
-import akka.stream.ActorMaterializer
-import akka.stream.scaladsl._
-
+import akka.http.scaladsl.model.{ ContentTypes, HttpEntity }
+import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.server.HttpApp
+import akka.http.scaladsl.server.Route
+import akka.http.scaladsl.settings.ServerSettings
+import com.typesafe.config.ConfigFactory
 
 /**
   *
@@ -18,19 +16,7 @@ import akka.stream.scaladsl._
 class InputManager extends InputManagerInterface {
 
   override def connect(): Unit = {
-    implicit val system = ActorSystem()
-
-    implicit val materializer = ActorMaterializer()
-
-    implicit val executionContext = system.dispatcher
-
-    val serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] =
-      Http().bind(interface = "localhost", port = 8080)
-
-    val bindingFuture: Future[Http.ServerBinding] =
-      serverSource.to(Sink.foreach { connection =>
-        //ici recuperer le contenu de requete et les renvoyer
-      }).run()
+    WebServer.startServer("localhost", 8080, ServerSettings(ConfigFactory.load))
   }
 
   override def disconnect(): Unit ={
@@ -58,5 +44,18 @@ class InputManager extends InputManagerInterface {
 
   }
 
+  case class Message(message : String)
+
+  object WebServer extends HttpApp {
+    def route: Route =
+      path("smartlogger") {
+        put {
+          entity(as[Message]) { message =>
+            complete("The message was :" + message)
+          }
+
+        }
+      }
+  }
 
   }
