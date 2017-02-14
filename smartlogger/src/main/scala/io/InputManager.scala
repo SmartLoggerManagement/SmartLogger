@@ -1,29 +1,62 @@
-import scala.concurrent.Future
+package smartlogger.src.main.scala.io
 
+import scala.concurrent.Future
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl._
 
-/**SmartLogger 0.1
+
+/**
+  *
+  * @author Team SmartLogger
+  * @since SmartLogger 0.1
+  * SmartLogger 0.1
+  *
   * @version
   */
-class InputManager {
-  // Connect
+class InputManager extends InputManagerInterface {
 
-  // Modifie les données => Transforme contenu.
+  override def connect(): Unit = {
+    implicit val system = ActorSystem()
 
-  // Envoie les données au ML.
+    implicit val materializer = ActorMaterializer()
 
-  implicit val system = ActorSystem()
-  implicit val materializer = ActorMaterializer()
-  implicit val executionContext = system.dispatcher
+    implicit val executionContext = system.dispatcher
 
-  val serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] =
-    Http().bind(interface = "localhost", port = 8080)
-  val bindingFuture: Future[Http.ServerBinding] =
-    serverSource.to(Sink.foreach { connection => // foreach materializes the source
-      println("Accepted new connection from " + connection.remoteAddress)
-      // ... and then
-    }).run()
-}
+    val serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] =
+      Http().bind(interface = "localhost", port = 8080)
+
+    val bindingFuture: Future[Http.ServerBinding] =
+      serverSource.to(Sink.foreach { connection =>
+        //ici recuperer le contenu de requete et les renvoyer
+      }).run()
+  }
+
+  override def disconnect(): Unit ={
+
+  }
+
+  /**
+    * Convert data receive from the HTTP flux.
+    *
+    * @since
+    * @version
+    */
+  override def convert(): Unit = {
+
+  }
+
+
+  /**
+    * Send the data previously convert to the Machine Learning to process train and predict method.
+    *
+    * @since
+    * @version
+    */
+  override   def sendData(): Unit ={
+
+  }
+
+
+  }
