@@ -7,6 +7,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -23,6 +24,10 @@ dependencies {
     compile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
     compile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
 
+    // Mail librairy
+    compile 'com.github.softprops:courier:0.1.4'
+    compile group: 'org.jvnet.mock-javamail', name: 'mock-javamail', version: '1.1' // Use to test mail sending.
+
     testCompile "org.scala-lang:scala-library:2.11"
     testCompile "org.scalatest:scalatest_2.11:3.0.1"
     testCompile 'junit:junit:4.12'
@@ -36,6 +41,7 @@ dependencies {
     testCompile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
+
 }
 
 sourceSets {
