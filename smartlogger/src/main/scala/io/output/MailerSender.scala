@@ -1,6 +1,9 @@
 package output
 
 import courier.{Envelope, Mailer, Text}
+import javax.mail.internet.InternetAddress
+
+import scala.util.{Failure, Success, Try}
 
 /**
   * Created by Kero76 on 15/02/17.
@@ -23,18 +26,17 @@ class MailSender(serverAddr: String, port: Int, mailAddr: String, pwd: String) e
     val mailer = Mailer(serverAddr, port)
       .auth(true)
       .as(mailAddr, pwd)
-      .startTtls(true)
+      .startTtls(true)()
 
 
-    /*
-     * @TODO : Fix bug on these lines.
-    mailer(Envelope.from("you" `@` "gmail.com")
-      .to("mom" `@` "gmail.com")
-      .cc("dad" `@` "gmail.com")
-      .subject("miss you")
+    //@TODO : Change onSucess to a updated function from Future.
+    mailer(Envelope.from(new InternetAddress("you@gmail.com"))
+      .to(new InternetAddress("mom@gmail.com"))
+      .cc(new InternetAddress("dad@gmail.com"))
+      .subject("Error on your server")
       .content(Text(content))).onSuccess {
       case _ => println("message delivered")
     }
-    */
+
   }
 }
