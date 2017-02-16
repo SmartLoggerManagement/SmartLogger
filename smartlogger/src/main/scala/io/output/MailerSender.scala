@@ -2,6 +2,7 @@ package output
 
 import courier.{Envelope, Mailer, Text}
 import javax.mail.internet.InternetAddress
+import scala.concurrent.ExecutionContext.Implicits.global
 
 import scala.util.{Failure, Success, Try}
 
@@ -34,8 +35,10 @@ class MailSender(serverAddr: String, port: Int, mailAddr: String, pwd: String) e
       .to(new InternetAddress("mom@gmail.com"))
       .cc(new InternetAddress("dad@gmail.com"))
       .subject("Error on your server")
-      .content(Text(content))).onSuccess {
-      case _ => println("message delivered")
+      .content(Text(content))).onComplete {
+        case Success(message) => println("Message delivered : " + message)
+        case Failure(message) => println("Failure during the sending of the message : "
+            + message)
     }
 
   }
