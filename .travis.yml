@@ -2,3 +2,18 @@ language: scala
 scala:
    - 2.11.2
    - 2.12.1
+
+# whitelist
+branches:
+  only:
+    - sources
+
+# blacklist
+branches:
+  except:
+    - master
+    - documentations
+    - transfer
+
+# Scripting
+script: cd smartlogger && gradle check
