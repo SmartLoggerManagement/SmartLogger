@@ -9,7 +9,7 @@ import scala.util.{Failure, Success, Try}
 /**
   * Created by Kero76 on 15/02/17.
   */
-class MailSender(serverAddr: String, port: Int, mailAddr: String, pwd: String) extends IOutputManager {
+class MailSender(serverAddr: String, port: Int, mailAddr: String, pwd: String) extends INotifier {
 
   /**
     * Stored information about mail contact
@@ -29,8 +29,6 @@ class MailSender(serverAddr: String, port: Int, mailAddr: String, pwd: String) e
       .as(mailAddr, pwd)
       .startTtls(true)()
 
-
-    //@TODO : Change onSucess to a updated function from Future.
     mailer(Envelope.from(new InternetAddress("you@gmail.com"))
       .to(new InternetAddress("mom@gmail.com"))
       .cc(new InternetAddress("dad@gmail.com"))

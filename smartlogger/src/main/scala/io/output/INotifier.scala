@@ -3,9 +3,10 @@ package output
 /**
   * Created by Kero76 on 15/02/17.
   */
-trait IOutputManager {
+trait INotifier {
 
   /**
+    * Send the message thanks into a communication flux.
     *
     * @param content
     *   Content to send.
