@@ -16,9 +16,12 @@ trait IAlerter {
   def addNotifier(notifier: INotifier): Unit
 
   /**
-    * Notify all notifier previously insert.
+    * Notify all notifiers previously added.
+    *
+    * @param content
+    *   content to send.
     * @since SmartLogger 1.0
     * @version 1.0
     */
-  def notifyAll(): Unit
+  def alertAll(content: String): Unit
 }

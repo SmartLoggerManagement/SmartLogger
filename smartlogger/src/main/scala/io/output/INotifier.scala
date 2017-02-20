@@ -6,7 +6,7 @@ package output
 trait INotifier {
 
   /**
-    * Send the message thanks into a communication flux.
+    * Send the message into a communication flux.
     *
     * @param content
     *   Content to send.
