@@ -1,9 +1,8 @@
-import akka.http.scaladsl.model.{ ContentTypes, HttpEntity }
+package input
+
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.HttpApp
-import akka.http.scaladsl.server.Route
-import akka.http.scaladsl.settings.ServerSettings
-import com.typesafe.config.ConfigFactory
+import akka.http.scaladsl.server.{HttpApp, Route}
 
 /**
   *

@@ -22,7 +22,8 @@ class Alerter extends IAlerter {
   }
 
   /**
-    * Notify all notifiers previously added.
+    * Notify all notifiers previously added.git pull
+    *
     *
     * @param content
     * content to send.
