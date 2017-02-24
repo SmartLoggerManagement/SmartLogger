@@ -20,7 +20,7 @@ trait InputManagerInterface {
   /**
     * Close the connection previously open by the method connect.
     *
-    * This method close the socket only if the socket is open and listen specific port.
+    * This method closes the socket only if the socket is open and listen specific port.
     *
     * @see connect()
     * @since
@@ -29,7 +29,7 @@ trait InputManagerInterface {
   def disconnect()
 
   /**
-    * Convert data receive from the HTTP flux.
+    * Convert data received from the HTTP flux.
     *
     * @since
     * @version
@@ -37,7 +37,7 @@ trait InputManagerInterface {
   def convert()
 
   /**
-    * Send the data previously convert to the Machine Learning to process train and predict method.
+    * Send the data previously converted to the Machine Learning to process, train and predict method.
     *
     * @since
     * @version

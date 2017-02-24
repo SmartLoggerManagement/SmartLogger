@@ -23,7 +23,7 @@ class InputManager extends InputManagerInterface {
   }
 
   /**
-    * Convert data receive from the HTTP flux.
+    * Convert data received from the HTTP flux.
     *
     * @since
     * @version
@@ -34,7 +34,7 @@ class InputManager extends InputManagerInterface {
 
 
   /**
-    * Send the data previously convert to the Machine Learning to process train and predict method.
+    * Send the data previously converted to the Machine Learning to process, train and predict method.
     *
     * @since
     * @version
