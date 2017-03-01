@@ -24,9 +24,7 @@ dependencies {
     compile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
     compile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
 
-    // Mail library
-    //compile 'com.github.softprops:courier:0.1.4'
-    
+    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
 
     testCompile "org.scala-lang:scala-library:2.11"
     testCompile "org.scalatest:scalatest_2.11:3.0.1"
@@ -49,12 +47,14 @@ dependencies {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/ML', 'src/main/scala/io/input']
+            srcDirs = ['src/main/scala/ML', 'src/main/scala/io']
         }
     }
     test {
         scala {
-            srcDirs = ['src/test/scala/IAnalysor']
+            srcDirs = ['src/test/scala/IAnalysor'
+                    //,'src/test/scala/benchmark'
+                    ]
         }
     }
 }
