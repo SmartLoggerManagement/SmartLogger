@@ -1,8 +1,14 @@
 package input
 
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
-import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.{HttpApp, Route}
+import akka.actor.ActorSystem
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.model.HttpMethods._
+import akka.http.scaladsl.model._
+import akka.stream.ActorMaterializer
+import akka.stream.scaladsl.Sink
+
+import scala.concurrent.duration._
+import scala.concurrent.Future
 
 /**
   *
@@ -14,50 +20,35 @@ import akka.http.scaladsl.server.{HttpApp, Route}
   */
 class InputManager extends InputManagerInterface {
 
-  override def connect(): Unit = {
+  val timeout = 300.millis
+
+  override def open(): Unit = {
     //WebServer.startServer("localhost", 8080, ServerSettings(ConfigFactory.load))
-  }
+    implicit val system = ActorSystem()
+    implicit val materializer = ActorMaterializer()
+    implicit val executionContext = system.dispatcher
 
-  override def disconnect(): Unit ={
+    val serverSource = Http().bind(interface = "localhost", port = 8080)
 
-  }
+    val requestHandler: HttpRequest => HttpResponse = {
+      // The PUT Request will give the logs, it needs to give them to the Batch
+      case r @ HttpRequest(PUT, Uri.Path("/smartlogger"), _, _, _) =>
+      val result = r.entity.toStrict(timeout).map { _.data }.map(_.utf8String)
+        for {res <- result } yield {
+          LogBatch.add(LogParser.parsePredictData(res))
+        }
+        HttpResponse(200, entity = "Data received !")
 
-  /**
-    * Convert data received from the HTTP flux.
-    *
-    * @since
-    * @version
-    */
-  override def convert(): Unit = {
-
-  }
-
-
-  /**
-    * Send the data previously converted to the Machine Learning to process, train and predict method.
-    *
-    * @since
-    * @version
-    */
-  override   def sendData(): Unit ={
-
-  }
-
-  case class Message(message : String)
-
-  object WebServer extends HttpApp {
-    def route: Route =
-      path("smartlogger") {
-            // At replace.
-            get {
-              complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Say hello to akka-http</h1>"))
-            }
-          }
-        /*put {
-          entity(as[Message]) { message =>
-            complete("The message was :" + message)
-          }
-
-        }*/
+      case r: HttpRequest =>
+        r.discardEntityBytes() // important to drain incoming HTTP Entity stream
+        HttpResponse(404, entity = "Unknown resource!")
     }
+
+    val bindingFuture: Future[Http.ServerBinding] =
+      serverSource.to(Sink.foreach { connection =>
+        println("Accepted new connection from " + connection.remoteAddress)
+        connection handleWithSyncHandler requestHandler
+      }).run()
   }
+
+}

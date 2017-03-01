@@ -15,32 +15,6 @@ trait InputManagerInterface {
     * @since
     * @version
     */
-  def connect()
+  def open()
 
-  /**
-    * Close the connection previously open by the method connect.
-    *
-    * This method closes the socket only if the socket is open and listen specific port.
-    *
-    * @see connect()
-    * @since
-    * @version
-    */
-  def disconnect()
-
-  /**
-    * Convert data received from the HTTP flux.
-    *
-    * @since
-    * @version
-    */
-  def convert()
-
-  /**
-    * Send the data previously converted to the Machine Learning to process, train and predict method.
-    *
-    * @since
-    * @version
-    */
-  def sendData()
 }
