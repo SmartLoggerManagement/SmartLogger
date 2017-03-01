@@ -6,6 +6,7 @@ import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model._
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Sink
+import fr.nicolasgille.json.{JsonFileManager, SettingType}
 
 import scala.concurrent.duration._
 import scala.concurrent.Future
@@ -31,8 +32,12 @@ class InputManager extends InputManagerInterface {
     implicit val materializer = ActorMaterializer()
     implicit val executionContext = system.dispatcher
 
+    // Parse akka_setting file and bind server with good interface and port.
+    val jsonManager : JsonFileManager = new JsonFileManager
+    jsonManager.readFile("src/main/resources/akka_setting.json", SettingType.INPUT_AKKA_SETTING)
+
     // Binding the server with the interface and the port
-    val serverSource = Http().bind(interface = "localhost", port = 8080)
+    val serverSource = Http().bind(interface = jsonManager.inputAkkaSettings.interface, port = jsonManager.inputAkkaSettings.port)
 
     // Defining the requestHandler to get the logs received from HTTP requests
     val requestHandler: HttpRequest => HttpResponse = {

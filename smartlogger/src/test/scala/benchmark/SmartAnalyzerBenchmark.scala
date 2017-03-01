@@ -25,13 +25,13 @@ class SmartAnalyzerBenchmark extends FunSuite {
   // Function running the training with example data
   //  & then running the predicting with example data
   def benchmark(analy:IAnalyzer, str:String):Unit = {
-    var source = Source.fromFile("src/test/scala/IAnalysor/TrainData.txt")
+    var source = Source.fromFile("src/test/resources/TrainData.txt")
     val trainData = LogParser.parseTrainingData(source.mkString)
     source.close()
 
     time("The training part of " + str + " took "){analy.train(trainData)}
 
-    source = Source.fromFile("src/test/scala/IAnalysor/TrainData.txt")
+    source = Source.fromFile("src/test/resources/TrainData.txt")
     val predictData = LogParser.parsePredictData(source.mkString)
 
     time("The predict part of " + str + " took "){analy.predict(predictData)}
