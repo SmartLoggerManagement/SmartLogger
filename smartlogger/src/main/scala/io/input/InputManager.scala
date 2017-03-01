@@ -22,14 +22,19 @@ class InputManager extends InputManagerInterface {
 
   val timeout = 300.millis
 
+  /**
+    * @inheritdoc
+    */
   override def open(): Unit = {
-    //WebServer.startServer("localhost", 8080, ServerSettings(ConfigFactory.load))
+
     implicit val system = ActorSystem()
     implicit val materializer = ActorMaterializer()
     implicit val executionContext = system.dispatcher
 
+    // Binding the server with the interface and the port
     val serverSource = Http().bind(interface = "localhost", port = 8080)
 
+    // Defining the requestHandler to get the logs received from HTTP requests
     val requestHandler: HttpRequest => HttpResponse = {
       // The PUT Request will give the logs, it needs to give them to the Batch
       case r @ HttpRequest(PUT, Uri.Path("/smartlogger"), _, _, _) =>
@@ -44,6 +49,7 @@ class InputManager extends InputManagerInterface {
         HttpResponse(404, entity = "Unknown resource!")
     }
 
+    // Running the server
     val bindingFuture: Future[Http.ServerBinding] =
       serverSource.to(Sink.foreach { connection =>
         println("Accepted new connection from " + connection.remoteAddress)

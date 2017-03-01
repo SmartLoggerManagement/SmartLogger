@@ -24,9 +24,9 @@ dependencies {
     compile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
     compile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
 
-    // Mail librairy
-    compile 'com.github.softprops:courier:0.1.4'
-    compile group: 'org.jvnet.mock-javamail', name: 'mock-javamail', version: '1.1' // Use to test mail sending.
+    // Mail library
+    //compile 'com.github.softprops:courier:0.1.4'
+    
 
     testCompile "org.scala-lang:scala-library:2.11"
     testCompile "org.scalatest:scalatest_2.11:3.0.1"
@@ -41,18 +41,20 @@ dependencies {
     testCompile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
-
+    
+    //testCompile 'com.github.softprops:courier:0.1.4'
+    //testCompile group: 'org.jvnet.mock-javamail', name: 'mock-javamail', version: '1.1' // Used to test mail sending.
 }
 
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/ML', 'src/main/scala/io']
+            srcDirs = ['src/main/scala/ML', 'src/main/scala/io/input']
         }
     }
     test {
         scala {
-            srcDirs = ['src/test/scala/IAnalysor', 'src/test/scala/io']
+            srcDirs = ['src/test/scala/IAnalysor']
         }
     }
 }
