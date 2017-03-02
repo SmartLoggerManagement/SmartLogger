@@ -32,7 +32,7 @@ dependencies {
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
 
     // JsonReaderFile
-    compile 'com.github.SmartLoggerManagement:JsonReaderFile:v1.0'
+    compile 'com.github.SmartLoggerManagement:JsonReaderFile:v1.0.1'
 
     // Test execution
     testCompile "org.scala-lang:scala-library:2.11"
@@ -56,13 +56,13 @@ dependencies {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/ML', 'src/main/scala/io']
+            srcDirs = ['src/main/scala/ML', 'src/main/scala/io/']
         }
     }
     test {
         scala {
             srcDirs = ['src/test/scala/IAnalysor'
-                       //,'src/test/scala/benchmark'
+                       ,'src/test/scala/benchmark'
             ]
         }
     }
