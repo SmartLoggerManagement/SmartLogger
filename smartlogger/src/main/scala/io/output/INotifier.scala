@@ -1,9 +1,10 @@
 package output
 
-import javax.mail.MessagingException
-
 /**
-  * Created by Kero76 on 15/02/17.
+  *
+  * @author Jordan Baudin, Nicolas GILLE
+  * @since SmartLogger 1.0
+  * @version 1.0
   */
 trait INotifier {
 
@@ -12,7 +13,7 @@ trait INotifier {
     *
     * @param text
     *   Content to send.
-    *   @throws MessagingException
+    *
     * @since SmartLogger 1.0
     * @version 1.0
     */

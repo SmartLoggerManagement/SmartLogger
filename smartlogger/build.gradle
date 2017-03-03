@@ -30,9 +30,12 @@ dependencies {
 
     // Mail library
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+    compile 'com.github.SmartLoggerManagement:courier:v0.1.4.1'
+    compile group: 'com.icegreen', name: 'greenmail', version: '1.5.3'  // GreenMail to test mail output.
 
     // JsonReaderFile
     compile 'com.github.SmartLoggerManagement:JsonReaderFile:v1.0.1'
+
 
     // Test execution
     testCompile "org.scala-lang:scala-library:2.11"
@@ -48,9 +51,6 @@ dependencies {
     testCompile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
-
-    //testCompile 'com.github.softprops:courier:0.1.4'
-    //testCompile group: 'org.jvnet.mock-javamail', name: 'mock-javamail', version: '1.1' // Used to test mail sending.
 }
 
 sourceSets {
@@ -61,9 +61,9 @@ sourceSets {
     }
     test {
         scala {
-            srcDirs = ['src/test/scala/IAnalysor'
-                       ,'src/test/scala/benchmark'
-                        ,'src/test/scala/io/input'
+            srcDirs = ['src/test/scala/IAnalysor',
+                       'src/test/scala/io',
+                       //'src/test/scala/benchmark'
             ]
         }
     }
