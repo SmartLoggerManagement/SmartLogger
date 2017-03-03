@@ -63,6 +63,7 @@ sourceSets {
         scala {
             srcDirs = ['src/test/scala/IAnalysor'
                        ,'src/test/scala/benchmark'
+                        ,'src/test/scala/io/input'
             ]
         }
     }
