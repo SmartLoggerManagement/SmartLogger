@@ -8,8 +8,8 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Sink
 import fr.nicolasgille.json.{JsonFileManager, SettingType}
 
-import scala.concurrent.duration._
 import scala.concurrent.Future
+import scala.concurrent.duration._
 
 /**
   *
@@ -53,7 +53,9 @@ object InputManager extends InputManagerInterface {
       case r @ HttpRequest(PUT, Uri.Path("/smartlogger"), _, _, _) =>
       val result = r.entity.toStrict(timeout).map { _.data }.map(_.utf8String)
         for {res <- result } yield {
+
           LogBatch.add(LogParser.parsePredictData(res))
+
         }
         HttpResponse(200, entity = "Data received !")
 

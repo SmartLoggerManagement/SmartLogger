@@ -5,6 +5,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala/io" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala/ML" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/resources" type="java-resource" />
@@ -12,6 +13,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.scalatest:scalatest_2.11:3.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.mockito:mockito-all:1.8.4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.spark:spark-core_2.11:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.spark:spark-mllib_2.11:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6" level="project" />

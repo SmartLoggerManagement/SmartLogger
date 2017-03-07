@@ -2,6 +2,8 @@ import input.{InputManager, LogBatch, LogParser}
 import org.apache.spark.ml.classification.NaiveBayes
 
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext
+import ExecutionContext.Implicits.global
 import scala.io.Source
 
 /**
@@ -12,6 +14,11 @@ import scala.io.Source
   * @version 1.0
   */
 object SmartLogger {
+
+  var result : Seq[(Long, String, Double)] = Seq.empty
+
+  def getResult :  Seq[(Long, String, Double)] = result
+
   def main(args: Array[String]): Unit = {
     val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
 
@@ -29,9 +36,16 @@ object SmartLogger {
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")
+
     system.scheduler.schedule(0 seconds, 10 seconds) {
+
       val batch = LogBatch.getBatch()
-      smartAnalyzer.predict(batch)
+      println(batch.isEmpty)
+
+
+      result = result.union(smartAnalyzer.predict(batch))
+
     }
+
   }
 }

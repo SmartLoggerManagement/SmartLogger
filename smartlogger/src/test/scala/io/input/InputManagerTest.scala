@@ -30,6 +30,7 @@ class InputManagerTest extends FunSuite with Matchers  {
     Thread.sleep(SLEEP_TIME)
     var batchContent = LogBatch.getBatch()
     batchContent = batchContent.sortWith{_._2.toInt < _._2.toInt}
+    println(batchContent)
     for (i <- 0 until maxOpenedFiles) {
       batchContent(i)._2 should equal("" + i)
 
