@@ -13,3 +13,5 @@ hs_err_pid*
 
 # Removed .idea/ folder.
 .idea/*
+smartlogger/.idea/*.xml
+smartlogger./idea/*.iml
