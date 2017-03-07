@@ -14,7 +14,6 @@ import scala.io.Source
 object SmartLogger {
   def main(args: Array[String]): Unit = {
     val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
-    val inputManager  = new InputManager
 
     // Open file and retrieve data.
     val source = Source.fromFile("src/test/resources/TrainData.txt")
@@ -26,7 +25,7 @@ object SmartLogger {
     smartAnalyzer.train(trainSeq)
 
     // Open server.
-    inputManager.open()
+    InputManager.open()
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")

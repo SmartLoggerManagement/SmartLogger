@@ -19,14 +19,22 @@ import scala.concurrent.Future
   *
   * @version
   */
-class InputManager extends InputManagerInterface {
+object InputManager extends InputManagerInterface {
 
   val timeout = 300.millis
 
+  var isOpen = false
   /**
     * @inheritdoc
     */
   override def open(): Unit = {
+
+    if (isOpen) {
+      println("The server is already open")
+      return
+    }
+
+    isOpen = true
 
     implicit val system = ActorSystem()
     implicit val materializer = ActorMaterializer()

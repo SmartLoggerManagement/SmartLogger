@@ -21,5 +21,15 @@ class ClientTest {
   println(responseFuture)
   }
 
+  def sendPost(content : String, uri : String ) {
+    implicit val system = ActorSystem()
+    implicit val materializer = ActorMaterializer()
+
+    val data: ByteString = ByteString.fromString(content)
+    val responseFuture: Future[HttpResponse] =
+      Http().singleRequest(HttpRequest(POST, uri = uri, entity = HttpEntity(data)))
+    //"http://127.0.0.1:8080/smartlogger"
+    println(responseFuture)
+  }
 }
 

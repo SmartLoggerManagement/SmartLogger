@@ -1,7 +1,10 @@
+
+
 import input.LogBatch
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
+
 /**
   * Created by teegreg on 03/03/17.
   */
@@ -9,8 +12,8 @@ import org.scalatest.{FunSuite, Matchers}
 class LogBatch$Test extends FunSuite with Matchers {
 
   test("testGetEmptyBatch") {
-    val sq = LogBatch.getBatch()
-    sq.length should equal(0)
+  val sq = LogBatch.getBatch()
+  sq.length should equal(0)
   }
 
   test("testAdd") {
@@ -31,15 +34,8 @@ class LogBatch$Test extends FunSuite with Matchers {
   test("testAdd2") {
     LogBatch.add(0L, "Log1")
     val sq = LogBatch.getBatch()
-    sq(0)._1 should equal(0L)
-    sq(0)._2 should equal("Log1")
+    sq.head._1 should equal(0L)
+    sq.head._2 should equal("Log1")
   }
-
-
-
-
-
-
-
 
 }
