@@ -1,0 +1,18 @@
+package dao
+
+/**
+  * Created by Kero76 on 07/03/17.
+  *
+  * @author Nicolas GILLE
+  * @since SmartLogger 0.2
+  * @version 1.0
+  */
+object StdDAO extends DAO {
+  override def request(request: String): Unit = {
+
+  }
+
+  override def insert(request: String): Boolean = {
+
+  }
+}
