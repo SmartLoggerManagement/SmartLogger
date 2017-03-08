@@ -9,7 +9,7 @@ import org.scalatest.{FunSuite, Matchers}
   * Created by teegreg on 03/03/17.
   */
 @RunWith(classOf[JUnitRunner])
-class LogBatch$Test extends FunSuite with Matchers {
+class LogBatchTest extends FunSuite with Matchers {
 
   test("testGetEmptyBatch") {
   val sq = LogBatch.getBatch()

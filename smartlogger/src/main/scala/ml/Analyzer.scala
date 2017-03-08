@@ -1,6 +1,6 @@
 package scala.ML
 
-trait IAnalyzer {
+trait Analyzer {
   /**
     * @param data Seq describing an ID, a Log, a Label
     */

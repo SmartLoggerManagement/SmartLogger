@@ -4,7 +4,7 @@ import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
 
-import scala.ML.IAnalyzer
+import scala.ML.Analyzer
 import scala.io.Source
 
 /**
@@ -26,7 +26,7 @@ class SmartAnalyzerBenchmark extends FunSuite {
   //  & then running the predicting with example data
   //  & testing if the result is good & transmitting
   //  the false results to track.
-  def benchmark(analy:IAnalyzer, str:String):Unit = {
+  def benchmark(analy:Analyzer, str:String):Unit = {
     var source = Source.fromFile("src/test/resources/TrainData.txt")
     val data = source.mkString
 

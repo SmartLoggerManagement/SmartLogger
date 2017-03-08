@@ -13,9 +13,8 @@ repositories {
 dependencies {
     // Scala and scalatest libraries
     compile 'org.scala-lang:scala-library:2.11'
-    compile "org.scalatest:scalatest_2.11:3.0.1"
 
-    compile group: 'org.mockito', name: 'mockito-all', version: '1.8.4'
+    // compile group: 'org.mockito', name: 'mockito-all', version: '1.8.4' // USELESS
 
     // Spark library
     compile 'org.apache.spark:spark-core_2.11:2.1.0'
@@ -25,14 +24,9 @@ dependencies {
     // Akka libraries
     compile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
     compile 'com.typesafe.akka:akka-http_2.11:10.0.3'
-    compile 'com.typesafe.akka:akka-http-testkit_2.11:10.0.3'
-    compile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
-    compile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
-    compile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
 
     // Mail library
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
-    compile 'com.github.SmartLoggerManagement:courier:v0.1.4.1'
     compile group: 'com.icegreen', name: 'greenmail', version: '1.5.3'  // GreenMail to test mail output.
 
     // JsonReaderFile
@@ -52,12 +46,6 @@ dependencies {
 
     testCompile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http_2.11:10.0.3'
-    testCompile 'com.typesafe.akka:akka-http-testkit_2.11:10.0.3'
-    testCompile 'com.typesafe.akka:akka-http-spray-json_2.11:10.0.3'
-    testCompile 'com.typesafe.akka:akka-http-jackson_2.11:10.0.3'
-    testCompile 'com.typesafe.akka:akka-http-xml_2.11:10.0.3'
-
-
 }
 
 sourceSets {

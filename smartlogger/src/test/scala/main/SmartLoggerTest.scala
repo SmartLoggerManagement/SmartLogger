@@ -7,7 +7,7 @@ import org.scalatest.{FunSuite, Matchers}
   * Created by teegreg on 07/03/17.
   */
 @RunWith(classOf[JUnitRunner])
-class SmartLogger$Test extends FunSuite with Matchers{
+class SmartLoggerTest extends FunSuite with Matchers{
 
 
 

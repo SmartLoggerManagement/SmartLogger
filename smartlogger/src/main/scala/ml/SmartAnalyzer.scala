@@ -5,16 +5,17 @@ import org.apache.spark.ml.classification._
 import org.apache.spark.ml.feature._
 import org.apache.spark.sql.{Row, SparkSession}
 
-import scala.ML.IAnalyzer
+import scala.ML.Analyzer
 
-/*
-@input : algo : Variable to determine which algorithm using.
-
- */
+/**
+  *
+  *
+  * @input : algo : Variable to determine which algorithm using.
+  */
 class SmartAnalyzer[Vector,
 E <: ProbabilisticClassifier[Vector, E, M],
 M <: ProbabilisticClassificationModel[Vector, M]]
-(var algo:Classifier[Vector, E, M])extends IAnalyzer {
+(var algo:Classifier[Vector, E, M]) extends Analyzer {
     var model:PipelineModel = _
 
     override def train(data: Seq[(Long, String, Double)]): Unit = {

@@ -7,7 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala/io" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala/ML" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/scala/ml" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../src/main/resources" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />

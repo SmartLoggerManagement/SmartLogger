@@ -5,7 +5,7 @@ package output
   */
 class Alerter extends IAlerter {
 
-  var notifiers:Seq[INotifier] = Seq.empty
+  var notifiers:Seq[Notifier] = Seq.empty
 
   /**
     * Add a notifier to the Alerter.
@@ -15,7 +15,7 @@ class Alerter extends IAlerter {
     * @since SmartLogger 1.0
     * @version 1.0
     */
-  override def addNotifier(notifier: INotifier): Unit = {
+  override def addNotifier(notifier: Notifier): Unit = {
     if (notifier != null && !notifiers.contains(notifier)) {
       notifiers = notifiers.:+(notifier)
     }
@@ -32,7 +32,8 @@ class Alerter extends IAlerter {
     */
   override def alertAll(content: String): Unit = {
     for (n <- notifiers) {
-      n.send(content)
+      n.setText(content)
+      n.send
     }
   }
 }

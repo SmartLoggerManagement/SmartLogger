@@ -9,7 +9,7 @@ import org.scalatest.{FunSuite, Matchers}
   * Created by teegreg on 06/03/17.
   */
 @RunWith(classOf[JUnitRunner])
-class LogParser$Test extends FunSuite with Matchers {
+class LogParserTest extends FunSuite with Matchers {
 
 
   test("parseTrainingDataNull") {

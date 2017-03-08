@@ -8,12 +8,12 @@ package output
   */
 class Observer extends IObserver {
 
-  var notifiers:Seq[INotifier] = Seq.empty
+  var notifiers:Seq[Notifier] = Seq.empty
 
   /**
     * @inheritdoc
     */
-  override def addNotifier(notifier: INotifier): Unit = {
+  override def addNotifier(notifier: Notifier): Unit = {
     if (notifier != null && !notifiers.contains(notifier)) {
       notifiers = notifiers.:+(notifier)
     }
@@ -22,7 +22,7 @@ class Observer extends IObserver {
   /**
     * @inheritdoc
     */
-  override def addNotifiers(notifiers: Seq[INotifier]): Unit = {
+  override def addNotifiers(notifiers: Seq[Notifier]): Unit = {
       for (n <- notifiers) {
         if (!this.notifiers.contains(n)) {
           this.notifiers = notifiers.:+(n)
@@ -33,7 +33,7 @@ class Observer extends IObserver {
   /**
     * @inheritdoc
     */
-  override def removeNotifier(notifier: INotifier): Unit = {
+  override def removeNotifier(notifier: Notifier): Unit = {
     this.notifiers = this.notifiers.filter(_ == notifier)
   }
 
@@ -42,7 +42,8 @@ class Observer extends IObserver {
     */
   override def notifyAll(content: String): Unit = {
     for (n <- notifiers) {
-      n.send(content)
+      n.setText(content)
+      n.send
     }
   }
 }

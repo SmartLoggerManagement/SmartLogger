@@ -17,7 +17,7 @@ trait IObserver {
     * @since SmartLogger 1.0
     * @version 1.0
     */
-  def addNotifier(notifier: INotifier): Unit
+  def addNotifier(notifier: Notifier): Unit
 
   /**
     * Add a Sequence of notifier at alert.
@@ -28,7 +28,7 @@ trait IObserver {
     * @since SmartLogger 1.0
     * @version 1.0
     */
-  def addNotifiers(notifiers: Seq[INotifier]): Unit
+  def addNotifiers(notifiers: Seq[Notifier]): Unit
 
   /**
     * Remove a specific notifier.
@@ -39,7 +39,7 @@ trait IObserver {
     * @since SmartLogger 1.0
     * @version 1.0
     */
-  def removeNotifier(notifier: INotifier): Unit
+  def removeNotifier(notifier: Notifier): Unit
 
   /**
     * Notify all notifiers previously added.
