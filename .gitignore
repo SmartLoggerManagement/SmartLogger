@@ -17,6 +17,5 @@ hs_err_pid*
 *.txt
 
 # Removed .idea/ folder.
-.idea/*
-smartlogger/.idea/*
-.idea/workspace.xml
+.idea/
+smartlogger/.idea/

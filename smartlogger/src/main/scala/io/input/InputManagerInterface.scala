@@ -17,4 +17,12 @@ trait InputManagerInterface {
     */
   def open()
 
+  /**
+    * Closing the connection.
+    *
+    * @since
+    * @version
+    */
+  def close()
+
 }

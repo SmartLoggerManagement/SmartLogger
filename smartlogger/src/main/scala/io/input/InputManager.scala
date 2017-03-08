@@ -25,19 +25,19 @@ class InputManager extends InputManagerInterface {
 
   var serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] = _
 
+  implicit val system = ActorSystem()
+  implicit val materializer = ActorMaterializer()
+  implicit val executionContext = system.dispatcher
+
   /**
     * @inheritdoc
     */
   override def open(): Unit = {
 
-    if (serverSource == null) {
+    if (serverSource != null) {
       println("The server is already open")
       return
     }
-
-    implicit val system = ActorSystem()
-    implicit val materializer = ActorMaterializer()
-    implicit val executionContext = system.dispatcher
 
     // Parse akka_setting file and bind server with good interface and port.
     val jsonManager : JsonFileManager = new JsonFileManager
@@ -70,5 +70,11 @@ class InputManager extends InputManagerInterface {
         connection handleWithSyncHandler requestHandler
       }).run()
   }
+
+  def close(): Unit = {
+    materializer.shutdown()
+    system.terminate()
+  }
+
 
 }
