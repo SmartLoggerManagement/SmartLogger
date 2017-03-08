@@ -5,7 +5,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model._
 import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.Sink
+import akka.stream.scaladsl.{Sink, Source}
 import fr.nicolasgille.json.{JsonFileManager, SettingType}
 
 import scala.concurrent.Future
@@ -19,22 +19,21 @@ import scala.concurrent.duration._
   *
   * @version
   */
-object InputManager extends InputManagerInterface {
+class InputManager extends InputManagerInterface {
 
   val timeout = 300.millis
 
-  var isOpen = false
+  var serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] = _
+
   /**
     * @inheritdoc
     */
   override def open(): Unit = {
 
-    if (isOpen) {
+    if (serverSource == null) {
       println("The server is already open")
       return
     }
-
-    isOpen = true
 
     implicit val system = ActorSystem()
     implicit val materializer = ActorMaterializer()
@@ -45,7 +44,7 @@ object InputManager extends InputManagerInterface {
     jsonManager.readFile("src/main/resources/akka_setting.json", SettingType.INPUT_AKKA_SETTING)
 
     // Binding the server with the interface and the port
-    val serverSource = Http().bind(interface = jsonManager.inputAkkaSettings.interface, port = jsonManager.inputAkkaSettings.port)
+    serverSource = Http().bind(interface = jsonManager.inputAkkaSettings.interface, port = jsonManager.inputAkkaSettings.port)
 
     // Defining the requestHandler to get the logs received from HTTP requests
     val requestHandler: HttpRequest => HttpResponse = {

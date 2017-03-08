@@ -1,10 +1,13 @@
 import input.{InputManager, LogBatch, LogParser}
 import org.apache.spark.ml.classification.NaiveBayes
+import output.Alerter
+import output.mail.MailNotifier
 
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext
 import ExecutionContext.Implicits.global
 import scala.io.Source
+import scala.util.Sorting
 
 /**
   * Created by Nicolas GILLE, Jordan BAUDIN on 07/03/17.
@@ -14,10 +17,6 @@ import scala.io.Source
   * @version 1.0
   */
 object SmartLogger {
-
-  var result : Seq[(Long, String, Double)] = Seq.empty
-
-  def getResult :  Seq[(Long, String, Double)] = result
 
   def main(args: Array[String]): Unit = {
     val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
@@ -32,18 +31,40 @@ object SmartLogger {
     smartAnalyzer.train(trainSeq)
 
     // Open server.
-    InputManager.open()
+    val input = new InputManager
+    input.open()
+
+    // Configuring the outputs
+    val alerter = new Alerter()
+    alerter.addNotifier(new MailNotifier("Alerte sur la 1.0 de SmartLogger"))
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")
 
     system.scheduler.schedule(0 seconds, 10 seconds) {
 
+      // Getting batch and using it to predict
       val batch = LogBatch.getBatch()
-      println(batch.isEmpty)
+      val result = smartAnalyzer.predict(batch)
 
+      // Sorting to put the biggest critically at firsts positions
+      Sorting.stableSort(result,
+        (e1: (Long, String, Double), e2: (Long, String, Double))
+        => e1._3 > e2._3)
 
-      result = result.union(smartAnalyzer.predict(batch))
+      // Getting into a message all the critically above the
+      // limit chosen beforehand
+      var counter = 0
+      var message = new String
+      while (counter < result.size && result(counter)._3 >= 2.0) {
+        message = message ++ result(counter)._2 ++ "\n"
+        counter += 1
+      }
+
+      // If there is at least one critical log, alert all notifiers.
+      if (counter > 0) {
+        alerter.alertAll(message)
+      }
 
     }
 

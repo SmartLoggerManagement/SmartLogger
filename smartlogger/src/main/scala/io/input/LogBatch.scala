@@ -31,9 +31,11 @@ object LogBatch {
     * @return The Batch
     */
   def getBatch():Seq[(Long, String)] = {
-    val batch = sequence
-    sequence = Seq.empty
-    return batch
+    this.synchronized {
+      val batch = sequence
+      sequence = Seq.empty
+      return batch
+    }
   }
 
 }

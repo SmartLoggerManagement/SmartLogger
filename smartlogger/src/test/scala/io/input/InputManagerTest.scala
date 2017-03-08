@@ -12,7 +12,7 @@ class InputManagerTest extends FunSuite with Matchers  {
   private val SLEEP_TIME = 2000
 
   test("NormalBehavior") {
-    InputManager.open()
+    val imput = new InputManager().open()
     val clt : ClientTest = new ClientTest()
     clt.sendRequest("Test Data", "http://127.0.0.1:8080/smartlogger")
     Thread.sleep(SLEEP_TIME)
@@ -21,7 +21,7 @@ class InputManagerTest extends FunSuite with Matchers  {
   }
 
   test("ChargeTest") {
-    InputManager.open()
+    val imput = new InputManager().open()
     val clt: ClientTest = new ClientTest()
     val maxOpenedFiles = 200// max number of files that can be opened on test environment at one time
     for (i <- 0 until maxOpenedFiles) {
@@ -40,7 +40,7 @@ class InputManagerTest extends FunSuite with Matchers  {
   }
 
   test("404 test") {
-    InputManager.open()
+    val imput = new InputManager().open()
     val clt : ClientTest = new ClientTest()
     clt.sendPost("Test Data", "http://127.0.0.1:8080/smartlogger")
     Thread.sleep(SLEEP_TIME)
