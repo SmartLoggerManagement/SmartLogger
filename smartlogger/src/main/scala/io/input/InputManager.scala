@@ -30,7 +30,7 @@ class InputManager extends InputManagerInterface {
     */
   override def open(): Unit = {
 
-    if (serverSource == null) {
+    if (serverSource != null) {
       println("The server is already open")
       return
     }
