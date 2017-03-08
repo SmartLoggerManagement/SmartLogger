@@ -27,7 +27,9 @@ dependencies {
 
     // Mail library
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
-    compile group: 'com.icegreen', name: 'greenmail', version: '1.5.3'  // GreenMail to test mail output.
+    // https://mvnrepository.com/artifact/dumbster/dumbster
+    compile group: 'dumbster', name: 'dumbster', version: '1.6'
+
 
     // JsonReaderFile
     compile 'com.github.SmartLoggerManagement:JsonReaderFile:v1.0.1'
@@ -46,6 +48,10 @@ dependencies {
 
     testCompile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http_2.11:10.0.3'
+
+    // Mail library
+    testCompile group: 'javax.mail', name: 'mail', version: '1.4.7'
+    testCompile group: 'com.icegreen', name: 'greenmail', version: '1.5.3'  // GreenMail to test mail output.
 }
 
 sourceSets {
@@ -58,6 +64,7 @@ sourceSets {
         scala {
             srcDirs = ['src/test/scala/IAnalysor',
                        'src/test/scala/io/input',
+                       'src/test/scala/io/output/mail',
                        //'src/test/scala/main'
                        //'src/test/scala/benchmark'
             ]

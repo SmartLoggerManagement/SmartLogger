@@ -30,17 +30,22 @@ class MailNotifier(subject:String) extends Notifier {
   // COMMANDS
   override def send() {
     // Init. of the message
-    val prop = System.getProperties
-    prop.put("mail.smtp.host", MailNotifier.serverAddress)
-    prop.put("mail.smtp.auth", "true")
+    val props = System.getProperties
+    props.put("mail.smtp.auth", "true")
+    props.put("mail.smtp.starttls.enable", "true")
+    props.put("mail.smtp.host", "smtp.gmail.com")
+    props.put("mail.smtp.port", "587")
+
+    val username = "smartlogger76@gmail.com"
+    val password = "$martlogger"
 
     // Building message
-    val session = Session.getInstance(prop, new Authenticator {
+    val session = Session.getInstance(props, new Authenticator {
       override def getPasswordAuthentication: PasswordAuthentication =
-        new mail.PasswordAuthentication("smartlogger", "$martlogger")
+        new mail.PasswordAuthentication(username, password)
     })
+    session.setDebug(true) // Comment line when code working.
 
-    session.setDebug(true)
     val message = new MimeMessage(session)
     message.setFrom(new InternetAddress(MailNotifier.from))
 
@@ -56,11 +61,7 @@ class MailNotifier(subject:String) extends Notifier {
     println("before sending")
 
     // Sending message
-    val tr = session.getTransport("smtp")
-    tr.connect(MailNotifier.serverAddress, "smartlogger", "$martlogger")
-    tr.sendMessage(message, message.getAllRecipients)
     Transport.send(message)
-
 
     println("See mailbox")
   }
