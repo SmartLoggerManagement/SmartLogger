@@ -18,7 +18,7 @@ class ClientTest {
   val responseFuture: Future[HttpResponse] =
     Http().singleRequest(HttpRequest(PUT, uri = uri, entity = HttpEntity(data)))
   //"http://127.0.0.1:8080/smartlogger"
-  println(responseFuture)
+  //println(responseFuture)
   }
 
   def sendPost(content : String, uri : String ) {
@@ -29,7 +29,7 @@ class ClientTest {
     val responseFuture: Future[HttpResponse] =
       Http().singleRequest(HttpRequest(POST, uri = uri, entity = HttpEntity(data)))
     //"http://127.0.0.1:8080/smartlogger"
-    println(responseFuture)
+    //println(responseFuture)
   }
 }
 

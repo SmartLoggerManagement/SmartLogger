@@ -1,22 +1,29 @@
+import akka.actor.Cancellable
 import input.{InputManager, LogBatch, LogParser}
 import org.apache.spark.ml.classification.NaiveBayes
 import output.Alerter
-import output.mail.MailNotifier
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
-import scala.concurrent.ExecutionContext
-import ExecutionContext.Implicits.global
 import scala.io.Source
 import scala.util.Sorting
 
 /**
-  * Created by Nicolas GILLE, Jordan BAUDIN on 07/03/17.
-  *
-  * @author Jordan BAUDIN, Nicolas GILLE
-  * @since SmartLogger 1.0
-  * @version 1.0
+  * Created by teegreg on 08/03/17.
   */
-object SmartLogger {
+class StubMain {
+
+  var resultt : Seq[(Long, String, Double)] = Seq.empty
+  var sched : Cancellable = _
+  var input : InputManager = _
+
+  def closeInput() : Unit = input.close()
+
+  def stopSchedule() : Unit = {
+    while (!sched.isCancelled) sched.cancel()
+  }
+
+  def getResult : Seq[(Long, String, Double)] = resultt
 
   def main(args: Array[String]): Unit = {
     val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
@@ -31,32 +38,35 @@ object SmartLogger {
     smartAnalyzer.train(trainSeq)
 
     // Open server.
-    val input = new InputManager
+    input = new InputManager
     input.open()
 
     // Configuring the outputs
     val alerter = new Alerter()
-    alerter.addNotifier(new MailNotifier("Alerte sur la 1.0 de SmartLogger"))
+    alerter.addNotifier(new StubNotifier())
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")
 
-    system.scheduler.schedule(0 seconds, 10 seconds) {
+    sched = system.scheduler.schedule(0 seconds, 5 seconds) {
 
       // Getting batch and using it to predict
       val batch = LogBatch.getBatch()
       var result = smartAnalyzer.predict(batch)
+      resultt = resultt.union(result)
 
       // Sorting to put the biggest critically at firsts positions
       result = Sorting.stableSort(result,
         (e1: (Long, String, Double), e2: (Long, String, Double))
         => e1._3 > e2._3)
 
+      //println("r : " + result)
+
       // Getting into a message all the critically above the
       // limit chosen beforehand
       var counter = 0
       var message = new String
-      while (counter < result.size && result(counter)._3 >= 2.0) {
+      while (counter < result.size && result(counter)._3 >= 1.0) {
         message = message ++ result(counter)._2 ++ "\n"
         counter += 1
       }
@@ -64,6 +74,7 @@ object SmartLogger {
       // If there is at least one critical log, alert all notifiers.
       if (counter > 0) {
         alerter.alertAll(message)
+
       }
 
     }

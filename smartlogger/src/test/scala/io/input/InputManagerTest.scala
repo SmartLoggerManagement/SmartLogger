@@ -9,22 +9,23 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class InputManagerTest extends FunSuite with Matchers  {
 
+
   private val SLEEP_TIME = 2000
 
   test("NormalBehavior") {
     val input = new InputManager
-    input.open
+    input.open()
     val clt : ClientTest = new ClientTest()
     clt.sendRequest("Test Data", "http://127.0.0.1:8088/smartlogger")
     Thread.sleep(SLEEP_TIME)
     val batchContent = LogBatch.getBatch()
     batchContent.head._2 should equal("Test Data")
-    input.close
+    input.close()
   }
 
   test("ChargeTest") {
     val input = new InputManager
-    input.open
+    input.open()
     val clt: ClientTest = new ClientTest()
     val maxOpenedFiles = 200// max number of files that can be opened on test environment at one time
     for (i <- 0 until maxOpenedFiles) {
@@ -39,20 +40,18 @@ class InputManagerTest extends FunSuite with Matchers  {
 
     }
     batchContent.length shouldBe maxOpenedFiles
-    input.close
+    input.close()
   }
 
   test("404 test") {
     val input = new InputManager
-    input.open
+    input.open()
     val clt : ClientTest = new ClientTest()
     clt.sendPost("Test Data", "http://127.0.0.1:8088/smartlogger")
     Thread.sleep(SLEEP_TIME)
     val batchContent = LogBatch.getBatch()
     batchContent shouldBe empty
-    input.close
+    input.close()
   }
-
-
 
 }
