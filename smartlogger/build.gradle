@@ -1,5 +1,5 @@
 group 'SmartLogger'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 apply plugin: 'scala'    // Add test task
 
@@ -64,7 +64,7 @@ sourceSets {
         scala {
             srcDirs = ['src/test/scala/IAnalysor',
                        'src/test/scala/io/input',
-                       'src/test/scala/main'
+                       'src/test/scala/main',
                        'src/test/scala/io/output/mail'
                        //'src/test/scala/benchmark'
             ]
@@ -78,8 +78,13 @@ task scalaTest(dependsOn: ['testClasses'], type: JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
 }
 
-task listJars {
-    doLast {
-        configurations.compile.each { File file -> println file.name }
+jar {
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
     }
 }

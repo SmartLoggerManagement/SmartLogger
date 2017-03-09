@@ -73,7 +73,7 @@ class StubMain {
 
       // If there is at least one critical log, alert all notifiers.
       if (counter > 0) {
-        alerter.alertAll(message)
+        alerter.notifyAll(message)
 
       }
 
