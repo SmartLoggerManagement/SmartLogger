@@ -22,15 +22,40 @@ class Alerter extends IAlerter {
   }
 
   /**
-    * Notify all notifiers previously added.git pull
+    * Add a Sequence of notifier at alert.
     *
+    * @param notifiers
+    * Notifiers to add.
+    * @since SmartLogger 1.0
+    * @version 1.0
+    */
+  override def addNotifiers(notifiers: Seq[Notifier]): Unit = {
+    for (n <- notifiers) {
+      this.addNotifier(n)
+    }
+  }
+
+  /**
+    * Remove a specific notifier.
+    *
+    * @param notifier
+    * Notifier to remove.
+    * @since SmartLogger 1.0
+    * @version 1.0
+    */
+  override def removeNotifier(notifier: Notifier): Unit = {
+      notifiers = notifiers.filterNot(_ == notifier)
+  }
+
+  /**
+    * Notify all notifiers previously added.git pull.
     *
     * @param content
     * content to send.
     * @since SmartLogger 1.0
     * @version 1.0
     */
-  override def alertAll(content: String): Unit = {
+  override def notifyAll(content: String): Unit = {
     for (n <- notifiers) {
       n.setText(content)
       n.send

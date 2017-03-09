@@ -1,9 +1,10 @@
 package output.mail
 
 import java.util.Date
+import javax.mail
 import javax.mail.Message.RecipientType
 import javax.mail.internet.{InternetAddress, MimeMessage}
-import javax.mail.{Session, Transport}
+import javax.mail.{Authenticator, PasswordAuthentication, Session, Transport}
 
 import output.Notifier
 
@@ -11,8 +12,8 @@ import output.Notifier
   * Defines global parameters which aren't modified between all MailAlerter instances
   */
 object MailNotifier {
-  /** The adress of the server */
-  val serverAddress:String = "localhost"
+  /** The address of the server */
+  val serverAddress:String = "smtp.gmail.com"
 
   /** The sender's mail adress used for sending any mail from this notifier */
   val from:String = "smartlogger@saagie.com"
@@ -29,11 +30,22 @@ class MailNotifier(subject:String) extends Notifier {
   // COMMANDS
   override def send() {
     // Init. of the message
-    val prop = System.getProperties
-    prop.put("mail.smtp.host", MailNotifier.serverAddress)
+    val props = System.getProperties
+    props.put("mail.smtp.auth", "true")
+    props.put("mail.smtp.starttls.enable", "true")
+    props.put("mail.smtp.host", "smtp.gmail.com")
+    props.put("mail.smtp.port", "587")
+
+    val username = "smartlogger76@gmail.com"
+    val password = "$martlogger"
 
     // Building message
-    val session = Session.getDefaultInstance(prop)
+    val session = Session.getInstance(props, new Authenticator {
+      override def getPasswordAuthentication: PasswordAuthentication =
+        new mail.PasswordAuthentication(username, password)
+    })
+    session.setDebug(true) // Comment line when code working.
+
     val message = new MimeMessage(session)
     message.setFrom(new InternetAddress(MailNotifier.from))
 
@@ -44,8 +56,13 @@ class MailNotifier(subject:String) extends Notifier {
     message.setSubject(subject)
     message.setText(text)
     message.setSentDate(new Date())
+    message.saveChanges()
+
+    println("before sending")
 
     // Sending message
     Transport.send(message)
+
+    println("See mailbox")
   }
 }

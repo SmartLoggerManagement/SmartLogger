@@ -6,7 +6,7 @@ package output
   * @since SmartLogger 1.0
   * @version 1.0
   */
-class Observer extends IObserver {
+class Observer extends IAlerter {
 
   var notifiers:Seq[Notifier] = Seq.empty
 
