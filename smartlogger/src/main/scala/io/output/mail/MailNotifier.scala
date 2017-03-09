@@ -26,7 +26,6 @@ class MailNotifier(subject:String) extends Notifier {
   // ALTERNATIVES
   def this() = this("SmartLogger - Notification")
 
-
   // COMMANDS
   override def send() {
     // Init. of the message

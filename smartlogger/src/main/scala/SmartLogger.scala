@@ -36,7 +36,14 @@ object SmartLogger {
 
     // Configuring the outputs
     val alerter = new Alerter()
-    alerter.addNotifier(new MailNotifier("Alerte sur la 1.0 de SmartLogger"))
+    var recipient: Seq[String] = Seq.empty
+    recipient = recipient.+:("franck.caron76@gmail.com")
+    recipient = recipient.+:("nic.gille@gmail.com")
+    recipient = recipient.+:("gregoire.pommier@etu.univ-rouen.fr")
+
+    val notifier = new MailNotifier("Alerte !")
+    notifier.setRecipients(recipient)
+    alerter.addNotifier(notifier)
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")
@@ -65,8 +72,6 @@ object SmartLogger {
       if (counter > 0) {
         alerter.notifyAll(message)
       }
-
     }
-
   }
 }

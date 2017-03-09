@@ -56,6 +56,8 @@ class Alerter extends IAlerter {
     * @version 1.0
     */
   override def notifyAll(content: String): Unit = {
+
+    println("Je suis dans Alerter : " + content)
     for (n <- notifiers) {
       n.setText(content)
       n.send
