@@ -15,7 +15,12 @@ hs_err_pid*
 *.xml
 *.iml
 *.txt
+*.jar
 
 # Removed .idea/ folder.
 .idea/
 smartlogger/.idea/
+
+#removed gradle repo
+smarlogger/.gradle
+smarlogger/build

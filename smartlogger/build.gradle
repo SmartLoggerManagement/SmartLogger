@@ -81,9 +81,11 @@ task scalaTest(dependsOn: ['testClasses'], type: JavaExec) {
 jar {
     from {
         configurations.compile.collect {
+            zip64 = true
             it.isDirectory() ? it : zipTree(it)
         }
         configurations.runtime.collect {
+            zip64 = true
             it.isDirectory() ? it : zipTree(it)
         }
     }
