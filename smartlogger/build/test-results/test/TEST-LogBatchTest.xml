@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="LogBatchTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-03-10T08:38:37" hostname="TheCodingLaptop" time="0.002">
+  <properties/>
+  <testcase name="testGetEmptyBatch" classname="LogBatchTest" time="0.0"/>
+  <testcase name="testAdd" classname="LogBatchTest" time="0.002"/>
+  <testcase name="testAdd2" classname="LogBatchTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

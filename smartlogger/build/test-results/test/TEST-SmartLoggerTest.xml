@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SmartLoggerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-03-10T08:38:13" hostname="TheCodingLaptop" time="24.074">
+  <properties/>
+  <testcase name="test normal behavior" classname="SmartLoggerTest" time="24.074"/>
+  <system-out><![CDATA[Je suis dans Alerter : Serveur 1 : Tue 7 March 14:49:39 CET 2017 : Temperature = 62°C 
+Serveur 1 : Tue 7 March 14:50:39 CET 2017 : Temperature = 85°C 
+
+There is a problem with : 
+Serveur 1 : Tue 7 March 14:49:39 CET 2017 : Temperature = 62°C 
+Serveur 1 : Tue 7 March 14:50:39 CET 2017 : Temperature = 85°C 
+
+]]></system-out>
+  <system-err><![CDATA[17/03/10 09:38:13 INFO ContextCleaner: Cleaned accumulator 207
+17/03/10 09:38:13 INFO ContextCleaner: Cleaned accumulator 209
+17/03/10 09:38:13 INFO ContextCleaner: Cleaned accumulator 208
+17/03/10 09:38:14 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+17/03/10 09:38:14 INFO SparkContext: Starting job: take at Classifier.scala:111
+17/03/10 09:38:14 INFO DAGScheduler: Registering RDD 16 (take at Classifier.scala:111)
+17/03/10 09:38:14 INFO DAGScheduler: Got job 2 (take at Classifier.scala:111) with 1 output partitions
+17/03/10 09:38:14 INFO DAGScheduler: Final stage: ResultStage 5 (take at Classifier.scala:111)
+17/03/10 09:38:14 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 4)
+17/03/10 09:38:14 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 4)
+17/03/10 09:38:14 INFO DAGScheduler: Submitting ShuffleMapStage 4 (MapPartitionsRDD[16] at take at Classifier.scala:111), which has no missing parents
+17/03/10 09:38:14 INFO MemoryStore: Block broadcast_4 stored as values in memory (estimated size 8.1 KB, free 869.1 MB)
+17/03/10 09:38:14 INFO MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 4.3 KB, free 869.1 MB)
+17/03/10 09:38:14 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on 10.0.104.191:56595 (size: 4.3 KB, free: 874.7 MB)
+17/03/10 09:38:14 INFO SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:996
+17/03/10 09:38:14 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 4 (MapPartitionsRDD[16] at take at Classifier.scala:111)
+17/03/10 09:38:14 INFO TaskSchedulerImpl: Adding task set 4.0 with 1 tasks
+17/03/10 09:38:14 WARN TaskSetManager: Stage 4 contains a task of very large size (328 KB). The maximum recommended task size is 100 KB.
+17/03/10 09:38:14 INFO TaskSetManager: Starting task 0.0 in stage 4.0 (TID 4, localhost, executor driver, partition 0, PROCESS_LOCAL, 336033 bytes)
+17/03/10 09:38:14 INFO Executor: Running task 0.0 in stage 4.0 (TID 4)
+17/03/10 09:38:14 INFO Executor: Finished task 0.0 in stage 4.0 (TID 4). 1809 bytes result sent to driver
+17/03/10 09:38:14 INFO TaskSetManager: Finished task 0.0 in stage 4.0 (TID 4) in 18 ms on localhost (executor driver) (1/1)
+17/03/10 09:38:14 INFO TaskSchedulerImpl: Removed TaskSet 4.0, whose tasks have all completed, from pool 
+17/03/10 09:38:14 INFO DAGScheduler: ShuffleMapStage 4 (take at Classifier.scala:111) finished in 0,019 s
+17/03/10 09:38:14 INFO DAGScheduler: looking for newly runnable stages
+17/03/10 09:38:14 INFO DAGScheduler: running: Set()
+17/03/10 09:38:14 INFO DAGScheduler: waiting: Set(ResultStage 5)
+17/03/10 09:38:14 INFO DAGScheduler: failed: Set()
+17/03/10 09:38:14 INFO DAGScheduler: Submitting ResultStage 5 (MapPartitionsRDD[19] at take at Classifier.scala:111), which has no missing parents
+17/03/10 09:38:14 INFO MemoryStore: Block broadcast_5 stored as values in memory (estimated size 7.2 KB, free 869.1 MB)
+17/03/10 09:38:14 INFO MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 3.8 KB, free 869.1 MB)
+17/03/10 09:38:14 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on 10.0.104.191:56595 (size: 3.8 KB, free: 874.7 MB)
+17/03/10 09:38:14 INFO SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:996
+17/03/10 09:38:14 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 5 (MapPartitionsRDD[19] at take at Classifier.scala:111)
+17/03/10 09:38:14 INFO TaskSchedulerImpl: Adding task set 5.0 with 1 tasks
+17/03/10 09:38:14 INFO TaskSetManager: Starting task 0.0 in stage 5.0 (TID 5, localhost, executor driver, partition 0, ANY, 5800 bytes)
+17/03/10 09:38:14 INFO Executor: Running task 0.0 in stage 5.0 (TID 5)
+17/03/10 09:38:14 INFO ShuffleBlockFetcherIterator: Getting 1 non-empty blocks out of 1 blocks
+17/03/10 09:38:14 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+17/03/10 09:38:14 INFO Executor: Finished task 0.0 in stage 5.0 (TID 5). 2011 bytes result sent to driver
+17/03/10 09:38:14 INFO TaskSetManager: Finished task 0.0 in stage 5.0 (TID 5) in 5 ms on localhost (executor driver) (1/1)
+17/03/10 09:38:14 INFO TaskSchedulerImpl: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+17/03/10 09:38:14 INFO DAGScheduler: ResultStage 5 (take at Classifier.scala:111) finished in 0,006 s
+17/03/10 09:38:14 INFO DAGScheduler: Job 2 finished: take at Classifier.scala:111, took 0,038247 s
+17/03/10 09:38:14 INFO NaiveBayes: org.apache.spark.ml.classification.NaiveBayes inferred 3 classes for labelCol=nb_68f9e0417820__labelCol since numClasses was not specified in the column metadata.
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 210
+17/03/10 09:38:14 INFO BlockManagerInfo: Removed broadcast_5_piece0 on 10.0.104.191:56595 in memory (size: 3.8 KB, free: 874.7 MB)
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 319
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 211
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 212
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 213
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 214
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 215
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 216
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 217
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 218
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 219
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 220
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 221
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned accumulator 222
+17/03/10 09:38:14 INFO ContextCleaner: Cleaned shuffle 2
+17/03/10 09:38:14 INFO BlockManagerInfo: Removed broadcast_4_piece0 on 10.0.104.191:56595 in memory (size: 4.3 KB, free: 874.7 MB)
+17/03/10 09:38:15 INFO SparkContext: Starting job: collect at NaiveBayes.scala:171
+17/03/10 09:38:15 INFO DAGScheduler: Registering RDD 24 (map at NaiveBayes.scala:159)
+17/03/10 09:38:15 INFO DAGScheduler: Got job 3 (collect at NaiveBayes.scala:171) with 1 output partitions
+17/03/10 09:38:15 INFO DAGScheduler: Final stage: ResultStage 7 (collect at NaiveBayes.scala:171)
+17/03/10 09:38:15 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 6)
+17/03/10 09:38:15 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 6)
+17/03/10 09:38:15 INFO DAGScheduler: Submitting ShuffleMapStage 6 (MapPartitionsRDD[24] at map at NaiveBayes.scala:159), which has no missing parents
+17/03/10 09:38:15 INFO MemoryStore: Block broadcast_6 stored as values in memory (estimated size 5.6 MB, free 863.5 MB)
+17/03/10 09:38:15 INFO MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 385.0 KB, free 863.1 MB)
+17/03/10 09:38:15 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on 10.0.104.191:56595 (size: 385.0 KB, free: 874.3 MB)
+17/03/10 09:38:15 INFO SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:996
+17/03/10 09:38:15 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 6 (MapPartitionsRDD[24] at map at NaiveBayes.scala:159)
+17/03/10 09:38:15 INFO TaskSchedulerImpl: Adding task set 6.0 with 1 tasks
+17/03/10 09:38:15 WARN TaskSetManager: Stage 6 contains a task of very large size (2612 KB). The maximum recommended task size is 100 KB.
+17/03/10 09:38:15 INFO TaskSetManager: Starting task 0.0 in stage 6.0 (TID 6, localhost, executor driver, partition 0, PROCESS_LOCAL, 2675607 bytes)
+17/03/10 09:38:15 INFO Executor: Running task 0.0 in stage 6.0 (TID 6)
+17/03/10 09:38:15 INFO Executor: Finished task 0.0 in stage 6.0 (TID 6). 1709 bytes result sent to driver
+17/03/10 09:38:15 INFO TaskSetManager: Finished task 0.0 in stage 6.0 (TID 6) in 95 ms on localhost (executor driver) (1/1)
+17/03/10 09:38:15 INFO TaskSchedulerImpl: Removed TaskSet 6.0, whose tasks have all completed, from pool 
+17/03/10 09:38:15 INFO DAGScheduler: ShuffleMapStage 6 (map at NaiveBayes.scala:159) finished in 0,095 s
+17/03/10 09:38:15 INFO DAGScheduler: looking for newly runnable stages
+17/03/10 09:38:15 INFO DAGScheduler: running: Set()
+17/03/10 09:38:15 INFO DAGScheduler: waiting: Set(ResultStage 7)
+17/03/10 09:38:15 INFO DAGScheduler: failed: Set()
+17/03/10 09:38:15 INFO DAGScheduler: Submitting ResultStage 7 (ShuffledRDD[25] at aggregateByKey at NaiveBayes.scala:160), which has no missing parents
+17/03/10 09:38:15 INFO MemoryStore: Block broadcast_7 stored as values in memory (estimated size 5.6 MB, free 857.4 MB)
+17/03/10 09:38:15 INFO MemoryStore: Block broadcast_7_piece0 stored as bytes in memory (estimated size 386.0 KB, free 857.1 MB)
+17/03/10 09:38:15 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on 10.0.104.191:56595 (size: 386.0 KB, free: 874.0 MB)
+17/03/10 09:38:15 INFO SparkContext: Created broadcast 7 from broadcast at DAGScheduler.scala:996
+17/03/10 09:38:15 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 7 (ShuffledRDD[25] at aggregateByKey at NaiveBayes.scala:160)
+17/03/10 09:38:15 INFO TaskSchedulerImpl: Adding task set 7.0 with 1 tasks
+17/03/10 09:38:15 INFO TaskSetManager: Starting task 0.0 in stage 7.0 (TID 7, localhost, executor driver, partition 0, ANY, 5765 bytes)
+17/03/10 09:38:15 INFO Executor: Running task 0.0 in stage 7.0 (TID 7)
+17/03/10 09:38:15 INFO ShuffleBlockFetcherIterator: Getting 1 non-empty blocks out of 1 blocks
+17/03/10 09:38:15 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+17/03/10 09:38:15 INFO Executor: Finished task 0.0 in stage 7.0 (TID 7). 26504 bytes result sent to driver
+17/03/10 09:38:15 INFO TaskSetManager: Finished task 0.0 in stage 7.0 (TID 7) in 35 ms on localhost (executor driver) (1/1)
+17/03/10 09:38:15 INFO TaskSchedulerImpl: Removed TaskSet 7.0, whose tasks have all completed, from pool 
+17/03/10 09:38:15 INFO DAGScheduler: ResultStage 7 (collect at NaiveBayes.scala:171) finished in 0,036 s
+17/03/10 09:38:15 INFO DAGScheduler: Job 3 finished: collect at NaiveBayes.scala:171, took 0,274232 s
+17/03/10 09:38:15 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+17/03/10 09:38:20 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+17/03/10 09:38:25 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+17/03/10 09:38:30 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+17/03/10 09:38:35 WARN SparkSession$Builder: Using an existing SparkSession; some configuration may not take effect.
+]]></system-err>
+</testsuite>

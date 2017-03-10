@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.typesafe.akka:akka-http-xml_2.11:10.0.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-http-xml_2.11/10.0.3/91e6b0144d7f93e9410e6255e6915f92874a53d/akka-http-xml_2.11-10.0.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-http-xml_2.11/10.0.3/d0b51f0cdcdcb11190e72bc27c19095bbafbd28b/akka-http-xml_2.11-10.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

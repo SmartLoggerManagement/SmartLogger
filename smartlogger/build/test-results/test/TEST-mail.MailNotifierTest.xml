@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mail.MailNotifierTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-03-10T08:38:46" hostname="TheCodingLaptop" time="1.346">
+  <properties/>
+  <testcase name="Test mail sending" classname="mail.MailNotifierTest" time="1.346"/>
+  <system-out><![CDATA[DEBUG: setDebug: JavaMail version 1.4.7
+before sending
+DEBUG: getProvider() returning javax.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "smtp.gmail.com", port 587, isSSL false
+220 smtp.gmail.com ESMTP e16sm11808297wra.36 - gsmtp
+DEBUG SMTP: connected to host "smtp.gmail.com", port: 587
+
+EHLO TheCodingLaptop
+250-smtp.gmail.com at your service, [193.52.159.57]
+250-SIZE 35882577
+250-8BITMIME
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "STARTTLS", arg ""
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+STARTTLS
+220 2.0.0 Ready to start TLS
+EHLO TheCodingLaptop
+250-smtp.gmail.com at your service, [193.52.159.57]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+DEBUG SMTP: Found extension "SIZE", arg "35882577"
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH"
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM 
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+DEBUG SMTP: AUTH LOGIN succeeded
+DEBUG SMTP: use8bit false
+MAIL FROM:<smartlogger@saagie.com>
+250 2.1.0 OK e16sm11808297wra.36 - gsmtp
+RCPT TO:<nic.gille@gmail.com>
+250 2.1.5 OK e16sm11808297wra.36 - gsmtp
+DEBUG SMTP: Verified Addresses
+DEBUG SMTP:   nic.gille@gmail.com
+DATA
+354  Go ahead e16sm11808297wra.36 - gsmtp
+Date: Fri, 10 Mar 2017 09:38:46 +0100 (CET)
+From: smartlogger@saagie.com
+To: nic.gille@gmail.com
+Message-ID: <1176524330.3.1489135126544.JavaMail.franck@TheCodingLaptop>
+Subject: SmartLogger - Notification
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Hello world!
+.
+250 2.0.0 OK 1489135127 e16sm11808297wra.36 - gsmtp
+QUIT
+221 2.0.0 closing connection e16sm11808297wra.36 - gsmtp
+See mailbox
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
