@@ -1,5 +1,7 @@
 package dao
 
+import database.dao.Log
+
 /**
   * Created by Kero76 on 07/03/17.
   *
@@ -8,11 +10,11 @@ package dao
   * @version 1.0
   */
 object StdDAO extends DAO {
-  override def request(request: String): Unit = {
-
+  override def request(request: String): Seq[(Log)] = {
+    return Seq.empty
   }
 
   override def insert(request: String): Boolean = {
-
+    return true
   }
 }

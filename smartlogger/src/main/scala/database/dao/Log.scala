@@ -1,4 +1,4 @@
-package dao
+package database.dao
 
 /**
   * Created by Kero76 on 07/03/17.
@@ -27,7 +27,7 @@ class Log (val i: Long, val l: String) {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def id = _id
+  def getId = _id
 
   /**
     * Get the content of the log.
@@ -37,7 +37,7 @@ class Log (val i: Long, val l: String) {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def log = _log
+  def getLog = _log
 
   /**
     * Return a view of the object InputSettings.

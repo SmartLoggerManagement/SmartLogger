@@ -11,5 +11,16 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+# Removed File type
+*.xml
+*.iml
+*.txt
+*.jar
+
 # Removed .idea/ folder.
-.idea/*
+.idea/
+smartlogger/.idea/
+
+#removed gradle repo
+smarlogger/.gradle/*
+smarlogger/build/*

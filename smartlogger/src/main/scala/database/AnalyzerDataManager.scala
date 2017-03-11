@@ -15,7 +15,7 @@ class AnalyzerDataManager extends DataManager {
   }
 
   override def checkData(data: String): Boolean = {
-
+    return true
   }
 
   override def addData(data: Seq[(Long, String)]): Unit = {

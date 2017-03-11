@@ -1,5 +1,7 @@
 package dao
 
+import database.dao.Log
+
 /**
   * Created by Kero76 on 07/03/17.
   *

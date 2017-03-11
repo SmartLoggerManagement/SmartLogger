@@ -56,13 +56,17 @@ dependencies {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/ML', 'src/main/scala/io/']
+            srcDirs = ['src/main/scala/ML',
+                       'src/main/scala/io/',
+                       'src/main/scala/database'
+            ]
         }
     }
     test {
         scala {
             srcDirs = ['src/test/scala/IAnalysor',
                        'src/test/scala/io',
+                       'src/test/scala/database'
                        //'src/test/scala/benchmark'
             ]
         }
