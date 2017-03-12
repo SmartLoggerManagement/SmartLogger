@@ -1,13 +1,13 @@
 package output
 
-//import com.ponkotuy.slack.SlackClient
+import com.ponkotuy.slack.SlackClient
 
 /**
   * Created by Jordan Baudin on 06/03/17.
   */
 class SlackSender(apiKey:String) extends INotifier {
 
-  //val s = new SlackClient(apiKey)
+  var s = new SlackClient(apiKey)
 
   /**
     * Send the message into a communication flux.
@@ -18,6 +18,7 @@ class SlackSender(apiKey:String) extends INotifier {
     * @version 1.0
     */
   override def send(text: String): Unit = {
-    //s.chat.postMessage("ChannelToDefineInJSON", "List of users to notify" + text)
+    s.chat.postMessage("#testsmartlogger", "@madzinah @kero76 " + text)
   }
+
 }
