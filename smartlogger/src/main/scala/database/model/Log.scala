@@ -1,18 +1,27 @@
-package database.dao
+package database.model
+
+import java.util.UUID
 
 /**
-  * Created by Kero76 on 07/03/17.
+  * This class is the model of the Database.
+  *
+  * An object Log is composed by two attributes :
+  * <ul>
+  *   <li>id : Unique identifier of the log which representing by an object UUID</li>
+  *   <li>log : The content of the Log.</li>
+  * </ul>
   *
   * @author Nicolas GILLE
   * @since SmartLogger 0.2
   * @version 1.0
   */
-class Log (val i: Long, val l: String) {
+class Log (val uuid: UUID, val l: String) {
 
   /**
     * The id of the log.
+    * This log identifier is an UUID generate totally randomly to avoid auto-incrementation not present on Impala.
     */
-  private val _id: Long = i
+  private val _id: UUID = uuid
 
   /**
     * The content of the log.
@@ -47,5 +56,5 @@ class Log (val i: Long, val l: String) {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  override def toString: String = this._id + " : " + this._log
+  override def toString: String = this._id.toString + " : " + this._log
 }

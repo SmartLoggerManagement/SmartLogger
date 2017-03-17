@@ -1,6 +1,4 @@
-package dao
-
-import database.dao.Log
+import database.model.Log
 
 /**
   * This trait is use to create an object use to interact with database and fill a POJO object type.

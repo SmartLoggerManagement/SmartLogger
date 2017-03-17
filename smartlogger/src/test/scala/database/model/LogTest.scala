@@ -1,11 +1,15 @@
-package database.dao
+package database.model
+
+import java.util.UUID
 
 import org.junit.runner.RunWith
 import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 import org.scalatest.junit.JUnitRunner
 
 /**
-  * Created by Kero76 on 11/03/17.
+  * @author Nicolas GILLE
+  * @since SmartLogger 0.2
+  * @version 1.0
   */
 @RunWith(classOf[JUnitRunner])
 class LogTest extends FeatureSpec with Matchers with GivenWhenThen {
@@ -15,7 +19,7 @@ class LogTest extends FeatureSpec with Matchers with GivenWhenThen {
 
     scenario("The DAO fill an object Log with precise Log") {
       Given("Create an Id and a Message to simulate information retrieve by the DAO.")
-      val id : Long = 123456789
+      val id : UUID = UUID.randomUUID()
       val message : String = "My name is Log, James Log"
 
       When("Fill the Log with id and message previously retrieve.")

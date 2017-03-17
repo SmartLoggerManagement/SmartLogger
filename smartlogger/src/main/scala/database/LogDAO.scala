@@ -1,8 +1,7 @@
-package dao
+import java.sql.{SQLException, SQLTimeoutException}
+import java.util.UUID
 
-import java.sql.{Connection, DriverManager, SQLException, SQLTimeoutException}
-
-import database.dao.Log
+import database.model.Log
 
 /**
   * It's an implementation of the trait DAO use to represent Log object from the Impala Database.
@@ -12,10 +11,12 @@ import database.dao.Log
   *
   * @author Nicolas GILLE
   * @see DAO
+  * @see DbConnector
   * @since SmartLogger 0.2
   * @version 1.0
   */
 object LogDAO extends DAO {
+
   /**
     * @inheritdoc
     */
@@ -23,34 +24,24 @@ object LogDAO extends DAO {
     // Sequence with all Log at return after SELECT query.
     var result: Seq[Log] = Seq.empty
 
-    // connect to the database named "mysql" on the localhost
-    val driver   = "com.mysql.jdbc.Driver"
-    val url      = "jdbc:mysql://localhost/mysql"
-    val username = "root"
-    val password = "root"
-
-    var connection: Connection = null
-
     try {
-      // make the connection
-      Class.forName(driver)
-      connection = DriverManager.getConnection(url, username, password)
-
-      // create the statement, and run the select query
-      val statement = connection.createStatement
+      // Initialize Database connection, create the statement, and run the select query
+      val statement = DbConnector.openConnection.createStatement
       val resultSet = statement.executeQuery(query)
 
       // Loop on each result and fill an object Log.
       while (resultSet.next) {
         val id  = resultSet.getString("id")
         val log = resultSet.getString("log")
-        result = result.+:(new Log(id.toLong, log))
+        result = result.+:(new Log(UUID.fromString(id), log))
       }
     } catch {
       case sqlTimeoutException: SQLTimeoutException => sqlTimeoutException.printStackTrace
       case sqlException:        SQLException        => sqlException.printStackTrace
+    } finally {
+      // Finally, we close the connection
+      DbConnector.closeConnection
     }
-    connection.close()
     return result
   }
 
@@ -58,27 +49,16 @@ object LogDAO extends DAO {
     * @inheritdoc
     */
   override def execute(query: String): Unit = {
-    // connect to the database named "mysql" on the localhost
-    val driver   = "com.mysql.jdbc.Driver"
-    val url      = "jdbc:mysql://localhost/mysql"
-    val username = "root"
-    val password = "root"
-
-    var connection: Connection = null
-
     try {
-      // make the connection
-      Class.forName(driver)
-      connection = DriverManager.getConnection(url, username, password)
-
-      // create the statement, and run the insert query.
-      val statement = connection.createStatement
+      // Initialize Database connection, create the statement, and run the insert query.
+      val statement = DbConnector.openConnection.createStatement
       statement.execute(query)
-
     } catch {
       case sqlTimeoutException: SQLTimeoutException => sqlTimeoutException.printStackTrace
       case sqlException:        SQLException        => sqlException.printStackTrace
+    } finally {
+      // Finally, we close the connection
+      DbConnector.closeConnection
     }
-    connection.close()
   }
 }
