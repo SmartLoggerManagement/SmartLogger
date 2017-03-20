@@ -1,12 +1,15 @@
 package util
 
-import java.io.{BufferedWriter, FileReader, FileWriter}
+import java.nio.file.{Files, Paths}
 import java.util.PropertyResourceBundle
 
 import scala.collection.mutable.Map
 
 /**
-  * Created by franck on 15/03/17.
+  *
+  * @author Franck Caron
+  * @since SmartLogger 1.0
+  * @version 1.0
   */
 class PropertiesManager() {
   // ATTRIBUTS
@@ -47,14 +50,23 @@ class PropertiesManager() {
     this.filepath = filepath
     this.data = Map.empty
 
-    // Chargement des propriétés
-    val bundle = new PropertyResourceBundle(new FileReader(filepath))
-    while (bundle.getKeys.hasMoreElements) {
-      val key:String = bundle.getKeys.nextElement()
-      data += (key -> bundle.getString(key))
+    if(!Files.exists(Paths.get(filepath))) {
+      Files.createFile(Paths.get(filepath))
+      return this
     }
 
-    this
+    // Chargement des propriétés
+    val bundle = new PropertyResourceBundle(Files.newBufferedReader(Paths.get(filepath)))
+
+    val iterator = bundle.keySet()
+                  .iterator()
+
+    while (iterator.hasNext) {
+      val key = iterator.next
+      data update (key, bundle.getString(key))
+    }
+
+    return this
   }
 
   /**
@@ -71,7 +83,7 @@ class PropertiesManager() {
     */
   def save():Unit = {
     // Ouverture du fichier de destination
-    val writer = new BufferedWriter(new FileWriter(filepath))
+    val writer = Files.newBufferedWriter(Paths.get(filepath))
 
     // Réecriture du fichier
     for (key:String <- data.keys) {

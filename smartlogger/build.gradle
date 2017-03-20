@@ -14,8 +14,6 @@ dependencies {
     // Scala and scalatest libraries
     compile 'org.scala-lang:scala-library:2.11'
 
-    // compile group: 'org.mockito', name: 'mockito-all', version: '1.8.4' // USELESS
-
     // Spark library
     compile 'org.apache.spark:spark-core_2.11:2.1.0'
     compile 'org.apache.spark:spark-mllib_2.11:2.1.0'
@@ -57,15 +55,19 @@ dependencies {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/ML', 'src/main/scala/io/','src/main/scala/' ]
+            srcDirs = ['src/main/scala/io/input',
+                       'src/main/scala/io/output/mail',
+                       'src/main/scala/io/output',
+                       'src/main/scala/ml',
+                       'src/main/scala/util' ]
         }
     }
     test {
         scala {
-            srcDirs = ['src/test/scala/IAnalysor',
-                       'src/test/scala/io/input',
-                       'src/test/scala/main',
-                       'src/test/scala/io/output/mail'
+            srcDirs = [//'src/test/scala/ml',
+                       //'src/test/scala/io',
+                       //'src/test/scala/main',
+                       'src/test/scala/util'
                        //'src/test/scala/benchmark'
             ]
         }
