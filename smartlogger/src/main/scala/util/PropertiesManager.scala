@@ -6,92 +6,121 @@ import java.util.PropertyResourceBundle
 import scala.collection.mutable.Map
 
 /**
+  * Class use to manage SmartLogger properties.
   *
   * @author Franck Caron
-  * @since SmartLogger 1.0
+  * @since SmartLogger 0.1
   * @version 1.0
   */
 class PropertiesManager() {
-  // ATTRIBUTS
-  /** Le nom de fichier properties associé à ce gestionnaire */
-  private var filepath:String = ""
-
-  /** La map des modifications à apporter au fichier de propriétés */
-  private var data:Map[String, String] = Map.empty
-
-
-  // REQUETES
+  // Attributes
   /**
-    * Renvoie la valeur textuelle associée au nom de propriété donné
+    * Name of the property file associate at the manager.
+    */
+  private var filepath: String = ""
+
+  /**
+    * Map containing the key and the associate value.
+    */
+  private var data: Map[String, String] = Map.empty
+
+
+  // Requests
+  /**
+    * Return the value associated to the key.
     *
-    * @param property Le nom de la propriété
+    * @param property
+    * The key.
+    * @return
+    * The value.
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
-  def get(property:String) : String = data(property)
+  def get(property: String): String = data(property)
 
   /**
-    * Renvoie l'ensembles des propriétés définies par le fichier
-    * de propriétés spécifié
+    * Return all properties present on property files.
+    *
+    * @return
+    * A sequence who contains all properties.
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
-  def getProperties() : Seq[String] = data.keys.toSeq
+  def getProperties(): Seq[String] = data.keys.toSeq
 
   /**
-    * Indique si la propriété donnée existe dans le fichier
-    * de propriétés
+    * Check if a property exists on property file.
+    *
+    * @return
+    * True if the property exists, in other case, it return false.
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
-  def exists(property:String) : Boolean = getProperties().contains(property)
+  def exists(property: String): Boolean = getProperties().contains(property)
 
 
-  // COMMANDES
+  // Commands
   /**
-    * Charge toutes les propriétés du fichier spécifié
+    * Loading all properties present on specific file.
+    *
+    * @param filepath
+    * The complete path of the property file.
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
-  def load(filepath:String) : PropertiesManager = {
-    // Réinitialisation
+  def load(filepath: String): PropertiesManager = {
+    // Reinitialisation
     this.filepath = filepath
     this.data = Map.empty
 
-    if(!Files.exists(Paths.get(filepath))) {
+    if (!Files.exists(Paths.get(filepath))) {
       Files.createFile(Paths.get(filepath))
       return this
     }
 
-    // Chargement des propriétés
+    // Loading properties
     val bundle = new PropertyResourceBundle(Files.newBufferedReader(Paths.get(filepath)))
 
     val iterator = bundle.keySet()
-                  .iterator()
+      .iterator()
 
     while (iterator.hasNext) {
       val key = iterator.next
-      data update (key, bundle.getString(key))
+      data update(key, bundle.getString(key))
     }
 
     return this
   }
 
   /**
-    * Modifie la valeur textuelle associée au nom de propriété donné
+    * Set the value in function of the key.
     *
-    * @param property Le nom de la propriété
-    * @param value La valeur à associer à cette propriété
+    * @param property
+    * Property name.
+    * @param value
+    * Associated value.
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
-  def set(property:String, value:String) : Unit = data(property) = value
+  def set(property: String, value: String): Unit = data(property) = value
 
   /**
-    * Modifie le fichier de propriétés pour qu'il corresponde aux informations
-    * associées à ce gestionnaire
+    * Save the file with new properties.
+    *
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
-  def save():Unit = {
-    // Ouverture du fichier de destination
+  def save(): Unit = {
+    // Open destination file.
     val writer = Files.newBufferedWriter(Paths.get(filepath))
 
-    // Réecriture du fichier
-    for (key:String <- data.keys) {
+    // Overwrite file.
+    for (key: String <- data.keys) {
       writer.write(key + "=" + data(key))
       writer.newLine()
     }
 
-    // Fermeture du fichier
+    // Close file.
     writer.close()
   }
 }

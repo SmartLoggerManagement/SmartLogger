@@ -8,8 +8,6 @@ import org.scalatest.junit.JUnitRunner
   */
 @RunWith(classOf[JUnitRunner])
 class InputManagerTest extends FunSuite with Matchers  {
-
-
   private val SLEEP_TIME = 2000
 
   test("NormalBehavior") {
@@ -53,5 +51,4 @@ class InputManagerTest extends FunSuite with Matchers  {
     batchContent shouldBe empty
     input.close()
   }
-
 }

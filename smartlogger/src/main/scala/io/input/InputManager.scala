@@ -13,13 +13,11 @@ import scala.concurrent.duration._
 
 /**
   *
-  * @author Team SmartLogger
+  * @author Jordan Baudin
   * @since SmartLogger 0.1
-  * SmartLogger 0.1
-  *
-  * @version
+  * @version 1.0
   */
-class InputManager extends InputManagerInterface {
+class InputManager extends IInputManager {
 
   val timeout = 300.millis
 
@@ -71,10 +69,11 @@ class InputManager extends InputManagerInterface {
       }).run()
   }
 
+  /**
+    * @inheritdoc
+    */
   def close(): Unit = {
     materializer.shutdown()
     system.terminate()
   }
-
-
 }

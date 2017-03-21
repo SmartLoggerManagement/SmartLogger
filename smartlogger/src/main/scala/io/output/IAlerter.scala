@@ -3,7 +3,7 @@ package output
 /**
   *
   * @author Nicolas GILLE, Jordan BAUDIN
-  * @since SmartLogger 1.0
+  * @since SmartLogger 0.1
   * @version 1.0
   */
 trait IAlerter {
@@ -12,9 +12,8 @@ trait IAlerter {
     * Add a notifier to the Alerter.
     *
     * @param notifier
-    *   Notifier to add.
-    *
-    * @since SmartLogger 1.0
+    * Notifier to add.
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   def addNotifier(notifier: Notifier): Unit
@@ -24,8 +23,7 @@ trait IAlerter {
     *
     * @param notifiers
     * Notifiers to add.
-    *
-    * @since SmartLogger 1.0
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   def addNotifiers(notifiers: Seq[Notifier]): Unit
@@ -35,8 +33,7 @@ trait IAlerter {
     *
     * @param notifier
     * Notifier to remove.
-    *
-    * @since SmartLogger 1.0
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   def removeNotifier(notifier: Notifier): Unit
@@ -45,9 +42,8 @@ trait IAlerter {
     * Notify all notifiers previously added.
     *
     * @param content
-    *   content to send.
-    *
-    * @since SmartLogger 1.0
+    * content to send.
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   def notifyAll(content: String): Unit

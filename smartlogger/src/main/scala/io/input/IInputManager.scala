@@ -1,10 +1,12 @@
 package input
 
-
 /**
-  * Created by Kero76 on 09/02/17.
+  *
+  * @author Nicolas Gille
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
-trait InputManagerInterface {
+trait IInputManager {
 
   /**
     * Open a connection on a specific port and interface.
@@ -12,16 +14,16 @@ trait InputManagerInterface {
     * Interface and port are specified in an external configuration file.
     * So this method bind a socket into a specific port and listen all requests received by this sport.
     *
-    * @since
-    * @version
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
   def open()
 
   /**
     * Closing the connection.
     *
-    * @since
-    * @version
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
   def close()
 

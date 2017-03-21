@@ -10,9 +10,6 @@ import output.mail.MailNotifier
   */
 @RunWith(classOf[JUnitRunner])
 class MailNotifierTest extends FunSuite with Matchers {
-
-
-
   test("Test mail sending") {
     var recipient: Seq[String] = Seq.empty
     //recipient = recipient.+:("franck.caron76@gmail.com")

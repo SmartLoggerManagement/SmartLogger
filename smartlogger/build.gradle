@@ -25,16 +25,9 @@ dependencies {
 
     // Mail library
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
-    // https://mvnrepository.com/artifact/dumbster/dumbster
-    compile group: 'dumbster', name: 'dumbster', version: '1.6'
-
 
     // JsonReaderFile
     compile 'com.github.SmartLoggerManagement:JsonReaderFile:v1.0.1'
-
-    // LogGenerator
-  //  compile 'com.github.SmartLoggerManagement:LogGenerator:1.1'
-
 
     // Test execution
     testCompile "org.scala-lang:scala-library:2.11"
@@ -43,13 +36,11 @@ dependencies {
     testCompile 'org.apache.spark:spark-core_2.11:2.1.0'
     testCompile 'org.apache.spark:spark-mllib_2.11:2.1.0'
     testCompile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: '2.8.6'
-
     testCompile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
     testCompile 'com.typesafe.akka:akka-http_2.11:10.0.3'
 
     // Mail library
     testCompile group: 'javax.mail', name: 'mail', version: '1.4.7'
-    testCompile group: 'com.icegreen', name: 'greenmail', version: '1.5.3'  // GreenMail to test mail output.
 }
 
 sourceSets {
@@ -64,11 +55,11 @@ sourceSets {
     }
     test {
         scala {
-            srcDirs = [//'src/test/scala/ml',
-                       //'src/test/scala/io',
-                       //'src/test/scala/main',
-                       'src/test/scala/util'
-                       //'src/test/scala/benchmark'
+            srcDirs = [//'src/test/scala/benchmark',
+                       'src/test/scala/ml',
+                       'src/test/scala/io',
+                       'src/test/scala/main',
+                       'src/test/scala/util',
             ]
         }
     }

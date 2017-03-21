@@ -1,7 +1,10 @@
 package output
 
 /**
-  * Created by Jordan Baudin on 20/02/17.
+  *
+  * @author Jordan Baudin
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
 class Alerter extends IAlerter {
 
@@ -11,8 +14,8 @@ class Alerter extends IAlerter {
     * Add a notifier to the Alerter.
     *
     * @param notifier
-    * Notifier to add.
-    * @since SmartLogger 1.0
+    *   Notifier to add.
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   override def addNotifier(notifier: Notifier): Unit = {
@@ -25,8 +28,8 @@ class Alerter extends IAlerter {
     * Add a Sequence of notifier at alert.
     *
     * @param notifiers
-    * Notifiers to add.
-    * @since SmartLogger 1.0
+    *   Notifiers to add.
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   override def addNotifiers(notifiers: Seq[Notifier]): Unit = {
@@ -39,8 +42,8 @@ class Alerter extends IAlerter {
     * Remove a specific notifier.
     *
     * @param notifier
-    * Notifier to remove.
-    * @since SmartLogger 1.0
+    *   Notifier to remove.
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   override def removeNotifier(notifier: Notifier): Unit = {
@@ -51,16 +54,14 @@ class Alerter extends IAlerter {
     * Notify all notifiers previously added.git pull.
     *
     * @param content
-    * content to send.
-    * @since SmartLogger 1.0
+    *   content to send.
+    * @since SmartLogger 0.1
     * @version 1.0
     */
   override def notifyAll(content: String): Unit = {
-
-    println("Je suis dans Alerter : " + content)
     for (n <- notifiers) {
       n.setText(content)
-      n.send
+      n.send()
     }
   }
 }

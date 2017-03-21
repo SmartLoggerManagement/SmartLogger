@@ -22,5 +22,5 @@ hs_err_pid*
 smartlogger/.idea/
 
 #removed gradle repo
-smarlogger/.gradle/*
-smarlogger/build/*
+smartlogger/.gradle/*
+smartlogger/build/*

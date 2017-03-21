@@ -1,9 +1,13 @@
 package util
 
 /**
+  * Class who extends PropertiesManager.
+  *
+  * Added data encryption on property file for added security.
   *
   * @author Jordan Baudin
-  * @since SmartLogger 1.0
+  * @see PropertiesManager
+  * @since SmartLogger 0.1
   * @version 1.0
   */
 class EncryptedPropertiesManager extends PropertiesManager {
@@ -11,7 +15,10 @@ class EncryptedPropertiesManager extends PropertiesManager {
 
   /**
     * Save the file encoding the values to avoid storing
-    *   plain text passwords and API keys
+    * plain text passwords and API keys
+    *
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
   override def save(): Unit = {
 
@@ -29,7 +36,10 @@ class EncryptedPropertiesManager extends PropertiesManager {
 
   /**
     * Load the file decoding the values to avoid storing
-    *   plain text passwords and API keys
+    * plain text passwords and API keys
+    *
+    * @since SmartLogger 0.1
+    * @version 1.0
     */
   override def load(filepath: String): PropertiesManager = {
     super.load(filepath)

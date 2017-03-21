@@ -4,7 +4,7 @@ import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
 
-import scala.ML.Analyzer
+import scala.ML.IAnalyzer
 import scala.io.Source
 
 /**
@@ -26,7 +26,7 @@ class SmartAnalyzerBenchmark extends FunSuite {
   //  & then running the predicting with example data
   //  & testing if the result is good & transmitting
   //  the false results to track.
-  def benchmark(analy:Analyzer, str:String):Unit = {
+  def benchmark(analy:IAnalyzer, str:String):Unit = {
     var source = Source.fromFile("src/test/resources/TrainData.txt")
     val data = source.mkString
 
@@ -57,19 +57,19 @@ class SmartAnalyzerBenchmark extends FunSuite {
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For NaiveBayes") {
-    benchmark(new SmartAnalyzer(new NaiveBayes), "NaiveBayes")
+    benchmark(new SmartIAnalyzer(new NaiveBayes), "NaiveBayes")
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For DecisionTreeClassifier") {
-    benchmark(new SmartAnalyzer(new DecisionTreeClassifier), "DecisionTreeClassifier")
+    benchmark(new SmartIAnalyzer(new DecisionTreeClassifier), "DecisionTreeClassifier")
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For LogisticRegression") {
-    benchmark(new SmartAnalyzer(new LogisticRegression), "LogisticRegression")
+    benchmark(new SmartIAnalyzer(new LogisticRegression), "LogisticRegression")
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For RandomForestClassifier") {
-    benchmark(new SmartAnalyzer(new RandomForestClassifier), "RandomForestClassifier")
+    benchmark(new SmartIAnalyzer(new RandomForestClassifier), "RandomForestClassifier")
   }
 
 }

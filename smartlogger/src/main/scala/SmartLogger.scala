@@ -1,4 +1,4 @@
-import input.{InputManager, LogBatch, LogParser}
+import input.{IInputManager, LogBatch, LogParser}
 import org.apache.spark.ml.classification.NaiveBayes
 import output.Alerter
 import output.mail.MailNotifier
@@ -10,16 +10,17 @@ import scala.io.Source
 import scala.util.Sorting
 
 /**
-  * Created by Nicolas GILLE, Jordan BAUDIN on 07/03/17.
+  * SmartLogger is the main object of the application start when you run SmartLogger's app.
+  *
   *
   * @author Jordan BAUDIN, Nicolas GILLE
-  * @since SmartLogger 1.0
+  * @since SmartLogger 0.1
   * @version 1.0
   */
 object SmartLogger {
 
   def main(args: Array[String]): Unit = {
-    val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
+    val smartAnalyzer = new SmartIAnalyzer(new NaiveBayes)
 
     // Open file and retrieve data.
     val source = Source.fromFile("src/test/resources/TrainData.txt")
@@ -31,7 +32,7 @@ object SmartLogger {
     smartAnalyzer.train(trainSeq)
 
     // Open server.
-    val input = new InputManager
+    val input = new IInputManager
     input.open()
 
     // Configuring the outputs

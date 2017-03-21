@@ -10,23 +10,41 @@ import output.Notifier
 
 /**
   * Defines global parameters which aren't modified between all MailAlerter instances
+  *
+  * @author Franck Caron
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
 object MailNotifier {
-  /** The address of the server */
-  val serverAddress:String = "smtp.gmail.com"
+  /**
+    * The address of the server.
+    */
+  val serverAddress: String = "smtp.gmail.com"
 
-  /** The sender's mail adress used for sending any mail from this notifier */
-  val from:String = "smartlogger@saagie.com"
+  /**
+    * The sender's mail adress used for sending any mail from this notifier.
+    */
+  val from: String = "smartlogger@saagie.com"
 }
 
 /**
   * Defines a notifier which emits its messages through mail.
+  *
+  * @author Franck Caron, Nicolas Gille
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
-class MailNotifier(subject:String) extends Notifier {
+class MailNotifier(subject: String) extends Notifier {
   // ALTERNATIVES
   def this() = this("SmartLogger - Notification")
 
   // COMMANDS
+  /**
+    * Method used to send email.
+    *
+    * @since SmartLogger 0.1
+    * @version 1.0
+    */
   override def send() {
     // Init. of the message
     val props = System.getProperties
@@ -57,11 +75,7 @@ class MailNotifier(subject:String) extends Notifier {
     message.setSentDate(new Date())
     message.saveChanges()
 
-    println("before sending")
-
     // Sending message
     Transport.send(message)
-
-    println("See mailbox")
   }
 }
