@@ -52,7 +52,6 @@ sourceSets {
     main {
         scala {
             srcDirs = ['src/main/scala/io/input',
-                       'src/main/scala/io/output/notifier',
                        'src/main/scala/io/output',
                        'src/main/scala/ml',
                        'src/main/scala/util']
