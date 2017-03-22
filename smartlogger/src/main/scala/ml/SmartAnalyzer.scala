@@ -13,7 +13,7 @@ import scala.ML.IAnalyzer
   * @since SmartLogger 0.1
   * @version 1.0
   */
-class SmartIAnalyzer[Vector,
+class SmartAnalyzer[Vector,
 E <: ProbabilisticClassifier[Vector, E, M],
 M <: ProbabilisticClassificationModel[Vector, M]]
 (var algo: Classifier[Vector, E, M]) extends IAnalyzer {

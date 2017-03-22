@@ -1,5 +1,7 @@
 package output
 
+import output.notifier.INotifier
+
 /**
   *
   * @author Nicolas GILLE, Jordan BAUDIN
@@ -16,7 +18,7 @@ trait IAlerter {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def addNotifier(notifier: Notifier): Unit
+  def addNotifier(notifier: INotifier): Unit
 
   /**
     * Add a Sequence of notifier at alert.
@@ -26,7 +28,7 @@ trait IAlerter {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def addNotifiers(notifiers: Seq[Notifier]): Unit
+  def addNotifiers(notifiers: Seq[INotifier]): Unit
 
   /**
     * Remove a specific notifier.
@@ -36,7 +38,7 @@ trait IAlerter {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def removeNotifier(notifier: Notifier): Unit
+  def removeNotifier(notifier: INotifier): Unit
 
   /**
     * Notify all notifiers previously added.

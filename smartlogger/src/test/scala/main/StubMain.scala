@@ -26,7 +26,7 @@ class StubMain {
   def getResult : Seq[(Long, String, Double)] = resultt
 
   def main(args: Array[String]): Unit = {
-    val smartAnalyzer = new SmartIAnalyzer(new NaiveBayes)
+    val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
 
     // Open file and retrieve data.
     val source = Source.fromFile("src/test/resources/TrainData.txt")

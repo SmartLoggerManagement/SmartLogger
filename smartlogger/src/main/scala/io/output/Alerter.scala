@@ -1,5 +1,7 @@
 package output
 
+import output.notifier.INotifier
+
 /**
   *
   * @author Jordan Baudin
@@ -8,7 +10,7 @@ package output
   */
 class Alerter extends IAlerter {
 
-  var notifiers:Seq[Notifier] = Seq.empty
+  var notifiers:Seq[INotifier] = Seq.empty
 
   /**
     * Add a notifier to the Alerter.
@@ -18,7 +20,7 @@ class Alerter extends IAlerter {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  override def addNotifier(notifier: Notifier): Unit = {
+  override def addNotifier(notifier: INotifier): Unit = {
     if (notifier != null && !notifiers.contains(notifier)) {
       notifiers = notifiers.:+(notifier)
     }
@@ -32,7 +34,7 @@ class Alerter extends IAlerter {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  override def addNotifiers(notifiers: Seq[Notifier]): Unit = {
+  override def addNotifiers(notifiers: Seq[INotifier]): Unit = {
     for (n <- notifiers) {
       this.addNotifier(n)
     }
@@ -46,7 +48,7 @@ class Alerter extends IAlerter {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  override def removeNotifier(notifier: Notifier): Unit = {
+  override def removeNotifier(notifier: INotifier): Unit = {
       notifiers = notifiers.filterNot(_ == notifier)
   }
 

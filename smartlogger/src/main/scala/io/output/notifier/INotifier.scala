@@ -1,4 +1,4 @@
-package output
+package output.notifier
 
 /**
   * This objects aims at notifying a given list of recipient in order
@@ -8,8 +8,7 @@ package output
   * @since SmartLogger 0.1
   * @version 1.0
   */
-trait Notifier {
-
+trait INotifier {
   // ATTRIBUTES
   /**
     * All adresses which will be alerted by this notifier

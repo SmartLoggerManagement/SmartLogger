@@ -2,7 +2,7 @@ import akka.actor.Cancellable
 import input.{InputManager, LogBatch, LogParser}
 import org.apache.spark.ml.classification.NaiveBayes
 import output.Alerter
-import output.mail.MailNotifier
+import output.notifier.MailNotifier
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -27,7 +27,7 @@ class StubSmartlogger {
   def getResult : Seq[(Long, String, Double)] = resultt
 
   def main(args: Array[String]): Unit = {
-    val smartAnalyzer = new SmartIAnalyzer(new NaiveBayes)
+    val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
 
     // Open file and retrieve data.
     val source = Source.fromFile("src/test/resources/TrainData.txt")

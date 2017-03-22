@@ -17,7 +17,7 @@ object AnalyzerBuilder {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def getNaiveBayes: IAnalyzer = new SmartIAnalyzer(new NaiveBayes())
+  def getNaiveBayes: IAnalyzer = new SmartAnalyzer(new NaiveBayes())
 
   /**
     * Provides an analyzer based on the LogisticRegression algorithm.
@@ -25,7 +25,7 @@ object AnalyzerBuilder {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def getLogisticRegression: IAnalyzer = new SmartIAnalyzer(new LogisticRegression())
+  def getLogisticRegression: IAnalyzer = new SmartAnalyzer(new LogisticRegression())
 
   /**
     * Provides an analyzer based on the LogisticRegression algorithm.
@@ -33,7 +33,7 @@ object AnalyzerBuilder {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def getDecisionTreeClassifier: IAnalyzer = new SmartIAnalyzer(new DecisionTreeClassifier())
+  def getDecisionTreeClassifier: IAnalyzer = new SmartAnalyzer(new DecisionTreeClassifier())
 
   /**
     * Provides an analyzer based on the LogisticRegression algorithm.
@@ -41,5 +41,5 @@ object AnalyzerBuilder {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def getRandomForestClassifier: IAnalyzer = new SmartIAnalyzer(new RandomForestClassifier())
+  def getRandomForestClassifier: IAnalyzer = new SmartAnalyzer(new RandomForestClassifier())
 }

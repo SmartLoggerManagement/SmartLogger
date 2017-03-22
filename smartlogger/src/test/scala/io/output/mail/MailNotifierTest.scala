@@ -3,7 +3,7 @@ package mail
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
-import output.mail.MailNotifier
+import output.notifier.MailNotifier
 
 /**
   * Created by Kero76 on 08/03/17.

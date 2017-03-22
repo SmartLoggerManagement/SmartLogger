@@ -1,12 +1,10 @@
-package output.mail
+package output.notifier
 
 import java.util.Date
 import javax.mail
 import javax.mail.Message.RecipientType
 import javax.mail.internet.{InternetAddress, MimeMessage}
 import javax.mail.{Authenticator, PasswordAuthentication, Session, Transport}
-
-import output.Notifier
 
 /**
   * Defines global parameters which aren't modified between all MailAlerter instances
@@ -34,7 +32,7 @@ object MailNotifier {
   * @since SmartLogger 0.1
   * @version 1.0
   */
-class MailNotifier(subject: String) extends Notifier {
+class MailNotifier(subject: String) extends INotifier {
   // ALTERNATIVES
   def this() = this("SmartLogger - Notification")
 

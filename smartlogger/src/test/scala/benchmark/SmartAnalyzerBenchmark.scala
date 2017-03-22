@@ -57,19 +57,19 @@ class SmartAnalyzerBenchmark extends FunSuite {
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For NaiveBayes") {
-    benchmark(new SmartIAnalyzer(new NaiveBayes), "NaiveBayes")
+    benchmark(new SmartAnalyzer(new NaiveBayes), "NaiveBayes")
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For DecisionTreeClassifier") {
-    benchmark(new SmartIAnalyzer(new DecisionTreeClassifier), "DecisionTreeClassifier")
+    benchmark(new SmartAnalyzer(new DecisionTreeClassifier), "DecisionTreeClassifier")
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For LogisticRegression") {
-    benchmark(new SmartIAnalyzer(new LogisticRegression), "LogisticRegression")
+    benchmark(new SmartAnalyzer(new LogisticRegression), "LogisticRegression")
   }
 
   test("Train & Predict Benchmark Using A 10k Lines File For RandomForestClassifier") {
-    benchmark(new SmartIAnalyzer(new RandomForestClassifier), "RandomForestClassifier")
+    benchmark(new SmartAnalyzer(new RandomForestClassifier), "RandomForestClassifier")
   }
 
 }
