@@ -41,10 +41,22 @@ object SmartLogger {
     recipient = recipient.+:("franck.caron76@gmail.com")
     recipient = recipient.+:("nic.gille@gmail.com")
     recipient = recipient.+:("gregoire.pommier@etu.univ-rouen.fr")
+    recipient = recipient.+:("madzinah@gmail.com")
 
     val notifier = new MailNotifier("Alerte !")
     notifier.setRecipients(recipient)
     alerter.addNotifier(notifier)
+
+    val properties = new EncryptedPropertiesManager
+    properties.load("src/test/resources/bundle.properties")
+    val apiKey = properties.get("$apiKey")
+
+    val slackSender = new SlackNotifier(apiKey)
+
+    testSlackSender setChannel "#testsmartlogger"
+    testSlackSender setRecipients Seq("@madzinah", "@kero76")
+
+    alerter.addNotifier(slackSender)
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")

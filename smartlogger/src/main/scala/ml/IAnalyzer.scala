@@ -13,6 +13,7 @@ trait IAnalyzer {
     *
     * @param data
     *   Seq describing an ID, a Log, a Label
+    * @throws IllegalArgumentException if data is null
     * @since SmartLogger 0.1
     * @version 1.0
     */
@@ -27,6 +28,9 @@ trait IAnalyzer {
     *   Seq describing an ID and a Log
     * @return
     *   Seq equals to the input Seq, with a new column which is the prediction
+    * @throws IllegalArgumentException if data is null
+    * @throws NotBoundException if the model is not created beforehand
+    *
     * @since SmartLogger 0.1
     * @version 1.0
     */

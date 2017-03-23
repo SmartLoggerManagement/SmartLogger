@@ -64,7 +64,6 @@ class InputManager extends IInputManager {
     // Running the server
     val bindingFuture: Future[Http.ServerBinding] =
       serverSource.to(Sink.foreach { connection =>
-        //println("Accepted new connection from " + connection.remoteAddress)
         connection handleWithSyncHandler requestHandler
       }).run()
   }

@@ -12,14 +12,15 @@ import com.ponkotuy.slack.SlackClient
   */
 class SlackNotifier(apiKey:String) extends INotifier {
   var s = new SlackClient(apiKey)
+  var channel: String = ""
+
+  def setChannel(c : String) = channel = c
 
   /**
-    * Send the message into a communication flux.
-    *
-    * @since SmartLogger 1.0
-    * @version 1.0
+    * @inheritdoc
     */
   override def send(): Unit = {
-    s.chat.postMessage("#testsmartlogger", "@madzinah @kero76 " + text)
+    val allRecipients = recipients.mkString(" ")
+    s.chat.postMessage(channel, allRecipients + " " + text)
   }
 }
