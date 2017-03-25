@@ -9,6 +9,6 @@ class StubNotifier extends INotifier {
     */
   override def send(): Unit = {
     println("There is a problem with : ")
-    println(this.text)
+    println(this.getText())
   }
 }

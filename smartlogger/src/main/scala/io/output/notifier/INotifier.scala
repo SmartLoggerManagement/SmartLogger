@@ -1,7 +1,10 @@
 package output.notifier
 
 /**
-  * This objects aims at notifying a given list of recipient in order
+  * Defines a notifier.
+  *
+  * A notifier aims at broadcasting a specific alert
+  * to a given list of recipients, in order
   * to warn them from the analysis's results.
   *
   * @author Franck Caron
@@ -11,14 +14,38 @@ package output.notifier
 trait INotifier {
   // ATTRIBUTES
   /**
-    * All adresses which will be alerted by this notifier
+    * All recipients which will be alerted by this notifier.
+    *
+    * The information described by these strings depends on the kind of
+    * this notifier.
     */
-  var recipients: Seq[String] = Seq.empty
+  private var recipients: Seq[String] = Seq.empty
 
   /**
     * The text content which will be transmitted by this notifier
     */
-  var text: String = ""
+  private var text: String = ""
+
+
+  // REQUESTS
+  /**
+    * Returns all recipients targeted by this notifier.
+    *
+    * @return All recipients which are targeted by this notifier
+    * @since SmartLogger 0.2
+    * @version 1.0
+    */
+  def getRecipients(): Seq[String] = recipients
+
+  /**
+    * Returns the alert text of this notifier.
+    *
+    * @return The text of any alert sent with this notifier
+    * @since SmartLogger 0.2
+    * @version 1.0
+    */
+  def getText(): String = text
+
 
   // COMMANDS
   /**

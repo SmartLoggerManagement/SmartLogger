@@ -1,6 +1,11 @@
 package scala.ML
 
 /**
+  * SmartLogger's core, provides all analysis functions which are needed
+  * to detect warnings or failure from a given log.
+  *
+  * The analyzer will be using the log as a triplet of an ID,
+  * a text content, and a value which acts as a classification value.
   *
   * @author Jordan Baudin
   * @since SmartLogger 0.1
@@ -12,7 +17,7 @@ trait IAnalyzer {
     * Method used to train Machine Learning.
     *
     * @param data
-    *   Seq describing an ID, a Log, a Label
+    *   Seq describing an ID, a Log's content, a Label
     * @since SmartLogger 0.1
     * @version 1.0
     */

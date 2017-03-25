@@ -3,14 +3,19 @@ package input
 /**
   * LogBatch is a class used to store Logs received from HTTP request.
   *
+  * This batch is used to provide a bunch of logs to the analyser,
+  * within a regular time interval.
+  *
   * @author Jordan Baudin
   * @since SmartLogger 0.1
   * @version 1.0
   */
 object LogBatch {
+  // ATTRIBUTES
+  /** All stored logs */
+  private var sequence: Seq[(Long, String)] = Seq.empty
 
-  var sequence: Seq[(Long, String)] = Seq.empty
-
+  // COMMANDS
   /**
     * Function adding a sequence given to the batch.
     *
@@ -53,5 +58,4 @@ object LogBatch {
       return batch
     }
   }
-
 }

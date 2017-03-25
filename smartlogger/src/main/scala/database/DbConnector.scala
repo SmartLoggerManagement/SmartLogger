@@ -1,20 +1,22 @@
 import java.sql.{Connection, DriverManager}
 
 /**
-  * DbConnector is a class use to connect SmartLogger on a Database.
-  * This class is composed by two methods use to open and close Connection on a Database.
+  * DbConnector is a class use to connect SmartLogger with a Database.
+  * This class is composed by two methods use to open
+  * and close Connection with a Database.
   *
   * @author Nicolas GILLE
   * @since SmartLogger 0.2
   * @version 1.0
   */
 object DbConnector {
-
+  // ATTRIBUTE
   /**
     * Object Connection at return when you open a connection on a Database.
     */
   private var connection : Connection = _
 
+  // COMMANDS
   /**
     * Method use to open a connection on a Database.
     *

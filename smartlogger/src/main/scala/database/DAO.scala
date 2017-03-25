@@ -12,7 +12,6 @@ import database.model.Log
   * @version 1.0
   */
 trait DAO {
-
   /**
     * Method call when you request the Database.
     *

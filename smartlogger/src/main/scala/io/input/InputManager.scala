@@ -7,42 +7,41 @@ import akka.http.scaladsl.model._
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
 import fr.nicolasgille.json.{JsonFileManager, SettingType}
+import util.Properties
 
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
 /**
+  * Standard implementation of the InputManager
   *
   * @author Jordan Baudin
   * @since SmartLogger 0.1
   * @version 1.0
   */
 class InputManager extends IInputManager {
+  // ATTRIBUTES
+  private val timeout = 300.millis
 
-  val timeout = 300.millis
+  private var serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] = _
 
-  var serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] = _
+  private implicit val system = ActorSystem()
+  private implicit val materializer = ActorMaterializer()
+  private implicit val executionContext = system.dispatcher
 
-  implicit val system = ActorSystem()
-  implicit val materializer = ActorMaterializer()
-  implicit val executionContext = system.dispatcher
-
+  // COMMANDS
   /**
     * @inheritdoc
     */
   override def open(): Unit = {
-
+    // Checks if the server is available
     if (serverSource != null) {
       println("The server is already open")
       return
     }
 
-    // Parse akka_setting file and bind server with good interface and port.
-    val jsonManager : JsonFileManager = new JsonFileManager
-    jsonManager.readFile("src/main/resources/akka_setting.json", SettingType.INPUT_AKKA_SETTING)
-
     // Binding the server with the interface and the port
-    serverSource = Http().bind(interface = jsonManager.inputAkkaSettings.interface, port = jsonManager.inputAkkaSettings.port)
+    serverSource = Http().bind(Properties.AKKA.get("interface"), Integer.valueOf(Properties.AKKA.get("port")))
 
     // Defining the requestHandler to get the logs received from HTTP requests
     val requestHandler: HttpRequest => HttpResponse = {
@@ -64,7 +63,6 @@ class InputManager extends IInputManager {
     // Running the server
     val bindingFuture: Future[Http.ServerBinding] =
       serverSource.to(Sink.foreach { connection =>
-        //println("Accepted new connection from " + connection.remoteAddress)
         connection handleWithSyncHandler requestHandler
       }).run()
   }

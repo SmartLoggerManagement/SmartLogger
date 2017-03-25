@@ -1,14 +1,14 @@
 package input
 
 /**
-  * Class used to parse Log receive from HTTP Request.
+  * This object aims at parsing all Logs received from HTTP Requests,
+  * which have been read by the InputManager
   *
   * @author Jordan Baudin
   * @since SmartLogger 0.1
   * @version 1.0
   */
 object LogParser {
-
   /**
     * Parse a raw view of log(s) and return
     * a Seq separating the label(s) and the log(s)
@@ -21,7 +21,6 @@ object LogParser {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-
   def parseTrainingData(data: String): Seq[(Long, String, Double)] = {
     if (data == null) {
       return null
@@ -55,7 +54,6 @@ object LogParser {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-
   def parsePredictData(data: String): Seq[(Long, String)] = {
     if (data == null) {
       return null
@@ -73,5 +71,4 @@ object LogParser {
 
     return sequence
   }
-
 }

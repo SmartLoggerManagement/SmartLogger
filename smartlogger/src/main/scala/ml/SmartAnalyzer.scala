@@ -8,6 +8,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 import scala.ML.IAnalyzer
 
 /**
+  * Standard implementation of an analyzer.
   *
   * @author Jordan Baudin
   * @since SmartLogger 0.1

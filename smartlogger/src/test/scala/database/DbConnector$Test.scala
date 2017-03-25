@@ -1,7 +1,9 @@
 import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 
 /**
-  * Created by teegreg on 22/03/17.
+  * @author Grégoire POMMIER
+  * @since SmartLogger 0.2
+  * @version 1.0
   */
 class DbConnector$Test extends FeatureSpec with Matchers with GivenWhenThen {
   feature("DbConnector connect to a database and return a connection") {

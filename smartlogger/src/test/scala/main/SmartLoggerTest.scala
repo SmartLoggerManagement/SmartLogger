@@ -8,10 +8,6 @@ import org.scalatest.{FunSuite, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class SmartLoggerTest extends FunSuite with Matchers{
-
-
-
-
   test("test normal behavior") {
 
     val main = new StubMain

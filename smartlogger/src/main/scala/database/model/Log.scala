@@ -3,9 +3,9 @@ package database.model
 import java.util.UUID
 
 /**
-  * This class is the model of the Database.
+  * The log's model used for storage in the Database.
   *
-  * An object Log is composed by two attributes :
+  * A Log is modelised by two attributes :
   * <ul>
   *   <li>id : Unique identifier of the log which representing by an object UUID</li>
   *   <li>log : The content of the Log.</li>
@@ -16,10 +16,11 @@ import java.util.UUID
   * @version 1.0
   */
 class Log (val uuid: UUID, val l: String) {
-
   /**
     * The id of the log.
-    * This log identifier is an UUID generate totally randomly to avoid auto-incrementation not present on Impala.
+    *
+    * This log identifier is an UUID generate totally randomly
+    * to avoid auto-incrementation not present on Impala.
     */
   private val _id: UUID = uuid
 

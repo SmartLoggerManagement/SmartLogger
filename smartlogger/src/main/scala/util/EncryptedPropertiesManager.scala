@@ -1,29 +1,29 @@
 package util
 
 /**
-  * Class who extends PropertiesManager.
+  * Defines a specific kind of PropertiesManager, which uses
+  * data encryption in order to protect some properties
+  * inside the associated .properties file.
   *
-  * Added data encryption on property file for added security.
+  * The "protected" properties are defined by prefixing
+  * them with a "$", inside the .properties file
   *
   * @author Jordan Baudin
   * @see PropertiesManager
-  * @since SmartLogger 0.1
+  * @since SmartLogger 0.2
   * @version 1.0
   */
-class EncryptedPropertiesManager extends PropertiesManager {
-
-
+protected[util] class EncryptedPropertiesManager extends PropertiesManager {
+  // COMMANDS
   /**
     * Save the file encoding the values to avoid storing
     * plain text passwords and API keys
     *
-    * @since SmartLogger 0.1
+    * @since SmartLogger 0.2
     * @version 1.0
     */
   override def save(): Unit = {
-
     // Encrypt
-
     for (k <- getProperties()) {
       if (k.startsWith("$")) {
         set(k, java.util.Base64
@@ -31,6 +31,7 @@ class EncryptedPropertiesManager extends PropertiesManager {
           .encodeToString(get(k).getBytes))
       }
     }
+
     super.save()
   }
 
@@ -38,7 +39,7 @@ class EncryptedPropertiesManager extends PropertiesManager {
     * Load the file decoding the values to avoid storing
     * plain text passwords and API keys
     *
-    * @since SmartLogger 0.1
+    * @since SmartLogger 0.2
     * @version 1.0
     */
   override def load(filepath: String): PropertiesManager = {
@@ -55,5 +56,4 @@ class EncryptedPropertiesManager extends PropertiesManager {
 
     return this
   }
-
 }

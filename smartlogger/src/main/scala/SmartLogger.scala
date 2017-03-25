@@ -10,15 +10,15 @@ import scala.io.Source
 import scala.util.Sorting
 
 /**
-  * SmartLogger is the main object of the application start when you run SmartLogger's app.
-  *
+  * SmartLogger is the main object of the application start
+  * when you run SmartLogger's app.
   *
   * @author Jordan BAUDIN, Nicolas GILLE
   * @since SmartLogger 0.1
   * @version 1.0
   */
 object SmartLogger {
-
+  // MAIN
   def main(args: Array[String]): Unit = {
     val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
 
