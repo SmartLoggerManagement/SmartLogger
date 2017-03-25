@@ -38,6 +38,8 @@ class SlackSenderTest extends FeatureSpec with GivenWhenThen with MockitoSugar {
       When("The sending function is called")
 
       testSlackSender setText message
+      testSlackSender setChannel "#testsmartlogger"
+      testSlackSender setRecipients Seq("@madzinah", "@kero76")
       testSlackSender send
 
       Then("It must send a message")
