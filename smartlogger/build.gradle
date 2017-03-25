@@ -1,9 +1,6 @@
 group 'SmartLogger'
 version '1.0'
-
-apply plugin: 'scala'    // Add test task
-
-sourceCompatibility = 1.8
+apply plugin: 'scala'
 
 repositories {
     mavenCentral()
@@ -11,67 +8,67 @@ repositories {
 }
 
 dependencies {
-    // Scala and scalatest libraries
-    compile 'org.scala-lang:scala-library:2.11'
-
-    // Spark library
-    compile 'org.apache.spark:spark-core_2.11:2.1.0'
-    compile 'org.apache.spark:spark-mllib_2.11:2.1.0'
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: '2.8.6'
-
-    // Akka libraries
-    compile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
-    compile 'com.typesafe.akka:akka-http_2.11:10.0.3'
-
-    // Mail library
-    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
-
-    // JsonReaderFile
-    compile 'com.github.SmartLoggerManagement:JsonReaderFile:v1.0.1'
-
-    // Slack API library
-    compile 'com.github.ponkotuy:scala-slack:0.4.0'
+    compile(
+            // Scala
+            'org.scala-lang:scala-library:2.11',
+            // Spark
+            'org.apache.spark:spark-core_2.11:2.1.0',
+            'org.apache.spark:spark-mllib_2.11:2.1.0',
+            'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
+            // Akka
+            'com.typesafe.akka:akka-http-core_2.11:10.0.3',
+            'com.typesafe.akka:akka-http_2.11:10.0.3',
+            // Mail
+            'javax.mail:mail:1.4.7',
+            // Slack API
+            'com.github.ponkotuy:scala-slack:0.4.0'
+    )
 
     // Test execution
-    testCompile "org.scala-lang:scala-library:2.11"
-    testCompile "org.scalatest:scalatest_2.11:3.0.1"
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.+'
+    testCompile(
+            // Test libraries used in project.
+            'org.scala-lang:scala-library:2.11',
+            'org.scalatest:scalatest_2.11:3.0.1',
+            'junit:junit:4.12',
+            'org.mockito:mockito-core:2.+',
 
-    testCompile 'org.apache.spark:spark-core_2.11:2.1.0'
-    testCompile 'org.apache.spark:spark-mllib_2.11:2.1.0'
-    testCompile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: '2.8.6'
-    testCompile 'com.typesafe.akka:akka-http-core_2.11:10.0.3'
-    testCompile 'com.typesafe.akka:akka-http_2.11:10.0.3'
-
-    // Mail library
-    testCompile group: 'javax.mail', name: 'mail', version: '1.4.7'
+            // Other librairies used in environment.
+            'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
+            'org.apache.spark:spark-core_2.11:2.1.0',
+            'org.apache.spark:spark-mllib_2.11:2.1.0',
+            'com.typesafe.akka:akka-http-core_2.11:10.0.3',
+            'com.typesafe.akka:akka-http_2.11:10.0.3',
+            'javax.mail:mail:1.4.7'
+    )
 }
 
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala/io/input',
-                       'src/main/scala/io/output',
-                       'src/main/scala/ml',
-                       'src/main/scala/util']
+            srcDirs = [
+                    'src/main/scala/fr/saagie/smartlogger/db',
+                    'src/main/scala/fr/saagie/smartlogger/db/model',
+                    'src/main/scala/fr/saagie/smartlogger/io/input',
+                    'src/main/scala/fr/saagie/smartlogger/io/output',
+                    'src/main/scala/fr/saagie/smartlogger/ml',
+                    'src/main/scala/fr/saagie/smartlogger/utils'
+            ]
         }
     }
     test {
         scala {
-            srcDirs = [//'src/test/scala/benchmark',
-                       'src/test/scala/ml',
-                       'src/test/scala/io',
-                       'src/test/scala/main',
-                       'src/test/scala/util']
+            srcDirs = [
+//                    'src/test/scala/fr/saagie/smartlogger/benchmark',
+//                    'src/test/scala/fr/saagie/smartlogger/db',
+//                    'src/test/scala/fr/saagie/smartlogger/db/model',
+                    'src/test/scala/fr/saagie/smartlogger/io/input',
+                    'src/test/scala/fr/saagie/smartlogger/io/output/notifier',
+                    'src/test/scala/fr/saagie/smartlogger/ml',
+                    'src/test/scala/fr/saagie/smartlogger/simulation',
+                    'src/test/scala/fr/saagie/smartlogger/utils',
+            ]
         }
     }
-}
-
-task scalaTest(dependsOn: ['testClasses'], type: JavaExec) {
-    main = 'org.scalatest.tools.Runner'
-    args = ['-R', 'build/classes/test', '-o']
-    classpath = sourceSets.test.runtimeClasspath
 }
 
 jar {
