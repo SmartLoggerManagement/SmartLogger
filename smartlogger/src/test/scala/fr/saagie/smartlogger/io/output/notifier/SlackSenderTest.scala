@@ -39,20 +39,24 @@ class SlackSenderTest extends FeatureSpec with GivenWhenThen with MockitoSugar {
 
       testSlackSender setText message
       testSlackSender setChannel "#testsmartlogger"
-      testSlackSender setRecipients Seq("@madzinah", "@kero76")
+      testSlackSender setRecipients Seq("madzinah", "kero76")
       testSlackSender send
 
       Then("It must send a message")
+
+      Mockito.verify(chatMock, Mockito.times(1)).postMessage("#testsmartlogger", "@madzinah @kero76 " + message)
+
     }
 
     scenario("A message needs to be send with a correct API key") {
       Given("A Slack client with a correct API key")
-      val properties = Properties.SLACK
-      val testSlackSender = new SlackNotifier
-
+      val testSlackSender = new SlackNotifier(Properties.SLACK.get("$apiKey"))
+      val message = "Testing message from Smartlogger Tests"
       When("The sending function is called")
 
-      testSlackSender setText "TestingMessage"
+      testSlackSender setText message
+      testSlackSender setChannel "#testsmartlogger"
+      testSlackSender setRecipients Seq("madzinah", "kero76")
       testSlackSender send
 
       Then("It must send a message")
