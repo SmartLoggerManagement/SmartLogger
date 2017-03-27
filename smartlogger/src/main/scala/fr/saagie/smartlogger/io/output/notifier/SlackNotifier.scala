@@ -10,18 +10,22 @@ import fr.saagie.smartlogger.utils.Properties
   * @since SmartLogger 0.2
   * @version 1.0
   */
-class SlackNotifier extends INotifier {
+class SlackNotifier(apiKey:String) extends INotifier {
   // ATTRIBUTES
   /**
     * The client used to interact with the Slack API
     */
-  private val slackClient = new SlackClient(Properties.SLACK.get("$apiKey"))
+
+  private val slackClient = new SlackClient(apiKey)
 
   /**
     * The Slack channel in which alerts will be published
     */
   private var channel: String = Properties.SLACK.get("thread")
 
+  def this() {
+    this(Properties.SLACK.get("$apiKey"))
+  }
 
   // COMMANDS
   /**
@@ -32,6 +36,7 @@ class SlackNotifier extends INotifier {
     */
   def setChannel(channel : String) = this.channel = channel
 
+
   /**
     * Send the message into a communication flux.
     *
@@ -40,13 +45,9 @@ class SlackNotifier extends INotifier {
     */
   override def send(): Unit = {
     // Building message
-    val build = new StringBuilder
-    for (recipient <- getRecipients()) {
-      build.append("@" + recipient)
-    }
-    build.append(getText())
+    val message = getRecipients().mkString("@", " @", " ") + getText()
 
     // Posting to the Slack thread
-    slackClient.chat.postMessage(channel, build.toString())
+    slackClient.chat.postMessage(channel, message)
   }
 }
