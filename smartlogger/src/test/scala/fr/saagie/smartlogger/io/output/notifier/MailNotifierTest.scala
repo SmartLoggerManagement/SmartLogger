@@ -2,7 +2,7 @@ package fr.saagie.smartlogger.io.output.notifier
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
 
 /**
   * @author Nicolas GILLE
@@ -10,8 +10,11 @@ import org.scalatest.{FunSuite, Matchers}
   * @version 1.0
   */
 @RunWith(classOf[JUnitRunner])
-class MailNotifierTest extends FunSuite with Matchers {
-  test("Test mail sending") {
+class MailNotifierTest extends FeatureSpec with GivenWhenThen with Matchers {
+  feature("This class test the MailNotifier by sending 3 e-mails")
+
+  scenario("Test mail sending") {
+    Given("A notifier and some e-mails")
     var recipient: Seq[String] = Seq.empty
     recipient = recipient.+:("franck.caron76@gmail.com")
     recipient = recipient.+:("nic.gille@gmail.com")
@@ -20,7 +23,10 @@ class MailNotifierTest extends FunSuite with Matchers {
     val notifier: MailNotifier = new MailNotifier
     notifier.setText("Test with .properties file")
     notifier.setRecipients(recipient)
+    When("send")
     notifier.send()
+    Then("Mail should be sent")
+
   }
 }
 

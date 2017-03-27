@@ -3,6 +3,7 @@ package fr.saagie.smartlogger.simulation
 import akka.actor.Cancellable
 import fr.saagie.smartlogger.io.input.{InputManager, LogBatch, LogParser}
 import fr.saagie.smartlogger.io.output.Alerter
+import fr.saagie.smartlogger.io.output.notifier.MailNotifier
 import fr.saagie.smartlogger.ml.SmartAnalyzer
 import org.apache.spark.ml.classification.NaiveBayes
 
@@ -12,9 +13,12 @@ import scala.io.Source
 import scala.util.Sorting
 
 /**
-  * Created by teegreg on 08/03/17.
+  * This is a stub of the smartlogger main class, used for the integration of Ml, input and output modules
+  * @author Grégoire POMMIER
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
-class StubMain {
+class StubMainIntegrationML_I_O {
 
   var resultt : Seq[(Long, String, Double)] = Seq.empty
   var sched : Cancellable = _
@@ -46,12 +50,19 @@ class StubMain {
 
     // Configuring the outputs
     val alerter = new Alerter()
-    alerter.addNotifier(new StubNotifier())
+    var recipient: Seq[String] = Seq.empty
+    recipient = recipient.+:("franck.caron76@gmail.com")
+    recipient = recipient.+:("nic.gille@gmail.com")
+    recipient = recipient.+:("gregoire.pommier@etu.univ-rouen.fr")
+
+    val notifier = new MailNotifier("Alerte !")
+    notifier.setRecipients(recipient)
+    alerter.addNotifier(notifier)
 
     // Execute on each X seconds the same part of code.
     val system = akka.actor.ActorSystem("smartlogger")
 
-    sched = system.scheduler.schedule(0 seconds, 5 seconds) {
+    sched = system.scheduler.schedule(0 seconds, 10 seconds) {
 
       // Getting batch and using it to predict
       val batch = LogBatch.getBatch()

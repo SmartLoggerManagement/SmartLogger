@@ -2,8 +2,11 @@ package fr.saagie.smartlogger.simulation
 
 import fr.saagie.smartlogger.io.output.notifier.INotifier
 
-/**
-  * Created by teegreg on 08/03/17.
+/** This is an implementation of INotifier
+  * aiming for test in a local context
+  * @author Grégoire POMMIER
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
 class StubNotifier extends INotifier {
   /**

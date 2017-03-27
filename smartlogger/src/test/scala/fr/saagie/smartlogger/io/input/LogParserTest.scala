@@ -2,36 +2,38 @@ package fr.saagie.smartlogger.io.input
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
 
 /**
-  * Created by teegreg on 06/03/17.
+  * @author Grégoire POMMIER
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
 @RunWith(classOf[JUnitRunner])
-class LogParserTest extends FunSuite with Matchers {
+class LogParserTest extends FeatureSpec with GivenWhenThen with Matchers {
 
 
-  test("parseTrainingDataNull") {
-    //given
-    //when
+  scenario("parseTrainingDataNull") {
+    Given("An empty parser")
+    When("We parse null data")
     val test = LogParser.parseTrainingData(null)
-    //then
+    Then("test should be null")
     test shouldBe null
   }
 
-  test("parsePredictDataNull") {
-    //given
-    //when
+  scenario("parsePredictDataNull") {
+    Given("A parser")
+    When("We predict Null data")
     val test = LogParser.parsePredictData(null)
-    //then
+    Then("test shouldBe null")
     test shouldBe null
   }
 
-  test("Comportement normal parseTrainData") {
-    //given
-    //when
+  scenario("Comportement normal parseTrainData") {
+    Given("A parser")
+    When("We parse a normal content")
     val ret = LogParser.parseTrainingData("1 content .\n2 expected .\n")
-    //then
+    Then("The return should be correct")
     ret should not be empty
     ret.head._1 should equal(0L)
     ret.head._2 should equal("content .")
@@ -41,36 +43,36 @@ class LogParserTest extends FunSuite with Matchers {
     ret(1)._3 should equal(2)
   }
 
-  test("Comportement limite parseTrainData") {
-    //given
+  scenario("Comportement limite parseTrainData") {
+    Given("A parser")
     val stringSize = 1000000 //1M
     val sb = new StringBuilder(stringSize)
     for (i <- 0 until stringSize) {
       sb.append('a')
     }
-    //when
+    When("We parse a big string")
     val ret = LogParser.parseTrainingData("1 "+ sb.toString() + " .")
-    //then
+    Then("The return should be correct")
     ret should not be empty
     ret.head._1 should equal(0L)
     ret.head._2 should equal(sb.toString() + " .")
     ret.head._3 should equal(1)
   }
 
-  test("Comportement faux parseTrainData") {
-    //given
-    //when
+  scenario("Comportement faux parseTrainData") {
+    Given("A parser")
+    When("We parse a wrong log")
     val ret = LogParser.parseTrainingData("expected .\n")
-    //then
+    Then("Return should be empty")
     ret shouldBe empty
   }
 
 
-  test("Comportement normal parsePredictData") {
-    //given
-    //when
+  scenario("Comportement normal parsePredictData") {
+    Given("A parser")
+    When("We parse expectable data")
     val ret = LogParser.parsePredictData("content .\nexpected .\n")
-    //then
+    Then("Return should be normal")
     ret should not be empty
     ret.head._1 should equal(0L)
     ret.head._2 should equal("content .")
@@ -78,16 +80,16 @@ class LogParserTest extends FunSuite with Matchers {
     ret(1)._2 should equal("expected .")
   }
 
-  test("Comportement limite parsePredictData") {
-    //given
+  scenario("Comportement limite parsePredictData") {
+    Given("A parser")
     val stringSize = 1000000 //1M
     val sb = new StringBuilder(stringSize)
     for (i <- 0 until stringSize) {
       sb.append('a')
     }
-    //when
+    When("")
     val ret = LogParser.parsePredictData(sb.toString())
-    //then
+    Then("")
     ret should not be empty
     ret.head._1 should equal(0L)
     ret.head._2 should equal(sb.toString())

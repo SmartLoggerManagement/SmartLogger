@@ -4,16 +4,19 @@ import fr.saagie.smartlogger.io.input.LogParser
 import fr.saagie.smartlogger.ml.{IAnalyzer, SmartAnalyzer}
 import org.apache.spark.ml.classification.{DecisionTreeClassifier, LogisticRegression, NaiveBayes, RandomForestClassifier}
 import org.junit.runner.RunWith
-import org.scalatest.FunSuite
+import org.scalatest.{FeatureSpec, FunSuite}
 import org.scalatest.junit.JUnitRunner
 
 import scala.io.Source
 
-/**
-  * Created by Jordan Baudin on 22/02/17.
+/**This class send a request with a given body to a given uri
+  *
+  * @author Jordan BAUDIN
+  * @since SmartLogger 0.1
+  * @version 1.0
   */
 @RunWith(classOf[JUnitRunner])
-class SmartAnalyzerBenchmark extends FunSuite {
+class SmartAnalyzerBenchmark extends FeatureSpec {
 
   // Function giving the time the thunk take to run
   def time[T](str: String)(thunk: => T): T = {
@@ -58,19 +61,19 @@ class SmartAnalyzerBenchmark extends FunSuite {
 
   }
 
-  test("Train & Predict Benchmark Using A 10k Lines File For NaiveBayes") {
+  scenario("Train & Predict Benchmark Using A 10k Lines File For NaiveBayes") {
     benchmark(new SmartAnalyzer(new NaiveBayes), "NaiveBayes")
   }
 
-  test("Train & Predict Benchmark Using A 10k Lines File For DecisionTreeClassifier") {
+  scenario("Train & Predict Benchmark Using A 10k Lines File For DecisionTreeClassifier") {
     benchmark(new SmartAnalyzer(new DecisionTreeClassifier), "DecisionTreeClassifier")
   }
 
-  test("Train & Predict Benchmark Using A 10k Lines File For LogisticRegression") {
+  scenario("Train & Predict Benchmark Using A 10k Lines File For LogisticRegression") {
     benchmark(new SmartAnalyzer(new LogisticRegression), "LogisticRegression")
   }
 
-  test("Train & Predict Benchmark Using A 10k Lines File For RandomForestClassifier") {
+  scenario("Train & Predict Benchmark Using A 10k Lines File For RandomForestClassifier") {
     benchmark(new SmartAnalyzer(new RandomForestClassifier), "RandomForestClassifier")
   }
 

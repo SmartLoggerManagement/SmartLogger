@@ -9,8 +9,17 @@ import akka.util.ByteString
 
 import scala.concurrent.Future
 
+/**This class send a request with a given body to a given uri
+  *
+  * @author Grégoire POMMIER
+  * @since SmartLogger 0.1
+  * @version 1.0
+  */
 class ClientTest {
-  def sendRequest(content : String, uri : String ) {
+  /**
+   * This method send a put request
+   */
+  def sendPutRequest(content : String, uri : String ) {
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
 
@@ -18,8 +27,10 @@ class ClientTest {
   val responseFuture: Future[HttpResponse] =
     Http().singleRequest(HttpRequest(PUT, uri = uri, entity = HttpEntity(data)))
   }
-
-  def sendPost(content : String, uri : String ) {
+  /**
+    * This method send a post request
+    */
+  def sendPostRequest(content : String, uri : String ) {
     implicit val system = ActorSystem()
     implicit val materializer = ActorMaterializer()
 
