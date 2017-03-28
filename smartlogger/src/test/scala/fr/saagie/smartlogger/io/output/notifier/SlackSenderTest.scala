@@ -43,9 +43,7 @@ class SlackSenderTest extends FeatureSpec with GivenWhenThen with MockitoSugar {
       testSlackSender send
 
       Then("It must send a message")
-
       Mockito.verify(chatMock, Mockito.times(1)).postMessage("#testsmartlogger", "@madzinah @kero76 " + message)
-
     }
 
     scenario("A message needs to be send with a correct API key") {
@@ -60,6 +58,7 @@ class SlackSenderTest extends FeatureSpec with GivenWhenThen with MockitoSugar {
       testSlackSender send
 
       Then("It must send a message")
+      assert(true)
     }
   }
 }

@@ -12,6 +12,10 @@ class StubNotifier extends INotifier {
   /**
     * Send the message to all recipients targeted by this notifier.
     */
+
+  /**
+    * @TODO Add comments
+    */
   override def send(): Unit = {
     println("There is a problem with : ")
     println(this.getText())

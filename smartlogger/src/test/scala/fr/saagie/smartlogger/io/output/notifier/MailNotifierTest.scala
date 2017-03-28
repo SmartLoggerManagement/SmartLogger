@@ -2,7 +2,7 @@ package fr.saagie.smartlogger.io.output.notifier
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
+import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 
 /**
   * @author Nicolas GILLE
@@ -11,22 +11,24 @@ import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class MailNotifierTest extends FeatureSpec with GivenWhenThen with Matchers {
-  feature("This class test the MailNotifier by sending 3 e-mails")
+  feature("This class test the MailNotifier by sending 3 e-mails") {
+    scenario("Send a mail at 3 users.") {
+      Given("Declare list of users to send email.")
+      var recipient: Seq[String] = Seq.empty
+      recipient = recipient.+:("franck.caron76@gmail.com")
+      recipient = recipient.+:("nic.gille@gmail.com")
+      recipient = recipient.+:("madzinah@gmail.com")
 
-  scenario("Test mail sending") {
-    Given("A notifier and some e-mails")
-    var recipient: Seq[String] = Seq.empty
-    recipient = recipient.+:("franck.caron76@gmail.com")
-    recipient = recipient.+:("nic.gille@gmail.com")
-    recipient = recipient.+:("madzinah@gmail.com")
+      val notifier: MailNotifier = new MailNotifier
+      notifier.setText("<p>Email with body</p>")
+      notifier.setRecipients(recipient)
 
-    val notifier: MailNotifier = new MailNotifier
-    notifier.setText("Test with .properties file")
-    notifier.setRecipients(recipient)
-    When("send")
-    notifier.send()
-    Then("Mail should be sent")
+      When("send email")
+      notifier.send()
 
+      Then("Mail should be sent")
+      assert(true)
+    }
   }
 }
 

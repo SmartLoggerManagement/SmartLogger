@@ -9,37 +9,46 @@ import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
   */
 class DbConnectorTest extends FeatureSpec with Matchers with GivenWhenThen {
   feature("DbConnector connect to a database and return a connection") {
-
-    scenario("testCloseConnection") {
+    scenario("Test the close connection method.") {
       Given("An open connection")
       val connection = DbConnector.openConnection
+
       When("We close it")
       DbConnector.closeConnection
+
       Then("It should be closed")
       connection.isClosed shouldBe true
     }
 
-    scenario("testCloseNonOpenedConection") {
-      Given("Nothing")
+    scenario("The connection is closed and the user try to close at new.") {
+      Given("An open connection")
+      DbConnector.openConnection
+      DbConnector.closeConnection
+
       When("We close it")
       DbConnector.closeConnection
+
       Then("It should do nothing")
     }
 
-    scenario("testCloseNonOpenedConection") {
+    scenario("The connection is close and the user try to close at new.") {
       Given("An open connection")
       val connection = DbConnector.openConnection
+      DbConnector.closeConnection
+
       When("We close it twice")
       DbConnector.closeConnection
-      DbConnector.closeConnection
+
       Then("It should be closed")
       connection.isClosed shouldBe true
     }
 
-    scenario("testOpenConnection") {
+    scenario("The DbConnector open a connection from the Database.") {
       Given("Nothing")
       When("We open the connection")
       val connection = DbConnector.openConnection
+
+      Then("The connection should be closed")
       connection.isClosed shouldBe false
     }
   }

@@ -19,6 +19,9 @@ class ClientTest {
   /**
    * This method send a put request
    */
+  /**
+    * @TODO Add comments
+    */
   def sendPutRequest(content : String, uri : String ) {
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
@@ -29,6 +32,9 @@ class ClientTest {
   }
   /**
     * This method send a post request
+    */
+  /**
+    * @TODO Add comments
     */
   def sendPostRequest(content : String, uri : String ) {
     implicit val system = ActorSystem()

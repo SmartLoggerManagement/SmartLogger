@@ -2,7 +2,7 @@ package fr.saagie.smartlogger.io.input
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
+import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 
 /**
   * @author Grégoire POMMIER
@@ -11,42 +11,46 @@ import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class LogBatchTest extends FeatureSpec with GivenWhenThen with Matchers {
-  feature("This class tests LogBatch")
+  feature("This class tests LogBatch") {
+    scenario("testGetEmptyBatch") {
+      Given("An empty Batch")
+      When("Retrieve the LogBatch content")
+      val sq = LogBatch.getBatch()
 
-  scenario("testGetEmptyBatch") {
-    Given("An empty Batch")
-    When("get")
-     val sq = LogBatch.getBatch()
-    Then("The retured sequence should be empty")
-    sq.length should equal(0)
-  }
-
-  scenario("testAdd") {
-    Given("A batch and a sequence")
-    var sequence : Seq[(Long, String)] = Seq.empty
-    for (i <- 0L until 2L) {
-      sequence = sequence.:+(i, "Log" + i)
+      Then("The sequence return should be empty")
+      sq.length should equal(0)
     }
-    When("We add the sequence")
-    LogBatch.add(sequence)
 
-    val sq = LogBatch.getBatch()
-    Then("This sequence should contain 2 elements")
-    sq.length should equal(2)
-    for (i <- 0 until 2) {
-      sq(i)._1 should equal(i)
-      sq(i)._2 should equal("Log" + i)
+    scenario("Add 1 log on LogBatch") {
+      Given("Add a Log on LogBatch")
+      LogBatch.add(0L, "Log1")
+
+      When("Retrieve LogBatch content")
+      val sq = LogBatch.getBatch()
+
+      Then("Batch should return '0L, Log1'")
+      sq.head._1 should equal(0L)
+      sq.head._2 should equal("Log1")
+    }
+
+    scenario("Add 2 Logs on LogBatch") {
+      Given("Instantiate a Seq with some log.")
+      var sequence: Seq[(Long, String)] = Seq.empty
+      for (i <- 0L until 2L) {
+        sequence = sequence.:+(i, "Log" + i)
+      }
+      LogBatch.add(sequence)
+
+      When("Retrieve content of LogBatch")
+      val sq = LogBatch.getBatch()
+
+      Then("This sequence should contain 2 elements")
+      sq.length should equal(2)
+      And("and the result is equal to i and 'Log' + i")
+      for (i <- 0 until 2) {
+        sq(i)._1 should equal(i)
+        sq(i)._2 should equal("Log" + i)
+      }
     }
   }
-
-  scenario("testAdd2") {
-    Given("An empty Batch")
-    When("We add something")
-    LogBatch.add(0L, "Log1")
-    val sq = LogBatch.getBatch()
-    Then("Batch should return it")
-    sq.head._1 should equal(0L)
-    sq.head._2 should equal("Log1")
-  }
-
 }

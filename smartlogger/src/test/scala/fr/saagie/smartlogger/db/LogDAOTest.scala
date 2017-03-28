@@ -4,7 +4,7 @@ import java.util.UUID
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
+import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
 
 /**
   * @author Camille LEPLUMEY
@@ -13,16 +13,18 @@ import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
   */
 
 @RunWith(classOf[JUnitRunner])
-class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen {
+class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with BeforeAndAfter {
   feature("The Database executes the query and fills the sequence 'result' with the resulting logs.") {
     info("To simulate the database's behaviour, we will mock its responses.")
 
-    val uuid = UUID.randomUUID()
+    before() {
+      val uuid = UUID.randomUUID()
+    }
 
     scenario("A create log query is sent to the database.") {
       Given("Create the 'set' query with the message")
       val message = "I am correct log"
-      val insertQuery : String = "Insert into Logs values (" + uuid + ", " + message + ")"
+      val insertQuery: String = "Insert into Logs values (" + uuid + ", " + message + ")"
 
       When("Query the Database with the query")
       LogDAO.execute(insertQuery)
@@ -33,7 +35,7 @@ class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen {
 
     scenario("A get query is sent to the database. The database responds with the appropriate answer.") {
       Given("Create the string 'get' query.")
-      val query : String = "Select * from Logs where id = " + uuid + ")"
+      val query: String = "Select * from Logs where id = " + uuid + ")"
 
       When("Query the Database with the query and analyse the result")
       val result = LogDAO.query(query)
@@ -48,7 +50,7 @@ class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen {
     scenario("A get query is sent to the database with an invalid uuid. The database responds with the appropriate answer.") {
       Given("Create the invalid uuid and the 'get' query")
       val invalidUuid = UUID.randomUUID()
-      val query : String = "Select * from Logs where id = " + invalidUuid + ")"
+      val query: String = "Select * from Logs where id = " + invalidUuid + ")"
 
       When("Query the Database with the query and analyse the result")
       val result = LogDAO.query(query)

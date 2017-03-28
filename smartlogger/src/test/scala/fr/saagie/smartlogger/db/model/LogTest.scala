@@ -3,8 +3,8 @@ package fr.saagie.smartlogger.db.model
 import java.util.UUID
 
 import org.junit.runner.RunWith
-import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 
 /**
   * @author Nicolas GILLE
@@ -19,8 +19,8 @@ class LogTest extends FeatureSpec with Matchers with GivenWhenThen {
 
     scenario("The DAO fill an object Log with precise Log") {
       Given("Create an Id and a Message to simulate information retrieve by the DAO.")
-      val id : UUID = UUID.randomUUID()
-      val message : String = "My name is Log, James Log"
+      val id: UUID = UUID.randomUUID()
+      val message: String = "My name is Log, James Log"
 
       When("Fill the Log with id and message previously retrieve.")
       val log = new Log(id, message)

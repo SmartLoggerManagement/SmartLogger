@@ -1,8 +1,9 @@
-import fr.saagie.smartlogger.ml.SmartAnalyzer
+package fr.saagie.smartlogger.ml
+
 import org.apache.spark.ml.classification.NaiveBayes
 import org.junit.runner.RunWith
-import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 
 /**
   * @author Camille LEPLUMEY
@@ -11,31 +12,24 @@ import org.scalatest.junit.JUnitRunner
   */
 @RunWith(classOf[JUnitRunner])
 class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
-    feature("This is unitary test for basic behavior of SmartAnalyser")
-      info("more in depth test is done in the benchmark package")
+  feature("This is unitary test for basic behavior of SmartAnalyser") {
+    info("more in depth test is done in the benchmark package")
 
-  /* testing train(null)
-    * expected behaviour : illegal argument exception
-    */
-    scenario("test train with null object") {
-      Given("A smart analyzer")
+    scenario("Try to execute method train with a null model object.") {
+      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithm.")
       val analy = new SmartAnalyzer(new NaiveBayes)
-        try {
-          When("Train with a null object")
-          analy.train(null)
-          Then("An IllegalArgumentExeption should be thrown")
-          fail("The test should throw an IllegalArgumentException")
-        } catch {
-          case exception:IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
-        }
+      try {
+        When("Train with a null model object")
+        analy.train(null)
+        Then("An IllegalArgumentException should be thrown")
+        fail("The test should throw an IllegalArgumentException")
+      } catch {
+        case exception: IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
+      }
     }
 
-    /*Testing train(seq)
-    *expected behavior : old.analy.model != new.analy.model
-     */
-
-    scenario("testTrainChange") {
-      Given("A smart analyzer")
+    scenario("Change the training model before process.") {
+      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithm, define a Sequence who contains the new training model and stored the previous model.")
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
         (0L, "X totally sucks :-(", 0.0),
@@ -43,17 +37,16 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
         (2L, "I'm so happy :-)", 2.0)
       )
       val oldModel = analy.model
-      When("Training")
+
+      When("Training on the new training model.")
       analy.train(seq)
+
       Then("The model should be updated")
       oldModel should not be analy.model
     }
 
-    /*Testing predict(null)
-    *expected behavior : IllegalArgumentException
-     */
-    scenario("testPredictNull") {
-      Given("A smart analyzer")
+    scenario("Call predict method on a null object.") {
+      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithmn and train with the specific model.")
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
         (0L, "X totally sucks :-(", 0.0),
@@ -64,33 +57,33 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
       try {
         When("Predict with a null object")
         analy.predict(null)
-        Then("An exeption should rise")
+        Then("An exception should rise")
         fail("Prediction not working with null seq at predict")
       } catch {
-        case exception:IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
-        case e:Exception => assert(false)
+        case exception: IllegalArgumentException => exception.getMessage should equal("data shouldn't be null")
+        case e: Exception => assert(false)
       }
     }
 
-    /*Testing predict(seq) giving always the same result
-    *expected behavior : predict(seq) == predict(seq)
-     */
-    scenario("test Predict Same Result") {
-      Given("A smart analyzer")
+    scenario("Predict same result with the same model") {
+      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithmn and train with the specific model.")
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
         (0L, "X totally sucks :-(", 0.0),
         (1L, "Today was kind of meh", 1.0),
         (2L, "I'm so happy :-)", 2.0)
       )
-      When("We train")
-      analy.train(seq)
       val predi = Seq.apply(
         (0L, "X totally sucks :-("),
         (1L, "Today was kind of meh"),
         (2L, "I'm so happy :-)")
       )
+
+      When("Train the analyzer with the model.")
+      analy.train(seq)
+
       Then("Prediction should stay the same")
       analy.predict(predi) should equal(seq)
     }
+  }
 }

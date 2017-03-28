@@ -23,14 +23,26 @@ class StubMainIntegrationML_I {
   var sched : Cancellable = _
   var input : InputManager = _
 
+  /**
+    * @TODO Add comments
+    */
   def closeInput() : Unit = input.close()
 
+  /**
+    * @TODO Add comments
+    */
   def stopSchedule() : Unit = {
     while (!sched.isCancelled) sched.cancel()
   }
 
+  /**
+    * @TODO Add comments
+    */
   def getResult : Seq[(Long, String, Double)] = resultt
 
+  /**
+    * @TODO Add comments
+    */
   def main(args: Array[String]): Unit = {
     val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
 

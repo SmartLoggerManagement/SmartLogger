@@ -2,7 +2,7 @@ package fr.saagie.smartlogger.io.input
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
+import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
 
 /**
   * @author Grégoire POMMIER
@@ -11,89 +11,95 @@ import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class LogParserTest extends FeatureSpec with GivenWhenThen with Matchers {
+  feature("LogParser receive log and parse it to return right information.") {
+    scenario("Parsing null data.") {
+      Given("Instantiate data at null")
+      val data = null
 
+      When("LogParser try to parse data.")
+      val test = LogParser.parseTrainingData(data)
 
-  scenario("parseTrainingDataNull") {
-    Given("An empty parser")
-    When("We parse null data")
-    val test = LogParser.parseTrainingData(null)
-    Then("test should be null")
-    test shouldBe null
-  }
-
-  scenario("parsePredictDataNull") {
-    Given("A parser")
-    When("We predict Null data")
-    val test = LogParser.parsePredictData(null)
-    Then("test shouldBe null")
-    test shouldBe null
-  }
-
-  scenario("Comportement normal parseTrainData") {
-    Given("A parser")
-    When("We parse a normal content")
-    val ret = LogParser.parseTrainingData("1 content .\n2 expected .\n")
-    Then("The return should be correct")
-    ret should not be empty
-    ret.head._1 should equal(0L)
-    ret.head._2 should equal("content .")
-    ret.head._3 should equal(1)
-    ret(1)._1 should equal(1L)
-    ret(1)._2 should equal("expected .")
-    ret(1)._3 should equal(2)
-  }
-
-  scenario("Comportement limite parseTrainData") {
-    Given("A parser")
-    val stringSize = 1000000 //1M
-    val sb = new StringBuilder(stringSize)
-    for (i <- 0 until stringSize) {
-      sb.append('a')
+      Then("The result of the parsing should be at null.")
+      test shouldBe null
     }
-    When("We parse a big string")
-    val ret = LogParser.parseTrainingData("1 "+ sb.toString() + " .")
-    Then("The return should be correct")
-    ret should not be empty
-    ret.head._1 should equal(0L)
-    ret.head._2 should equal(sb.toString() + " .")
-    ret.head._3 should equal(1)
-  }
 
-  scenario("Comportement faux parseTrainData") {
-    Given("A parser")
-    When("We parse a wrong log")
-    val ret = LogParser.parseTrainingData("expected .\n")
-    Then("Return should be empty")
-    ret shouldBe empty
-  }
+    scenario("Parse data and see the result.") {
+      Given("A parser")
+      val data = "1 content .\n2 expected .\n"
 
+      When("We parse a normal content")
+      val ret = LogParser.parseTrainingData(data)
 
-  scenario("Comportement normal parsePredictData") {
-    Given("A parser")
-    When("We parse expectable data")
-    val ret = LogParser.parsePredictData("content .\nexpected .\n")
-    Then("Return should be normal")
-    ret should not be empty
-    ret.head._1 should equal(0L)
-    ret.head._2 should equal("content .")
-    ret(1)._1 should equal(1L)
-    ret(1)._2 should equal("expected .")
-  }
+      Then("The data parse not empty,")
+      ret should not be empty
 
-  scenario("Comportement limite parsePredictData") {
-    Given("A parser")
-    val stringSize = 1000000 //1M
-    val sb = new StringBuilder(stringSize)
-    for (i <- 0 until stringSize) {
-      sb.append('a')
+      And("and the size is equal 2")
+      ret.size should equal(2)
+
+      And("and the id of the first element is 0L, content ., and 1")
+      ret.head._1 should equal(0L)
+      ret.head._2 should equal("content .")
+      ret.head._3 should equal(1)
+
+      And("and the id of the last element is 1L, expected ., and 2")
+      ret(1)._1 should equal(1L)
+      ret(1)._2 should equal("expected .")
+      ret(1)._3 should equal(2)
     }
-    When("")
-    val ret = LogParser.parsePredictData(sb.toString())
-    Then("")
-    ret should not be empty
-    ret.head._1 should equal(0L)
-    ret.head._2 should equal(sb.toString())
 
+    scenario("Parse a huge String (1 billion characters)") {
+      Given("Initialize the huge string with 1 billion of 'a'")
+      val stringSize = 1000000
+      val sb = new StringBuilder(stringSize)
+      for (i <- 0 until stringSize) {
+        sb.append('a')
+      }
+
+      When("We parse a big string")
+      val ret = LogParser.parseTrainingData("1 " + sb.toString() + " .")
+
+      Then("The return should be correct")
+      ret should not be empty
+
+      And("and the size of the Seq is 1")
+      ret.size should equal(1)
+
+      And("and the id of the first element is 0L, aaaa(1B) ., and 1")
+      ret.head._1 should equal(0L)
+      ret.head._2 should equal(sb.toString() + " .")
+      ret.head._3 should equal(1)
+    }
+
+    scenario("Parse datab with invalid format.") {
+      Given("Instantiate data at null")
+      val data = "expected .\n"
+
+      When("LogParser parse log with wrong format.")
+      val test = LogParser.parseTrainingData(data)
+
+      Then("The result of the parsing should be empty.")
+      test shouldBe empty
+    }
+
+
+    scenario("Parse to without identifier at first.") {
+      Given("Initialize data at parse.")
+      val data = "content .\nexpected .\n"
+
+      When("Parse data.")
+      val ret = LogParser.parsePredictData(data)
+
+      Then("Return should be not empty")
+      ret should not be empty
+
+      And("and contains 2 elements")
+      ret.size should equal(2)
+
+      And("and the id of the first element is '0L, content .' and second element is equal to '1L, expected .'")
+      ret.head._1 should equal(0L)
+      ret.head._2 should equal("content .")
+      ret(1)._1 should equal(1L)
+      ret(1)._2 should equal("expected .")
+    }
   }
-
 }
