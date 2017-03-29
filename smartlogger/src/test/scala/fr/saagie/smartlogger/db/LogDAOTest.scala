@@ -11,7 +11,6 @@ import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
   * @since SmartLogger 0.2
   * @version 1.0
   */
-
 @RunWith(classOf[JUnitRunner])
 class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with BeforeAndAfter {
   feature("The Database executes the query and fills the sequence 'result' with the resulting logs.") {
