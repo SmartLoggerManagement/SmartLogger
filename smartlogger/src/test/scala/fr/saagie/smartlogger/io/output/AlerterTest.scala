@@ -1,10 +1,11 @@
 package fr.saagie.smartlogger.io.output
 
-import fr.saagie.smartlogger.io.output.notifier.{MailNotifier, SlackNotifier}
+import fr.saagie.smartlogger.io.output.Alerter
+import fr.saagie.smartlogger.io.output.notifier.{INotifier, MailNotifier, SlackNotifier}
 import org.easymock.EasyMock
 import org.junit.runner.RunWith
-import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
 
 
 /**
@@ -32,12 +33,14 @@ class AlerterTest extends FeatureSpec with GivenWhenThen with Matchers with Befo
 
       Then("Number of notifier is equal at 1")
       alerter.notifiers.size should equal(1)
+      And("The Seq contains the correct notifier")
+      alerter.notifiers should contain(notifier)
     }
 
     scenario("Add a sequence of notifiers on Alerter and check the number of notifiers already present") {
       Given("Initialize Alerter and a sequence of Notifiers")
-      val notifiers = Seq.empty
-      notifiers.+:(Seq(
+      var notifiers:Seq[INotifier] = Seq.empty
+      notifiers = notifiers.++(Seq(
         new MailNotifier(""),
         new MailNotifier(""),
         new SlackNotifier(""),
@@ -59,14 +62,16 @@ class AlerterTest extends FeatureSpec with GivenWhenThen with Matchers with Befo
       When("Add the mail notifier on alerter")
       alerter.addNotifier(notifier)
 
-      Then("The alerter contain only 1 instance of notifier")
+      Then("The alerter contains only 1 instance of notifier")
       alerter.notifiers.size should equal(1)
+      And("The alerter contains the right notifier")
+      alerter.notifiers should contain(notifier)
     }
 
-    scenario("Add 2 time the same sequence of Notifiers") {
+    scenario("Add twice the same sequence of Notifiers") {
       Given("Instantiate notifiers")
-      val notifiers = Seq.empty
-      notifiers.+:(Seq(
+      var notifiers:Seq[INotifier] = Seq.empty
+      notifiers = notifiers.++(Seq(
         new MailNotifier(""),
         new MailNotifier(""),
         new SlackNotifier(""),
@@ -91,7 +96,7 @@ class AlerterTest extends FeatureSpec with GivenWhenThen with Matchers with Befo
       alerter.removeNotifier(notifier)
 
       Then("Alerter doesn't contain notifier")
-      alerter.notifiers.size should equal(0)
+      alerter.notifiers shouldBe empty
     }
 
     scenario("Remove a notifier not insert previously on alerter") {
@@ -101,15 +106,15 @@ class AlerterTest extends FeatureSpec with GivenWhenThen with Matchers with Befo
       When("Remove a notifier not insert previously")
       alerter.removeNotifier(notifier)
 
-      Then("Nothing append, the alerter not contains notifier")
-      alerter.notifiers.size should equal(0)
+      Then("Nothing happened, the alerter does not contain notifier")
+      alerter.notifiers shouldBe empty
     }
 
     scenario("Remove a notifier insert at the start of the sequence of notifier") {
       Given("Instantiate notifiers")
       val slack = new SlackNotifier("")
-      val notifiers = Seq.empty
-      notifiers.+:(Seq(
+      var notifiers:Seq[INotifier] = Seq.empty
+      notifiers = notifiers.++(Seq(
         slack,
         new MailNotifier(""),
         new MailNotifier(""),
@@ -118,18 +123,19 @@ class AlerterTest extends FeatureSpec with GivenWhenThen with Matchers with Befo
       ))
       alerter.addNotifiers(notifiers)
 
-      When("Remove a notifier not insert previously")
+      When("Remove the notifier from the start of the sequence")
       alerter.removeNotifier(slack)
 
-      Then("Nothing append, the alerter not contains notifier")
+      Then("The sequence is only missing the notifier selected")
       alerter.notifiers.size should equal(4)
+      alerter.notifiers should not contain(slack)
     }
 
     scenario("Remove a notifier insert in the middle of the sequence of notifier") {
       Given("Instantiate notifiers")
       val slack = new SlackNotifier("")
-      val notifiers = Seq.empty
-      notifiers.+:(Seq(
+      var notifiers:Seq[INotifier] = Seq.empty
+      notifiers = notifiers.++(Seq(
         new MailNotifier(""),
         new MailNotifier(""),
         slack,
@@ -138,31 +144,33 @@ class AlerterTest extends FeatureSpec with GivenWhenThen with Matchers with Befo
       ))
       alerter.addNotifiers(notifiers)
 
-      When("Remove a notifier not insert previously")
+      When("Remove the notifier from the middle of the sequence")
       alerter.removeNotifier(slack)
 
-      Then("Nothing append, the alerter not contains notifier")
+      Then("The sequence is only missing the notifier selected")
       alerter.notifiers.size should equal(4)
+      alerter.notifiers should not contain(slack)
     }
 
     scenario("Remove a notifier insert at the end of the sequence of notifier") {
       Given("Instantiate notifiers")
       val slack = new SlackNotifier("")
-      val notifiers = Seq.empty
-      notifiers.+:(Seq(
-        slack,
+      var notifiers:Seq[INotifier] = Seq.empty
+      notifiers = notifiers.++(Seq(
         new MailNotifier(""),
         new MailNotifier(""),
         new MailNotifier(""),
-        new SlackNotifier("")
+        new SlackNotifier(""),
+        slack
       ))
       alerter.addNotifiers(notifiers)
 
-      When("Remove a notifier not insert previously")
+      When("Remove the notifier from the end of the sequence")
       alerter.removeNotifier(slack)
 
-      Then("Nothing append, the alerter not contains notifier")
+      Then("The sequence is only missing the notifier selected")
       alerter.notifiers.size should equal(4)
+      alerter.notifiers should not contain(slack)
     }
 
     scenario("Add a notifier on the alerter and notify it") {
