@@ -64,14 +64,14 @@ sourceSets {
         scala {
             srcDirs = [
 //                    'src/test/scala/fr/saagie/smartlogger/benchmark',
-                    'src/test/scala/fr/saagie/smartlogger/db',
-                    'src/test/scala/fr/saagie/smartlogger/db/model',
+//                    'src/test/scala/fr/saagie/smartlogger/db',
+//                    'src/test/scala/fr/saagie/smartlogger/db/model',
                     'src/test/scala/fr/saagie/smartlogger/io/input',
-                    'src/test/scala/fr/saagie/smartlogger/io/output',
-                    'src/test/scala/fr/saagie/smartlogger/io/output/notifier',
-                    'src/test/scala/fr/saagie/smartlogger/ml',
-                    'src/test/scala/fr/saagie/smartlogger/simulation',
-                    'src/test/scala/fr/saagie/smartlogger/utils',
+//                    'src/test/scala/fr/saagie/smartlogger/io/output',
+//                    'src/test/scala/fr/saagie/smartlogger/io/output/notifier',
+//                    'src/test/scala/fr/saagie/smartlogger/ml',
+//                    'src/test/scala/fr/saagie/smartlogger/simulation',
+//                    'src/test/scala/fr/saagie/smartlogger/utils',
             ]
         }
     }

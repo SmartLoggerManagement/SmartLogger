@@ -73,5 +73,36 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       batchContent shouldBe empty
       input.close()
     }
+
+    scenario("Client is opened, closed, then opened once more with a request sent after each. The batch should only contain 2 requests") {
+      Given("Instantiate client and open connection.")
+      val input = new InputManager
+      input.open()
+      val clt: ClientTest = new ClientTest()
+
+      When("Send three PUT requests")
+      clt.sendPutRequest("Test Data1", "http://127.0.0.1:8088/smartlogger")
+      Thread.sleep(SLEEP_TIME)
+      input.close()
+      clt.sendPutRequest("Closed Request", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPutRequest("Closed Request2", "http://127.0.0.1:8088/smartlogger")
+      Thread.sleep(SLEEP_TIME)
+      input.open()
+      Thread.sleep(SLEEP_TIME)
+      clt.sendPutRequest("Test Data2", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPutRequest("Test Data3", "http://127.0.0.1:8088/smartlogger")
+      Thread.sleep(SLEEP_TIME)
+
+      Then("Retrieve information from LogBatch")
+      var batchContent = LogBatch.getBatch()
+
+      And("Batch content isn't empty")
+      batchContent should not be empty
+      batchContent.size shouldBe (3)
+      batchContent.head._2 shouldBe ("Test Data1")
+      batchContent(1)._2 shouldBe ("Test Data2")
+      batchContent(2)._2 shouldBe ("Test Data3")
+      input.close()
+    }
   }
 }
