@@ -13,12 +13,10 @@ import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with BeforeAndAfter {
+  val uuid: UUID = UUID.randomUUID()
   feature("The Database executes the query and fills the sequence 'result' with the resulting logs.") {
     info("To simulate the database's behaviour, we will mock its responses.")
 
-    before() {
-      val uuid = UUID.randomUUID()
-    }
 
     scenario("A create log query is sent to the database.") {
       Given("Create the 'set' query with the message")

@@ -11,7 +11,7 @@ import org.scalatest.junit.JUnitRunner
   */
 @RunWith(classOf[JUnitRunner])
 class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
-  private val SLEEP_TIME = 2000
+  private val SLEEP_TIME = 1000
 
   feature("InputManager use to retrieve information from HTTP Request") {
     scenario("The client send by PUT a log at SmartLogger.") {
@@ -19,15 +19,17 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       val input = new InputManager
       input open
       val clt: ClientTest = new ClientTest()
-      Thread.sleep(SLEEP_TIME)
+
 
       When("Send a log by PUT")
       clt.sendPutRequest("Test Data", "http://127.0.0.1:8088/smartlogger")
+      Thread.sleep(SLEEP_TIME)
 
       Then("Retrieve log from LogBatch")
       val batchContent = LogBatch.getBatch()
 
       And("and check the result.")
+      batchContent should not be empty
       batchContent.head._2 should equal("Test Data")
       input.close()
     }
