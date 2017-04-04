@@ -68,5 +68,18 @@ class PropertiesManagerTest extends FeatureSpec with GivenWhenThen {
 
       Files.deleteIfExists(Paths.get(filepath))
     }
+
+    scenario("An empty file can be loaded, the data should be empty") {
+      Given("An existing file")
+      val filepath = "src/test/resources/emptyTest.properties"
+      And("A PropertiesManager")
+      val propertiesManager = new PropertiesManager
+
+      When("The file is loaded")
+      propertiesManager.load(filepath)
+
+      Then("The properties should not be empty")
+      assert(propertiesManager.getProperties().isEmpty)
+    }
   }
 }
