@@ -20,3 +20,6 @@ SmartLogger is an application use to predict potential problems from Server.
 - Camille Leplumey : Quality Manager and Developer
 - Khalid Rabou : Frontend Manager and Developer 
 
+## Resources
+### External Links
+- Help for Impala : [https://www.tutorialspoint.com/impala/](https://www.tutorialspoint.com/impala/)

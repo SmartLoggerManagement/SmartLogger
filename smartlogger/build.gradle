@@ -22,8 +22,8 @@ dependencies {
             'javax.mail:mail:1.4.7',
             // Slack API
             'com.github.ponkotuy:scala-slack:0.4.0',
-            //Db
-            'mysql:mysql-connector-java:6.0.6'
+            // Database
+            'org.apache.hive:hive-jdbc:2.1.0',
     )
 
     // Test execution
@@ -43,7 +43,7 @@ dependencies {
             'com.typesafe.akka:akka-http-core_2.11:10.0.3',
             'com.typesafe.akka:akka-http_2.11:10.0.3',
             'javax.mail:mail:1.4.7',
-            'mysql:mysql-connector-java:6.0.6'
+            'org.apache.hive:hive-jdbc:2.1.1',
     )
 }
 
@@ -63,21 +63,22 @@ sourceSets {
     test {
         scala {
             srcDirs = [
-//                    'src/test/scala/fr/saagie/smartlogger/benchmark',
-//                    'src/test/scala/fr/saagie/smartlogger/db',
-//                    'src/test/scala/fr/saagie/smartlogger/db/model',
+                    'src/test/scala/fr/saagie/smartlogger/benchmark',
+                    'src/test/scala/fr/saagie/smartlogger/db',
+                    'src/test/scala/fr/saagie/smartlogger/db/model',
                     'src/test/scala/fr/saagie/smartlogger/io/input',
-//                    'src/test/scala/fr/saagie/smartlogger/io/output',
-//                    'src/test/scala/fr/saagie/smartlogger/io/output/notifier',
-//                    'src/test/scala/fr/saagie/smartlogger/ml',
-//                    'src/test/scala/fr/saagie/smartlogger/simulation',
-//                    'src/test/scala/fr/saagie/smartlogger/utils',
+                    'src/test/scala/fr/saagie/smartlogger/io/output',
+                    'src/test/scala/fr/saagie/smartlogger/io/output/notifier',
+                    'src/test/scala/fr/saagie/smartlogger/ml',
+                    'src/test/scala/fr/saagie/smartlogger/simulation',
+                    'src/test/scala/fr/saagie/smartlogger/utils',
             ]
         }
     }
 }
 
 //jar {
+//    archiveName = "SmartLogger-SNAPSHOT-0.2"
 //    from {
 //        configurations.compile.collect {
 //            zip64 = true

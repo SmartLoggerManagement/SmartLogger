@@ -18,6 +18,8 @@ object DbConnector {
     */
   private var connection : Connection = _
 
+  private final val DRIVER : String = "org.apache.hive.jdbc.HiveDriver"
+
   // COMMANDS
   /**
     * Method use to open a connection on a Database.
@@ -39,8 +41,8 @@ object DbConnector {
     */
   def openConnection: Connection = {
     // connect to the database named "mysql" on the localhost
-    val driver   = "com.mysql.jdbc.Driver"
-    val url      = "jdbc:mysql://localhost/mysql"
+    val driver   = DbConnector.DRIVER
+    val url      = "jdbc:hive2://dn1.p2.prod.saagie.io:21050,dn2.p2.prod.saagie.io:21050,dn3.p2.prod.saagie.io:21050/;auth=noSasl"
     val username = "root"
     val password = "root"
 
@@ -62,6 +64,7 @@ object DbConnector {
   def closeConnection : Unit = {
     if (connection != null) {
       connection.close()
+      connection = null
     }
   }
 }

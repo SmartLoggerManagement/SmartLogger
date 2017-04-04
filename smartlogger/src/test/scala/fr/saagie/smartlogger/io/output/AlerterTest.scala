@@ -1,6 +1,5 @@
 package fr.saagie.smartlogger.io.output
 
-import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{INotifier, MailNotifier, SlackNotifier}
 import org.easymock.EasyMock
 import org.junit.runner.RunWith
