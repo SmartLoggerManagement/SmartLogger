@@ -4,9 +4,11 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model._
+import akka.http.scaladsl.settings.ConnectionPoolSettings
 import akka.stream.ActorMaterializer
 import akka.util.ByteString
 
+import scala.concurrent.duration._
 import scala.concurrent.Future
 
 /**This class send a request with a given body to a given uri
@@ -27,8 +29,11 @@ class ClientTest {
   implicit val materializer = ActorMaterializer()
 
   val data: ByteString = ByteString.fromString(content)
+
+  val connectionPoolSettings = ConnectionPoolSettings(system).withIdleTimeout(1 second)
+
   val responseFuture: Future[HttpResponse] =
-    Http().singleRequest(HttpRequest(PUT, uri = uri, entity = HttpEntity(data)))
+    Http().singleRequest(HttpRequest(PUT, uri = uri, entity = HttpEntity(data)), settings = connectionPoolSettings)
   }
   /**
     * This method send a post request

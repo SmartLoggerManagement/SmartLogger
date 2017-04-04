@@ -1,7 +1,7 @@
 package fr.saagie.smartlogger.io.input
 
 import org.junit.runner.RunWith
-import org.scalatest.{FeatureSpec, FunSuite, GivenWhenThen, Matchers}
+import org.scalatest._
 import org.scalatest.junit.JUnitRunner
 
 /**
@@ -13,10 +13,12 @@ import org.scalatest.junit.JUnitRunner
 class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
   private val SLEEP_TIME = 1000
 
+  private val input = new InputManager
+
+
   feature("InputManager use to retrieve information from HTTP Request") {
     scenario("The client send by PUT a log at SmartLogger.") {
       Given("Open connection")
-      val input = new InputManager
       input open
       val clt: ClientTest = new ClientTest()
 
@@ -31,12 +33,11 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       And("and check the result.")
       batchContent should not be empty
       batchContent.head._2 should equal("Test Data")
-      input.close()
+      input close
     }
 
     scenario("Used Gatling for Stress test") {
-      val input = new InputManager
-      input.open()
+      input open
       val clt: ClientTest = new ClientTest()
       val maxOpenedFiles = 200 // max number of files that can be opened on test environment at one time
       for (i <- 0 until maxOpenedFiles) {
@@ -53,13 +54,12 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
 
       }
       batchContent.length shouldBe maxOpenedFiles
-      input.close()
+      input close
     }
 
     scenario("Request throws a 404 not found") {
       Given("Instantiate client and open connection.")
-      val input = new InputManager
-      input.open()
+      input open
       val clt: ClientTest = new ClientTest()
 
       When("Send a request POST")
@@ -71,19 +71,20 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
 
       And("Batch content is empty")
       batchContent shouldBe empty
-      input.close()
+
+      input close
     }
 
     scenario("Client is opened, closed, then opened once more with a request sent after each. The batch should only contain 2 requests") {
       Given("Instantiate client and open connection.")
-      val input = new InputManager
-      input.open()
+      input open
       val clt: ClientTest = new ClientTest()
 
       When("Send three PUT requests")
       clt.sendPutRequest("Test Data1", "http://127.0.0.1:8088/smartlogger")
       Thread.sleep(SLEEP_TIME)
       input.close()
+      Thread.sleep(SLEEP_TIME)
       clt.sendPutRequest("Closed Request", "http://127.0.0.1:8088/smartlogger")
       clt.sendPutRequest("Closed Request2", "http://127.0.0.1:8088/smartlogger")
       Thread.sleep(SLEEP_TIME)
@@ -94,15 +95,18 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       Thread.sleep(SLEEP_TIME)
 
       Then("Retrieve information from LogBatch")
-      var batchContent = LogBatch.getBatch()
+      val batchContent = LogBatch.getBatch()
 
       And("Batch content isn't empty")
+      println("=================")
+      println(batchContent)
       batchContent should not be empty
       batchContent.size shouldBe (3)
       batchContent.head._2 shouldBe ("Test Data1")
       batchContent(1)._2 shouldBe ("Test Data2")
       batchContent(2)._2 shouldBe ("Test Data3")
-      input.close()
+
+      input close
     }
   }
 }

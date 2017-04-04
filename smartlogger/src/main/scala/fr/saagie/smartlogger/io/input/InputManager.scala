@@ -7,9 +7,8 @@ import akka.http.scaladsl.model._
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
-
 import fr.saagie.smartlogger.utils.Properties
 
 /**
@@ -25,8 +24,8 @@ class InputManager extends IInputManager {
 
   private var serverSource: Source[Http.IncomingConnection, Future[Http.ServerBinding]] = _
 
-  private implicit val system = ActorSystem()
-  private implicit val materializer = ActorMaterializer()
+  private implicit var system: ActorSystem = ActorSystem("SmartLogger")
+  private implicit var materializer: ActorMaterializer = ActorMaterializer()
   private implicit val executionContext = system.dispatcher
 
   // COMMANDS
@@ -39,6 +38,9 @@ class InputManager extends IInputManager {
       println("The server is already open")
       return
     }
+
+    system = ActorSystem("SmartLogger")
+    materializer = ActorMaterializer()
 
     // Binding the server with the interface and the port
     serverSource = Http().bind(Properties.AKKA.get("interface"), Integer.valueOf(Properties.AKKA.get("port")))
@@ -72,6 +74,7 @@ class InputManager extends IInputManager {
     */
   def close(): Unit = {
     materializer.shutdown()
-    system.terminate()
+    Await.result(system.terminate(), 1 second)
+    serverSource = null
   }
 }
