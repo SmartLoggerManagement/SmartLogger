@@ -24,6 +24,7 @@ dependencies {
             'com.github.ponkotuy:scala-slack:0.4.0',
             // Database
             'org.apache.hive:hive-jdbc:2.1.0',
+            'org.postgresql:postgresql:42.0.0',
     )
 
     // Test execution

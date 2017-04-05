@@ -31,6 +31,16 @@ object Properties {
     */
   val AKKA = load("akka.properties")
 
+  /**
+    * The property manager associated with database properties
+    */
+  val DB = load("db.properties")
+
+  /**
+    * The property manager associated with test database properties
+    */
+  val DB_TEST = load("dbtest.properties")
+
 
   // TOOL
   /**

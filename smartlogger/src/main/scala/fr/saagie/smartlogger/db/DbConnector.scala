@@ -2,6 +2,8 @@ package fr.saagie.smartlogger.db
 
 import java.sql.{Connection, DriverManager}
 
+import fr.saagie.smartlogger.utils.Properties
+
 /**
   * DbConnector is a class use to connect SmartLogger with a Database.
   * This class is composed by two methods use to open
@@ -17,8 +19,6 @@ object DbConnector {
     * Object Connection at return when you open a connection on a Database.
     */
   private var connection : Connection = _
-
-  private final val DRIVER : String = "org.apache.hive.jdbc.HiveDriver"
 
   // COMMANDS
   /**
@@ -40,16 +40,18 @@ object DbConnector {
     * @version 1.0
     */
   def openConnection: Connection = {
-    // connect to the database named "mysql" on the localhost
-    val driver   = DbConnector.DRIVER
-    val url      = "jdbc:hive2://dn1.p2.prod.saagie.io:21050,dn2.p2.prod.saagie.io:21050,dn3.p2.prod.saagie.io:21050/;auth=noSasl"
-    val username = "root"
-    val password = "root"
+    // Retrieve all connection properties
+    val properties = Properties.DB_TEST
 
-   // make the connection
+    // Connect to database
+    val driver   = properties.get("driver")
+    val url      = properties.get("url")
+    val username = properties.get("username")
+    val password = properties.get("password")
+
+   // Building the connection
     Class.forName(driver)
-    connection = DriverManager.getConnection(url, username, password)
-    return connection
+    return DriverManager.getConnection(url, username, password)
   }
 
   /**
