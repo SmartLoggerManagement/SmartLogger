@@ -15,7 +15,7 @@ import java.util.UUID
   * @since SmartLogger 0.2
   * @version 1.0
   */
-class Log (val uuid: UUID, val l: String) {
+class Log(uuid: UUID, l: String) {
   /**
     * The id of the log.
     *

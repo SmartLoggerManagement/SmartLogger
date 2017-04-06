@@ -1,5 +1,6 @@
 package fr.saagie.smartlogger.db
 
+import java.sql.ResultSet
 import java.util.UUID
 
 import fr.saagie.smartlogger.db.model.Log
@@ -39,10 +40,21 @@ object LogDAO extends DAO[Log] {
   /**
     * @inheritdoc
     */
-  def get(condition: String): Seq[Log] = {
+  override def get(): Seq[Log] = get(null, null)
+  /**
+    * @inheritdoc
+    */
+  override def get(condition: String, args: Seq[Any]): Seq[Log] = {
     // Retrieving data
-    val sql = "SELECT * FROM " + getTableName() + " WHERE " + condition + ";"
-    val resultSet = query(sql)
+    var resultSet:ResultSet = null
+    var sql = "SELECT * FROM " + getTableName()
+    if (condition != null) {
+      sql += " WHERE " + condition
+      resultSet = query(sql, args)
+
+    } else {
+      resultSet = query(sql)
+    }
 
     // Extracting data
     var result: Seq[Log] = Seq.empty
@@ -60,7 +72,7 @@ object LogDAO extends DAO[Log] {
   /**
     * @inheritdoc
     */
-  def build(): Unit = {
+  override def build(): Unit = {
     // Building request
     val attrs = getAttributeMap()
     val sql = new StringBuilder
@@ -77,7 +89,7 @@ object LogDAO extends DAO[Log] {
   /**
     * @inheritdoc
     */
-  def drop(): Unit = {
+  override def drop(): Unit = {
     // Destroying table
     execute("DROP TABLE " + getTableName() + ";")
   }
@@ -85,7 +97,7 @@ object LogDAO extends DAO[Log] {
   /**
     * @inheritdoc
     */
-  def insert(elt: Log): Unit = {
+  override def insert(elt: Log): Unit = {
     // Building request
     val sql = "INSERT INTO " + getTableName() + " VALUES (?, ?)"
     var params: Seq[Any] = Seq.empty
@@ -99,7 +111,7 @@ object LogDAO extends DAO[Log] {
   /**
     * @inheritdoc
     */
-  def update(elt: Log): Unit = {
+  override def update(elt: Log): Unit = {
     // Building request
     val sql = "UPDATE " + getTableName() + " SET log=? WHERE id=?;"
     var params: Seq[Any] = Seq.empty
@@ -113,7 +125,7 @@ object LogDAO extends DAO[Log] {
   /**
     * @inheritdoc
     */
-  def delete(elt: Log): Unit = {
+  override def delete(elt: Log): Unit = {
     // Building request
     val sql = "DELETE FROM " + getTableName() + " WHERE id=?;"
     var params: Seq[Any] = Seq.empty
@@ -121,5 +133,9 @@ object LogDAO extends DAO[Log] {
 
     // Building table
     execute(sql, params)
+  }
+
+  def main(args: Array[String]): Unit = {
+    LogDAO.build()
   }
 }

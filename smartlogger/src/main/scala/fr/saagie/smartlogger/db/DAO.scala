@@ -21,15 +21,22 @@ trait DAO[T] {
   def getTableName(): String
 
   /**
+    * Returns all pieces of data contained in the database
+    *
+    * @return
+    */
+  def get(): Seq[T]
+  /**
     * Returns all pieces of data contained in the database which verify
     * the given condition.
     * This condition describes the content of the WHERE clause
     * in a SQL SELECT request.
     *
     * @param condition The content of the WHERE clause
-    *                  in the SQL SELECT request to send
+    *                  in the SQL SELECT prepared statement to send
+    * @param args The parameters used to complete the prepared statement
     */
-  def get(condition: String): Seq[T]
+  def get(condition: String, args: Seq[Any]): Seq[T]
 
 
   // COMMANDS
@@ -73,18 +80,29 @@ trait DAO[T] {
     *
     * @param query
     *   The query at execute by the method with the following format : SELECT id, log FROM DATABASE_NAME.
+    *   It represents a prepared statement, which means that all values must be
+    *   replaced by a '?' in the query
+    * @param args
+    *   All arguments which will be used to complete the "prepared" part
+    *   of the query.
     * @return
     *   Return an instance of Seq who contain all logs retrieve from the Database or an empty Sequence.
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  protected def query(query: String): ResultSet = {
+  protected def query(query: String, args: Seq[Any]): ResultSet = {
     // Sequence with all Log at return after SELECT query.
     var result: ResultSet = null
 
     try {
       // Initialize Database connection, create the statement, and run the query
-      val statement = DbConnector.openConnection.createStatement
+      val statement = DbConnector.openConnection.prepareStatement(query)
+      var k = 1
+      while (k < args.size) {
+        statement.setObject(k, args(k))
+        k += 1
+      }
+
       result = statement.executeQuery(query)
     } catch {
       case sqlTimeoutException: SQLTimeoutException => sqlTimeoutException.printStackTrace
@@ -94,6 +112,9 @@ trait DAO[T] {
       DbConnector.closeConnection
     }
     return result
+  }
+  protected def query(query: String): ResultSet = {
+    this.query(query, Seq.empty)
   }
 
   /**
@@ -108,30 +129,21 @@ trait DAO[T] {
     * @param query
     *   The query at execute on the Database. Currently, the request is a request about :
     *   INSERT, INSERT OVERWRITE, UPDATE, ...
+    *   It represents a prepared statement, which means that all values must be
+    *   replaced by a '?' in the query
+    * @param args
+    *   All arguments which will be used to complete the "prepared" part
+    *   of the query.
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  protected def execute(query: String): Unit = {
-    try {
-      // Initialize Database connection, create the statement, and run the insert query.
-      val statement = DbConnector.openConnection.createStatement
-      statement.execute(query)
-    } catch {
-      case sqlTimeoutException: SQLTimeoutException => sqlTimeoutException.printStackTrace
-      case sqlException:        SQLException        => sqlException.printStackTrace
-    } finally {
-      // Finally, we close the connection
-      DbConnector.closeConnection
-    }
-  }
-
-  protected def execute(query: String, seq: Seq[Any]): Unit = {
+  protected def execute(query: String, args: Seq[Any]): Unit = {
     try {
       // Initialize Database connection, create the statement, and run the insert query.
       val statement = DbConnector.openConnection.prepareStatement(query)
-      var k = 0
-      while (k < seq.size) {
-        statement.setObject(k, seq(k))
+      var k = 1
+      while (k < args.size) {
+        statement.setObject(k, args(k))
         k += 1
       }
 
@@ -143,5 +155,8 @@ trait DAO[T] {
       // Finally, we close the connection
       DbConnector.closeConnection
     }
+  }
+  protected def execute(query: String): Unit = {
+    execute(query, Seq.empty)
   }
 }
