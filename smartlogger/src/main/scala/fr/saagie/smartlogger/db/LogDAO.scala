@@ -2,9 +2,7 @@ package fr.saagie.smartlogger.db
 
 import java.sql.ResultSet
 import java.util.UUID
-
-import fr.saagie.smartlogger.db.model.Log
-
+import model.Log
 import scala.collection.mutable.Map
 
 /**

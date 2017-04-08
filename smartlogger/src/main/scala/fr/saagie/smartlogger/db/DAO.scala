@@ -91,6 +91,7 @@ trait DAO[T] {
     * @version 1.0
     */
   protected def query(query: String, args: Seq[Any]): ResultSet = {
+    System.out.println(query);
     // Sequence with all Log at return after SELECT query.
     var result: ResultSet = null
 
@@ -138,6 +139,7 @@ trait DAO[T] {
     * @version 1.0
     */
   protected def execute(query: String, args: Seq[Any]): Unit = {
+    System.out.println(query);
     try {
       // Initialize Database connection, create the statement, and run the insert query.
       val statement = DbConnector.openConnection.prepareStatement(query)
