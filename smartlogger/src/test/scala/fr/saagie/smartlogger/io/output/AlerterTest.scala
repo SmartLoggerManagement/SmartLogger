@@ -6,9 +6,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
 
-
 /**
-  * @author Nicolas Gille
+  * @author Nicolas Gille, Jordan Baudin
   * @since SmartLogger 0.2
   * @version 1.0
   */

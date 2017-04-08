@@ -24,3 +24,4 @@ smartlogger/.idea/
 #removed gradle repo
 smartlogger/.gradle/*
 smartlogger/build/*
+smartlogger/out/*
