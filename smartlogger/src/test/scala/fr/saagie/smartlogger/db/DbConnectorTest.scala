@@ -22,13 +22,14 @@ class DbConnectorTest extends FeatureSpec with Matchers with GivenWhenThen {
 
     scenario("The connection is closed and the user try to close at new.") {
       Given("An open connection")
-      DbConnector.openConnection
+      val connection = DbConnector.openConnection
       DbConnector.closeConnection
 
       When("We close it")
       DbConnector.closeConnection
 
       Then("It should do nothing")
+      connection.isClosed shouldBe true
     }
 
     scenario("The connection is close and the user try to close at new.") {
@@ -52,5 +53,4 @@ class DbConnectorTest extends FeatureSpec with Matchers with GivenWhenThen {
       connection.isClosed shouldBe false
     }
   }
-
 }

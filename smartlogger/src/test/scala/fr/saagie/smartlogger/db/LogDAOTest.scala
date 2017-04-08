@@ -14,10 +14,9 @@ import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with BeforeAndAfter {
-  val uuid: UUID = UUID.randomUUID()
   feature("The Database executes the query and fills the sequence 'result' with the resulting logs.") {
-
     scenario("Table building request is sent to the database, when no table is already built") {
+      Given("Calling DAO to build Table on Database")
       When("Launch of the building process")
       LogDAO.build()
 
@@ -27,7 +26,7 @@ class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with Befor
 
     scenario("Log insertion into the database's table") {
       Given("Create the 'set' query with the message")
-      val log = new Log(uuid, "I am correct log")
+      val log = new Log(UUID.randomUUID(), "I am correct log")
 
       When("Query the Database with the query")
       LogDAO.insert(log)
@@ -37,11 +36,13 @@ class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with Befor
     }
 
     scenario("A get query is sent to the database. The database responds with the appropriate answer.") {
+      Given("Retrieve information from persistence system.")
+
       When("Query the Database with the query and analyse the result")
       val result = LogDAO.get()
 
       Then("The return must contain at least one log")
-      assert(result.size > 0)
+      result should not be empty
     }
 
     scenario("A get query is sent to the database with an invalid uuid. The database responds with the appropriate answer.") {
@@ -52,7 +53,7 @@ class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with Befor
       val result = LogDAO.get("id = ?", Seq.empty.+(invalidUuid.toString))
 
       Then("The result must have no rows")
-      assert(result.size == 0)
+      result shouldBe empty
     }
   }
 }
