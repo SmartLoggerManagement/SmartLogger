@@ -30,7 +30,7 @@ class ClientTest {
 
   val data: ByteString = ByteString.fromString(content)
 
-  val connectionPoolSettings = ConnectionPoolSettings(system).withIdleTimeout(1 second)
+  val connectionPoolSettings = ConnectionPoolSettings(system).withIdleTimeout(2 second)
 
   val responseFuture: Future[HttpResponse] =
     Http().singleRequest(HttpRequest(PUT, uri = uri, entity = HttpEntity(data)), settings = connectionPoolSettings)
