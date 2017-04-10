@@ -22,7 +22,7 @@ object AttrMySQLFactory extends AttributeFactory {
     /**
       * @inheritdoc
       */
-    override def getType(): String = "TEXT"
+    override def getType(): String = "STRING"
 
     /**
       * @inheritdoc

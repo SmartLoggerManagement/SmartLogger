@@ -23,7 +23,7 @@ class LogTest extends FeatureSpec with Matchers with GivenWhenThen {
       val message: String = "My name is Log, James Log"
 
       When("Fill the Log with id and message previously retrieve.")
-      val log = new Log(id, message)
+      val log = new Log()
 
       Then("The log id must be equal to 123456789")
       log.getId should equal(id)

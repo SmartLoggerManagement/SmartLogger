@@ -9,7 +9,10 @@ import fr.saagie.smartlogger.db.model.attributes.Attribute
 import scala.collection.mutable.Map
 
 /**
-  * Created by Kero76 on 10/04/17.
+  *
+  * @author Nicolas GILLE
+  * @since SmartLogger 0.2
+  * @version 1.0
   */
 abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
   // REQUESTS
@@ -61,7 +64,7 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
     */
   override def drop(): Unit = {
     // Destroying table
-    execute("DROP TABLE  IF EXISTS " + LogDAO.getDatabaseName() + "." + getTableName() + ";")
+    execute("DROP TABLE IF EXISTS " + LogDAO.getDatabaseName() + "." + getTableName() + ";")
   }
 
   /**
@@ -89,6 +92,6 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
     * @inheritdoc
     */
   override def update(elt: T, args: Map[String, Attribute[_ <: Object]]): Unit = {
-    throw UnsupportedOperationException
+    throw new UnsupportedOperationException
   }
 }

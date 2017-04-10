@@ -1,11 +1,9 @@
 package fr.saagie.smartlogger.db
 
-import java.sql.ResultSet
-
 import fr.saagie.smartlogger.db.model.DAOData
 import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
-import scala.collection.mutable.Map
 
+import scala.collection.mutable.Map
 
 /**
   * This trait is use to create an object use to interact with database and fill a POJO object type.

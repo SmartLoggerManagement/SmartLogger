@@ -1,6 +1,6 @@
 package fr.saagie.smartlogger.db.model.attributes
 
-import java.sql.{PreparedStatement, ResultSet, SQLException};
+import java.sql.{PreparedStatement, ResultSet, SQLException}
 
 /**
   * Represents an attribute.
@@ -27,7 +27,7 @@ abstract class Attribute[T](firstValue: T) {
 
   // REQUESTS
   /**
-    * Retrieves the type used inside the extern data table of this attribute
+    * Retrieves the type used inside the external data table of this attribute
     */
   def getType(): String
 
@@ -35,10 +35,10 @@ abstract class Attribute[T](firstValue: T) {
     * Reads the value of the attribute from the result set,
     * at the actual line and at the column specified by the given label.
     *
-    * @param result      The resultset used for the reading
+    * @param result      The resultSet used for the reading
     * @param columnLabel The column's name
     * @throws SQLException
-    * An error has occured when the data was retrieved
+    * An error has occurred when the data was retrieved
     */
   def read(result: ResultSet, columnLabel: String)
 
@@ -50,13 +50,13 @@ abstract class Attribute[T](firstValue: T) {
   def set(obj: T) = this.obj = obj
 
   /**
-    * Defines the paramater inside the given prepared statement.
+    * Defines the parameter inside the given prepared statement.
     * It aims at writing new values inside data tables' rows.
     *
     * @param state          The prepared request which needs to be defined
     * @param parameterIndex The index of the parameter to define
     * @throws SQLException
-    * An error has occured when the data was retrieved
+    * An error has occurred when the data was retrieved
     */
   def write(state: PreparedStatement, parameterIndex: Int)
 }

@@ -6,13 +6,13 @@ import scala.collection.mutable.Map
 /**
   * The log's model used for storage in the Database.
   *
-  * A Log is modelised by two attributes :
+  * A Log is represented by two attributes :
   * <ul>
   *   <li>id : Unique identifier of the log which representing by an object UUID</li>
   *   <li>log : The content of the Log.</li>
   * </ul>
   *
-  * @author Nicolas GILLE
+  * @author Nicolas GILLE, Franck CARON
   * @since SmartLogger 0.2
   * @version 1.0
   */
@@ -48,7 +48,7 @@ class Log(factory: AttributeFactory) extends DAOData {
   override def toString: String = this.getId.toString + " : " + this.getLog
 
   // TOOLS
-  private def initialize(): Map[String, Attribute[_ <: Object]] = {
+  override protected def initialize(): Map[String, Attribute[_ <: Object]] = {
     val result: Map[String, Attribute[_ <: Object]] = Map.empty
     result.put("id", factory.newString("", 36))
     result.put("content", factory.newCLOB(""))

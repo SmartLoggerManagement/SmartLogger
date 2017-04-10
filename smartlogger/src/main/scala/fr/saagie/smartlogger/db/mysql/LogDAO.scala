@@ -4,7 +4,10 @@ import fr.saagie.smartlogger.db.model.Log
 import fr.saagie.smartlogger.db.model.attributes.AttributeFactory
 
 /**
-  * Created by Kero76 on 10/04/17.
+  *
+  * @author Nicolas GILLE
+  * @since SmartLogger 0.2
+  * @version 1.0
   */
 object LogDAO extends AbstractMySQLDAO[Log] {
   // REQUESTS
