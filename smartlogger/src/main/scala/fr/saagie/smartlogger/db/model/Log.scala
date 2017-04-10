@@ -1,6 +1,7 @@
 package fr.saagie.smartlogger.db.model
 
-import java.util.UUID
+import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
+import scala.collection.mutable.Map
 
 /**
   * The log's model used for storage in the Database.
@@ -15,20 +16,7 @@ import java.util.UUID
   * @since SmartLogger 0.2
   * @version 1.0
   */
-class Log(uuid: UUID, l: String) {
-  /**
-    * The id of the log.
-    *
-    * This log identifier is an UUID generate totally randomly
-    * to avoid auto-incrementation not present on Impala.
-    */
-  private val _id: UUID = uuid
-
-  /**
-    * The content of the log.
-    */
-  private val _log: String = l
-
+class Log(factory: AttributeFactory) extends DAOData {
   /**
     * Get the unique identifier of the Log
     *
@@ -37,7 +25,7 @@ class Log(uuid: UUID, l: String) {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def getId = _id
+  def getId = attributes("id")
 
   /**
     * Get the content of the log.
@@ -47,7 +35,7 @@ class Log(uuid: UUID, l: String) {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def getLog = _log
+  def getLog = attributes("content")
 
   /**
     * Return a view of the object InputSettings.
@@ -57,5 +45,13 @@ class Log(uuid: UUID, l: String) {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  override def toString: String = this._id.toString + " : " + this._log
+  override def toString: String = this.getId.toString + " : " + this.getLog
+
+  // TOOLS
+  private def initialize(): Map[String, Attribute[_ <: Object]] = {
+    val result: Map[String, Attribute[_ <: Object]] = Map.empty
+    result.put("id", factory.newString("", 36))
+    result.put("content", factory.newCLOB(""))
+    return result
+  }
 }

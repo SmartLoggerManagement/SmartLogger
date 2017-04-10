@@ -1,6 +1,11 @@
 package fr.saagie.smartlogger.db
 
-import java.sql.{ResultSet, SQLException, SQLTimeoutException}
+import java.sql.ResultSet
+
+import fr.saagie.smartlogger.db.model.DAOData
+import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
+import scala.collection.mutable.Map
+
 
 /**
   * This trait is use to create an object use to interact with database and fill a POJO object type.
@@ -13,7 +18,7 @@ import java.sql.{ResultSet, SQLException, SQLTimeoutException}
   * @since SmartLogger 0.2
   * @version 1.0
   */
-trait DAO[T] {
+trait DAO[T <: DAOData] {
   // REQUESTS
   /**
     * Provides the name of the database's table in which data will be stored
@@ -21,11 +26,14 @@ trait DAO[T] {
   def getTableName(): String
 
   /**
-    * Returns all pieces of data contained in the database
-    *
-    * @return
+    * Provides the name of kind of factor, which is used to build new attributes
     */
-  def get(): Seq[T]
+  def getAttributeFactory(): AttributeFactory
+
+  /**
+    * Returns all pieces of data contained in the database
+    */
+  def get(): Seq[T] = get(null, null)
   /**
     * Returns all pieces of data contained in the database which verify
     * the given condition.
@@ -34,9 +42,10 @@ trait DAO[T] {
     *
     * @param condition The content of the WHERE clause
     *                  in the SQL SELECT prepared statement to send
-    * @param args The parameters used to complete the prepared statement
+    * @param args The attributes as (label, data) pairs,
+    *             used to complete the prepared statement
     */
-  def get(condition: String, args: Seq[Any]): Seq[T]
+  def get(condition: String, args: Map[String, Attribute[_ <: Object]]): Seq[T]
 
 
   // COMMANDS
@@ -58,20 +67,17 @@ trait DAO[T] {
   /**
     * Update an existing element in the DAO's associated table
     */
-  def update(elt: T): Unit
-
-  /**
-    * Delete all elements in the DAO's associated table, which verify
-    * the given condition.
-    * A condition describes the content of the WHERE clause,
-    * in a SQL DELETE request
-    *
-    * @param elt The element to delete from the database
-    */
-  def delete(elt: T): Unit
+  def update(elt: T, args: Map[String, Attribute[_ <: Object]]): Unit
 
 
   // TOOLS
+  /**
+    * Method call to build a new instance of type T.
+    * Used for query calls, in order to build the resulting
+    * sequence.
+    */
+  protected def newInstance(): T
+
   /**
     * Method call when you request the Database.
     *
@@ -90,33 +96,41 @@ trait DAO[T] {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  protected def query(query: String, args: Seq[Any]): ResultSet = {
-    System.out.println(query);
-    // Sequence with all Log at return after SELECT query.
-    var result: ResultSet = null
+  protected def executeQuery(query: String, args: Map[String, Attribute[_ <: Object]]): Seq[T] = {
+    // Initialize Database connection, create the statement, and run the query
+    val statement = DbConnector.connect().prepareStatement(query)
 
-    try {
-      // Initialize Database connection, create the statement, and run the query
-      val statement = DbConnector.openConnection.prepareStatement(query)
+    // Adding arguments to statement
+    if (args != null) {
       var k = 1
-      while (k < args.size) {
-        statement.setObject(k, args(k))
+      for (key <- args.keys) {
+        args(key).write(statement, k)
         k += 1
       }
-
-      result = statement.executeQuery(query)
-    } catch {
-      case sqlTimeoutException: SQLTimeoutException => sqlTimeoutException.printStackTrace
-      case sqlException: SQLException => sqlException.printStackTrace
-    } finally {
-      // Finally, we close the connection
-      DbConnector.closeConnection
     }
-    return result
+
+    // Executing the query
+    val result = statement.executeQuery()
+
+    // Extracting data
+    var seq: Seq[T] = Seq.empty
+    while (result.next()) {
+      val obj = newInstance()
+
+      // Reading attributes value
+      for (key <- obj.attributes.keys) {
+        obj.attributes(key).read(result, key)
+      }
+      seq = seq.+:(obj)
+    }
+
+    // Finally, we close the connection
+    result.close()
+    DbConnector.close()
+
+    return seq
   }
-  protected def query(query: String): ResultSet = {
-    this.query(query, Seq.empty)
-  }
+  protected def executeQuery(query: String): Seq[T] = executeQuery(query, null)
 
   /**
     * Method call when you interact with elements present on the Database.
@@ -138,27 +152,24 @@ trait DAO[T] {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  protected def execute(query: String, args: Seq[Any]): Unit = {
-    System.out.println(query);
-    try {
-      // Initialize Database connection, create the statement, and run the insert query.
-      val statement = DbConnector.openConnection.prepareStatement(query)
+  protected def execute(query: String, args: Map[String, Attribute[_ <: Object]]): Unit = {
+    // Initializing statement.
+    val statement = DbConnector.connect().prepareStatement(query)
+
+    // Adding arguments to statement
+    if (args != null) {
       var k = 1
-      while (k < args.size) {
-        statement.setObject(k, args(k))
+      for (key <- args.keys) {
+        args(key).write(statement, k)
         k += 1
       }
-
-      statement.execute()
-    } catch {
-      case sqlTimeoutException: SQLTimeoutException => sqlTimeoutException.printStackTrace
-      case sqlException:        SQLException        => sqlException.printStackTrace
-    } finally {
-      // Finally, we close the connection
-      DbConnector.closeConnection
     }
+
+    // Executing the query
+    statement.execute()
+
+    // Finally, we close the connection
+    DbConnector.close()
   }
-  protected def execute(query: String): Unit = {
-    execute(query, Seq.empty)
-  }
+  protected def execute(query: String): Unit = execute(query, null)
 }

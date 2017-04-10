@@ -1,10 +1,10 @@
 package fr.saagie.smartlogger
 
-import fr.saagie.smartlogger.io.input.{InputManager, LogBatch, LogParser}
+import fr.saagie.smartlogger.io.input.{IInputManager, InputManager, LogBatch, LogParser}
 import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{MailNotifier, SlackNotifier}
-import fr.saagie.smartlogger.ml.SmartAnalyzer
-import fr.saagie.smartlogger.utils.EncryptedPropertiesManager
+import fr.saagie.smartlogger.ml.AnalyzerBuilder
+import fr.saagie.smartlogger.utils.{EncryptedPropertiesManager, Properties}
 
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext
@@ -23,7 +23,7 @@ import scala.util.Sorting
 object SmartLogger {
   // MAIN
   def main(args: Array[String]): Unit = {
-    val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
+    val smartAnalyzer = AnalyzerBuilder.getNaiveBayes
 
     // Open file and retrieve data.
     val source = Source.fromFile("src/test/resources/TrainData.txt")
@@ -35,7 +35,7 @@ object SmartLogger {
     smartAnalyzer.train(trainSeq)
 
     // Open server.
-    val input = new IInputManager
+    val input = new InputManager()
     input.open()
 
     // Configuring the outputs
@@ -50,14 +50,13 @@ object SmartLogger {
     notifier.setRecipients(recipient)
     alerter.addNotifier(notifier)
 
-    val properties = new EncryptedPropertiesManager
-    properties.load("src/test/resources/bundle.properties")
+    val properties = Properties.SLACK
     val apiKey = properties.get("$apiKey")
 
     val slackSender = new SlackNotifier(apiKey)
 
-    testSlackSender setChannel "#testsmartlogger"
-    testSlackSender setRecipients Seq("@madzinah", "@kero76")
+    slackSender setChannel "#testsmartlogger"
+    slackSender setRecipients Seq("@madzinah", "@kero76")
 
     alerter.addNotifier(slackSender)
 
