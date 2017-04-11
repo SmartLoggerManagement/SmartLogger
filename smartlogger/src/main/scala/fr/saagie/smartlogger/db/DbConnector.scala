@@ -13,12 +13,6 @@ import fr.saagie.smartlogger.utils.Properties
   * @version 1.0
   */
 object DbConnector {
-  // ATTRIBUTE
-  /**
-    * The last connection established with the database
-    */
-  private var connection : Connection = _
-
   // COMMANDS
   /**
     * Establishes a new connection with the database
@@ -37,9 +31,6 @@ object DbConnector {
     * @version 1.0
     */
   def connect(): Connection = {
-    // If a connection has already been defined, we'll use it first
-    if (connection != null) return connection
-
     // Retrieve all connection properties
     val properties = Properties.DB_TEST
 
@@ -51,7 +42,8 @@ object DbConnector {
 
    // Building the connection
     Class.forName(driver)
-    return DriverManager.getConnection(url, username, password)
+    val connection = DriverManager.getConnection(url, username, password)
+    return connection
   }
 
   /**
@@ -63,10 +55,9 @@ object DbConnector {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def close(): Unit = {
+  def close(connection: Connection): Unit = {
     if (connection != null) {
       connection.close()
-      connection = null
     }
   }
 }

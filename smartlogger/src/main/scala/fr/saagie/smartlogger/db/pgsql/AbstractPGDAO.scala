@@ -3,13 +3,18 @@ package fr.saagie.smartlogger.db.pgsql
 import java.sql.ResultSet
 
 import fr.saagie.smartlogger.db.DAO
-import fr.saagie.smartlogger.db.model.attributes.Attribute
+import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
 import fr.saagie.smartlogger.db.model.DAOData
 
 import scala.collection.mutable.Map
 
 abstract protected[pgsql] class AbstractPGDAO[T <: DAOData] extends DAO[T] {
   // REQUESTS
+  /**
+    * Provides the name of kind of factor, which is used to build new attributes
+    */
+  def getAttributeFactory(): AttributeFactory = AttrPGSQLFactory
+
   /**
     * @inheritdoc
     */
@@ -20,8 +25,10 @@ abstract protected[pgsql] class AbstractPGDAO[T <: DAOData] extends DAO[T] {
 
     // Adding condition, if the condition was defined
     if (condition != null && args != null) {
-      sql += " WHERE " + condition
+      sql += " WHERE " + condition + ";"
+      return executeQuery(sql, args)
     }
+    sql += ";"
 
     // Extracting data
     return executeQuery(sql)
@@ -73,8 +80,9 @@ abstract protected[pgsql] class AbstractPGDAO[T <: DAOData] extends DAO[T] {
     // Creating n-uplet
     var k = elt.attributes.size
     while (k > 0) {
-      sql.append('?')
-      if (k > 1) sql.append(',')
+      sql.append("?")
+      if (k > 1) sql.append(",")
+      k -= 1
     }
     sql.append(");")
 

@@ -95,8 +95,11 @@ trait DAO[T <: DAOData] {
     * @version 1.0
     */
   protected def executeQuery(query: String, args: Map[String, Attribute[_ <: Object]]): Seq[T] = {
+    println(query)
+
     // Initialize Database connection, create the statement, and run the query
-    val statement = DbConnector.connect().prepareStatement(query)
+    val connection = DbConnector.connect()
+    val statement = connection.prepareStatement(query)
 
     // Adding arguments to statement
     if (args != null) {
@@ -124,7 +127,7 @@ trait DAO[T <: DAOData] {
 
     // Finally, we close the connection
     result.close()
-    DbConnector.close()
+    DbConnector.close(connection)
 
     return seq
   }
@@ -151,8 +154,10 @@ trait DAO[T <: DAOData] {
     * @version 1.0
     */
   protected def execute(query: String, args: Map[String, Attribute[_ <: Object]]): Unit = {
+    println(query)
     // Initializing statement.
-    val statement = DbConnector.connect().prepareStatement(query)
+    val connection = DbConnector.connect()
+    val statement = connection.prepareStatement(query)
 
     // Adding arguments to statement
     if (args != null) {
@@ -167,7 +172,7 @@ trait DAO[T <: DAOData] {
     statement.execute()
 
     // Finally, we close the connection
-    DbConnector.close()
+    DbConnector.close(connection)
   }
   protected def execute(query: String): Unit = execute(query, null)
 }

@@ -1,6 +1,7 @@
 package fr.saagie.smartlogger.db.mysql
 
 import java.sql.{PreparedStatement, ResultSet, Timestamp}
+import java.util.UUID
 import javax.sql.rowset.serial.SerialClob
 
 import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
@@ -37,6 +38,32 @@ object AttrMySQLFactory extends AttributeFactory {
       */
     override def write(state: PreparedStatement, parameterIndex: Int): Unit = {
       state.setClob(parameterIndex, new SerialClob(obj.toCharArray))
+    }
+  }
+
+  /**
+    * Creates a new attribute to store UUIDs (Identifiers strings)
+    */
+  override def newUUID(value: UUID) = new Attribute[UUID](value) {
+    // REQUESTS
+    /**
+      * @inheritdoc
+      */
+    override def getType(): String = "VARCHAR(36)"
+
+    /**
+      * @inheritdoc
+      */
+    override def read(result: ResultSet, columnLabel: String): Unit = {
+      obj = UUID.fromString(result.getString(columnLabel))
+    }
+
+    // COMMAND
+    /**
+      * @inheritdoc
+      */
+    override def write(state: PreparedStatement, parameterIndex: Int): Unit = {
+      state.setString(parameterIndex, obj.toString)
     }
   }
 

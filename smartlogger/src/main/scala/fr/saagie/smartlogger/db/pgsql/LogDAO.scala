@@ -23,11 +23,6 @@ object LogDAO extends AbstractPGDAO[Log] {
   override def getTableName(): String = "Log"
 
   /**
-    * Provides the name of kind of factor, which is used to build new attributes
-    */
-  override def getAttributeFactory(): AttributeFactory = AttrPGSQLFactory
-
-  /**
     * Method call to build a new instance of type T.
     * Used for query calls, in order to build the resulting
     * sequence.

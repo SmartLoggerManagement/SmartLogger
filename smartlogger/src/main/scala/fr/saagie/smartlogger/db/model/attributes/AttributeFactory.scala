@@ -1,6 +1,7 @@
 package fr.saagie.smartlogger.db.model.attributes
 
 import java.sql.Timestamp
+import java.util.UUID
 
 /**
   * Represents an attribute factory, used to build new attributes
@@ -17,6 +18,11 @@ trait AttributeFactory {
     * Creates a new attribute to store CLOBs (Texts without size limits)
     */
   def newCLOB(text: String): Attribute[String]
+
+  /**
+    * Creates a new attribute to store CLOBs (Texts without size limits)
+    */
+  def newUUID(value: UUID): Attribute[UUID]
 
   /**
     * Creates a new attribute to store Integers

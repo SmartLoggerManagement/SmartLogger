@@ -1,10 +1,10 @@
 package fr.saagie.smartlogger
 
-import fr.saagie.smartlogger.io.input.{IInputManager, InputManager, LogBatch, LogParser}
+import fr.saagie.smartlogger.io.input.{InputManager, LogBatch, LogParser}
 import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{MailNotifier, SlackNotifier}
 import fr.saagie.smartlogger.ml.AnalyzerBuilder
-import fr.saagie.smartlogger.utils.{EncryptedPropertiesManager, Properties}
+import fr.saagie.smartlogger.utils.Properties
 
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext

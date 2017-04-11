@@ -1,5 +1,6 @@
 package fr.saagie.smartlogger.db.model
 
+import java.util.UUID
 import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
 import scala.collection.mutable.Map
 
@@ -17,6 +18,7 @@ import scala.collection.mutable.Map
   * @version 1.0
   */
 class Log(factory: AttributeFactory) extends DAOData {
+  // REQUESTS
   /**
     * Get the unique identifier of the Log
     *
@@ -25,7 +27,7 @@ class Log(factory: AttributeFactory) extends DAOData {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def getId = attributes("id")
+  def getId: UUID = attributes("id").asInstanceOf[Attribute[UUID]].value
 
   /**
     * Get the content of the log.
@@ -35,7 +37,7 @@ class Log(factory: AttributeFactory) extends DAOData {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def getLog = attributes("content")
+  def getContent: String = attributes("content").asInstanceOf[Attribute[String]].value
 
   /**
     * Return a view of the object InputSettings.
@@ -45,13 +47,30 @@ class Log(factory: AttributeFactory) extends DAOData {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  override def toString: String = this.getId.toString + " : " + this.getLog
+  override def toString: String = this.getId.toString + " : " + this.getContent
+
+
+  // COMMANDES
+  /**
+    * Sets the value of the log's id
+    */
+  def setId(uUID: UUID) = {
+    attributes("id").asInstanceOf[Attribute[UUID]].set(uUID)
+  }
+
+  /**
+    * Sets the log's content
+    */
+  def setContent(text: String) = {
+    attributes("content").asInstanceOf[Attribute[String]].set(text)
+  }
+
 
   // TOOLS
   override protected def initialize(): Map[String, Attribute[_ <: Object]] = {
     val result: Map[String, Attribute[_ <: Object]] = Map.empty
-    result.put("id", factory.newString("", 36))
-    result.put("content", factory.newCLOB(""))
+    result.put("id", factory.newUUID(UUID.randomUUID()))
+    result.put("content", factory.newString("", 512))
     return result
   }
 }
