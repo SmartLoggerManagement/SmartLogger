@@ -1,0 +1,1229 @@
+Log file created at: 2017/02/16 16:37:23
+Running on machine: dn8.poc.matmut.saagie.io
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E0216 16:37:23.511729  1693 logging.cc:120] stderr will be logged to this file.
+W0216 16:37:23.552758  1693 authentication.cc:961] LDAP authentication is being used with TLS, but without an --ldap_ca_certificate file, the identity of the LDAP server cannot be verified.  Network communication (and hence passwords) could be intercepted by a man-in-the-middle attack
+E0217 14:47:35.987731  2961 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0217 15:16:01.695016  5201 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0217 15:46:55.775756  7339 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0217 15:59:56.959095  8164 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 09:18:02.911093  6117 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+W0220 09:45:23.827389  1909 BlockReaderFactory.java:778] I/O error constructing remote block reader.
+Java exception follows:
+org.apache.hadoop.net.ConnectTimeoutException: 60000 millis timeout while waiting for channel to be ready for connect. ch : java.nio.channels.SocketChannel[connection-pending remote=/192.168.25.22:50010]
+	at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:533)
+	at org.apache.hadoop.hdfs.DFSClient.newConnectedPeer(DFSClient.java:3499)
+	at org.apache.hadoop.hdfs.BlockReaderFactory.nextTcpPeer(BlockReaderFactory.java:840)
+	at org.apache.hadoop.hdfs.BlockReaderFactory.getRemoteBlockReaderFromTcp(BlockReaderFactory.java:755)
+	at org.apache.hadoop.hdfs.BlockReaderFactory.build(BlockReaderFactory.java:376)
+	at org.apache.hadoop.hdfs.DFSInputStream.blockSeekTo(DFSInputStream.java:662)
+	at org.apache.hadoop.hdfs.DFSInputStream.readWithStrategy(DFSInputStream.java:889)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:960)
+	at org.apache.hadoop.fs.FSDataInputStream.read(FSDataInputStream.java:143)
+W0220 09:45:23.827767  1909 DFSInputStream.java:699] Failed to connect to /192.168.25.22:50010 for block, add to deadNodes and continue. org.apache.hadoop.net.ConnectTimeoutException: 60000 millis timeout while waiting for channel to be ready for connect. ch : java.nio.channels.SocketChannel[connection-pending remote=/192.168.25.22:50010]
+Java exception follows:
+org.apache.hadoop.net.ConnectTimeoutException: 60000 millis timeout while waiting for channel to be ready for connect. ch : java.nio.channels.SocketChannel[connection-pending remote=/192.168.25.22:50010]
+	at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:533)
+	at org.apache.hadoop.hdfs.DFSClient.newConnectedPeer(DFSClient.java:3499)
+	at org.apache.hadoop.hdfs.BlockReaderFactory.nextTcpPeer(BlockReaderFactory.java:840)
+	at org.apache.hadoop.hdfs.BlockReaderFactory.getRemoteBlockReaderFromTcp(BlockReaderFactory.java:755)
+	at org.apache.hadoop.hdfs.BlockReaderFactory.build(BlockReaderFactory.java:376)
+	at org.apache.hadoop.hdfs.DFSInputStream.blockSeekTo(DFSInputStream.java:662)
+	at org.apache.hadoop.hdfs.DFSInputStream.readWithStrategy(DFSInputStream.java:889)
+	at org.apache.hadoop.hdfs.DFSInputStream.read(DFSInputStream.java:960)
+	at org.apache.hadoop.fs.FSDataInputStream.read(FSDataInputStream.java:143)
+E0220 09:50:55.391089  8753 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:08:05.407702 10031 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:10:09.310890 10109 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:15:10.623083 10461 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:17:21.823179 10816 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:19:25.983324 10866 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:29:55.999790 11652 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 10:50:56.286948 13676 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 11:01:05.822893 14408 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 11:09:23.359041 14798 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 11:09:37.694960 14826 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 11:11:47.358959 15173 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+E0220 11:13:47.166913 15184 data-stream-sender.cc:263] channel send status: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion terminée par expiration du délai d'attente)
+W0227 17:07:38.939883  6293 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/TMP/mrsq/_impala_insert_staging/c44e702b509bd3ba_1444fb9005ba80af/.c44e702b509bd3ba-1444fb9005ba80b5_1775742405_dir/c44e702b509bd3ba-1444fb9005ba80b5_1840588643_data.0.parq (inode 251726): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+W0227 17:19:09.531316  7891 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/TMP/mrsq/_impala_insert_staging/9e4c256a99ace038_6773e788a179fda6/.9e4c256a99ace038-6773e788a179fdae_1655539685_dir/9e4c256a99ace038-6773e788a179fdae_2056003511_data.0.parq (inode 251900): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+E0228 09:47:34.096958 12872 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn4.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0228 09:47:37.914412 12871 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn4.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0228 10:19:17.861423 17228 expr.cc:147] Could not construct expr tree.
+Unknown expr node type: 14
+
+TExpr {
+  01: nodes (list) = list<struct>[2] {
+    [0] = TExprNode {
+      01: node_type (i32) = 14,
+      02: type (struct) = TColumnType {
+        01: types (list) = list<struct>[1] {
+          [0] = TTypeNode {
+            01: type (i32) = 0,
+            02: scalar_type (struct) = TScalarType {
+              01: type (i32) = 6,
+            },
+          },
+        },
+      },
+      03: num_children (i32) = 1,
+      04: fn (struct) = TFunction {
+        01: name (struct) = TFunctionName {
+          01: db_name (string) = "_impala_builtins",
+          02: function_name (string) = "count",
+        },
+        02: binary_type (i32) = 0,
+        03: arg_types (list) = list<struct>[1] {
+          [0] = TColumnType {
+            01: types (list) = list<struct>[1] {
+              [0] = TTypeNode {
+                01: type (i32) = 0,
+                02: scalar_type (struct) = TScalarType {
+                  01: type (i32) = 12,
+                },
+              },
+            },
+          },
+        },
+        04: ret_type (struct) = TColumnType {
+          01: types (list) = list<struct>[1] {
+            [0] = TTypeNode {
+              01: type (i32) = 0,
+              02: scalar_type (struct) = TScalarType {
+                01: type (i32) = 6,
+              },
+            },
+          },
+        },
+        05: has_var_args (bool) = false,
+        07: signature (string) = "count(STRING)",
+        10: aggregate_fn (struct) = TAggregateFunction {
+          01: intermediate_type (struct) = TColumnType {
+            01: types (list) = list<struct>[1] {
+              [0] = TTypeNode {
+                01: type (i32) = 0,
+                02: scalar_type (struct) = TScalarType {
+                  01: type (i32) = 6,
+                },
+              },
+            },
+          },
+          02: update_fn_symbol (string) = "_ZN6impala18AggregateFunctions11CountUpdateEPN10impala_udf15FunctionContextERKNS1_6AnyValEPNS1_9BigIntValE",
+          03: init_fn_symbol (string) = "_ZN6impala18AggregateFunctions8InitZeroIN10impala_udf9BigIntValEEEvPNS2_15FunctionContextEPT_",
+          05: merge_fn_symbol (string) = "_ZN6impala18AggregateFunctions10CountMergeEPN10impala_udf15FunctionContextERKNS1_9BigIntValEPS4_",
+          07: ignores_distinct (bool) = false,
+          09: remove_fn_symbol (string) = "_ZN6impala18AggregateFunctions11CountRemoveEPN10impala_udf15FunctionContextERKNS1_6AnyValEPNS1_9BigIntValE",
+        },
+        11: is_persistent (bool) = true,
+      },
+      18: agg_expr (struct) = TAggregateExpr {
+        01: is_merge_agg (bool) = false,
+      },
+    },
+    [1] = TExprNode {
+      01: node_type (i32) = 10,
+      02: type (struct) = TColumnType {
+        01: types (list) = list<struct>[1] {
+          [0] = TTypeNode {
+            01: type (i32) = 0,
+            02: scalar_type (struct) = TScalarType {
+              01: type (i32) = 12,
+            },
+          },
+        },
+      },
+      03: num_children (i32) = 0,
+      14: slot_ref (struct) = TSlotRef {
+        01: slot_id (i32) = 2,
+      },
+    },
+  },
+}
+E0228 10:19:17.862152 17228 exec-node.cc:223] Could not construct plan tree:
+TPlan {
+  01: nodes (list) = list<struct>[2] {
+    [0] = TPlanNode {
+      01: node_id (i32) = 1,
+      02: node_type (i32) = 3,
+      03: num_children (i32) = 1,
+      04: limit (i64) = -1,
+      05: row_tuples (list) = list<i32>[1] {
+        [0] = 1,
+      },
+      06: nullable_tuples (list) = list<bool>[1] {
+        [0] = false,
+      },
+      13: agg_node (struct) = TAggregationNode {
+        01: grouping_exprs (list) = list<struct>[5] {
+          [0] = TExpr {
+            01: nodes (list) = list<struct>[1] {
+              [0] = TExprNode {
+                01: node_type (i32) = 10,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 12,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 0,
+                14: slot_ref (struct) = TSlotRef {
+                  01: slot_id (i32) = 0,
+                },
+              },
+            },
+          },
+          [1] = TExpr {
+            01: nodes (list) = list<struct>[1] {
+              [0] = TExprNode {
+                01: node_type (i32) = 10,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 12,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 0,
+                14: slot_ref (struct) = TSlotRef {
+                  01: slot_id (i32) = 1,
+                },
+              },
+            },
+          },
+          [2] = TExpr {
+            01: nodes (list) = list<struct>[1] {
+              [0] = TExprNode {
+                01: node_type (i32) = 10,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 12,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 0,
+                14: slot_ref (struct) = TSlotRef {
+                  01: slot_id (i32) = 0,
+                },
+              },
+            },
+          },
+          [3] = TExpr {
+            01: nodes (list) = list<struct>[1] {
+              [0] = TExprNode {
+                01: node_type (i32) = 10,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 12,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 0,
+                14: slot_ref (struct) = TSlotRef {
+                  01: slot_id (i32) = 1,
+                },
+              },
+            },
+          },
+          [4] = TExpr {
+            01: nodes (list) = list<struct>[2] {
+              [0] = TExprNode {
+                01: node_type (i32) = 14,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 6,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 1,
+                04: fn (struct) = TFunction {
+                  01: name (struct) = TFunctionName {
+                    01: db_name (string) = "_impala_builtins",
+                    02: function_name (string) = "count",
+                  },
+                  02: binary_type (i32) = 0,
+                  03: arg_types (list) = list<struct>[1] {
+                    [0] = TColumnType {
+                      01: types (list) = list<struct>[1] {
+                        [0] = TTypeNode {
+                          01: type (i32) = 0,
+                          02: scalar_type (struct) = TScalarType {
+                            01: type (i32) = 12,
+                          },
+                        },
+                      },
+                    },
+                  },
+                  04: ret_type (struct) = TColumnType {
+                    01: types (list) = list<struct>[1] {
+                      [0] = TTypeNode {
+                        01: type (i32) = 0,
+                        02: scalar_type (struct) = TScalarType {
+                          01: type (i32) = 6,
+                        },
+                      },
+                    },
+                  },
+                  05: has_var_args (bool) = false,
+                  07: signature (string) = "count(STRING)",
+                  10: aggregate_fn (struct) = TAggregateFunction {
+                    01: intermediate_type (struct) = TColumnType {
+                      01: types (list) = list<struct>[1] {
+                        [0] = TTypeNode {
+                          01: type (i32) = 0,
+                          02: scalar_type (struct) = TScalarType {
+                            01: type (i32) = 6,
+                          },
+                        },
+                      },
+                    },
+                    02: update_fn_symbol (string) = "_ZN6impala18AggregateFunctions11CountUpdateEPN10impala_udf15FunctionContextERKNS1_6AnyValEPNS1_9BigIntValE",
+                    03: init_fn_symbol (string) = "_ZN6impala18AggregateFunctions8InitZeroIN10impala_udf9BigIntValEEEvPNS2_15FunctionContextEPT_",
+                    05: merge_fn_symbol (string) = "_ZN6impala18AggregateFunctions10CountMergeEPN10impala_udf15FunctionContextERKNS1_9BigIntValEPS4_",
+                    07: ignores_distinct (bool) = false,
+                    09: remove_fn_symbol (string) = "_ZN6impala18AggregateFunctions11CountRemoveEPN10impala_udf15FunctionContextERKNS1_6AnyValEPNS1_9BigIntValE",
+                  },
+                  11: is_persistent (bool) = true,
+                },
+                18: agg_expr (struct) = TAggregateExpr {
+                  01: is_merge_agg (bool) = false,
+                },
+              },
+              [1] = TExprNode {
+                01: node_type (i32) = 10,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 12,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 0,
+                14: slot_ref (struct) = TSlotRef {
+                  01: slot_id (i32) = 2,
+                },
+              },
+            },
+          },
+        },
+        02: aggregate_functions (list) = list<struct>[1] {
+          [0] = TExpr {
+            01: nodes (list) = list<struct>[2] {
+              [0] = TExprNode {
+                01: node_type (i32) = 14,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 6,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 1,
+                04: fn (struct) = TFunction {
+                  01: name (struct) = TFunctionName {
+                    01: db_name (string) = "_impala_builtins",
+                    02: function_name (string) = "count",
+                  },
+                  02: binary_type (i32) = 0,
+                  03: arg_types (list) = list<struct>[1] {
+                    [0] = TColumnType {
+                      01: types (list) = list<struct>[1] {
+                        [0] = TTypeNode {
+                          01: type (i32) = 0,
+                          02: scalar_type (struct) = TScalarType {
+                            01: type (i32) = 12,
+                          },
+                        },
+                      },
+                    },
+                  },
+                  04: ret_type (struct) = TColumnType {
+                    01: types (list) = list<struct>[1] {
+                      [0] = TTypeNode {
+                        01: type (i32) = 0,
+                        02: scalar_type (struct) = TScalarType {
+                          01: type (i32) = 6,
+                        },
+                      },
+                    },
+                  },
+                  05: has_var_args (bool) = false,
+                  07: signature (string) = "count(STRING)",
+                  10: aggregate_fn (struct) = TAggregateFunction {
+                    01: intermediate_type (struct) = TColumnType {
+                      01: types (list) = list<struct>[1] {
+                        [0] = TTypeNode {
+                          01: type (i32) = 0,
+                          02: scalar_type (struct) = TScalarType {
+                            01: type (i32) = 6,
+                          },
+                        },
+                      },
+                    },
+                    02: update_fn_symbol (string) = "_ZN6impala18AggregateFunctions11CountUpdateEPN10impala_udf15FunctionContextERKNS1_6AnyValEPNS1_9BigIntValE",
+                    03: init_fn_symbol (string) = "_ZN6impala18AggregateFunctions8InitZeroIN10impala_udf9BigIntValEEEvPNS2_15FunctionContextEPT_",
+                    05: merge_fn_symbol (string) = "_ZN6impala18AggregateFunctions10CountMergeEPN10impala_udf15FunctionContextERKNS1_9BigIntValEPS4_",
+                    07: ignores_distinct (bool) = false,
+                    09: remove_fn_symbol (string) = "_ZN6impala18AggregateFunctions11CountRemoveEPN10impala_udf15FunctionContextERKNS1_6AnyValEPNS1_9BigIntValE",
+                  },
+                  11: is_persistent (bool) = true,
+                },
+                18: agg_expr (struct) = TAggregateExpr {
+                  01: is_merge_agg (bool) = false,
+                },
+              },
+              [1] = TExprNode {
+                01: node_type (i32) = 10,
+                02: type (struct) = TColumnType {
+                  01: types (list) = list<struct>[1] {
+                    [0] = TTypeNode {
+                      01: type (i32) = 0,
+                      02: scalar_type (struct) = TScalarType {
+                        01: type (i32) = 12,
+                      },
+                    },
+                  },
+                },
+                03: num_children (i32) = 0,
+                14: slot_ref (struct) = TSlotRef {
+                  01: slot_id (i32) = 2,
+                },
+              },
+            },
+          },
+        },
+        03: intermediate_tuple_id (i32) = 1,
+        04: output_tuple_id (i32) = 1,
+        05: need_finalize (bool) = false,
+        06: use_streaming_preaggregation (bool) = true,
+        07: estimated_input_cardinality (i64) = 3563107,
+      },
+      18: label (string) = "01:AGGREGATE",
+      19: label_detail (string) = "STREAMING",
+      20: estimated_stats (struct) = TExecStats {
+        03: cardinality (i64) = 3563107,
+        04: memory_used (i64) = 134217728,
+      },
+    },
+    [1] = TPlanNode {
+      01: node_id (i32) = 0,
+      02: node_type (i32) = 0,
+      03: num_children (i32) = 0,
+      04: limit (i64) = -1,
+      05: row_tuples (list) = list<i32>[1] {
+        [0] = 0,
+      },
+      06: nullable_tuples (list) = list<bool>[1] {
+        [0] = false,
+      },
+      08: hdfs_scan_node (struct) = THdfsScanNode {
+        01: tuple_id (i32) = 0,
+        04: random_replica (bool) = false,
+        05: codegen_conjuncts (bool) = false,
+      },
+      18: label (string) = "00:SCAN HDFS",
+      19: label_detail (string) = "bas_mfz.mvtprod2015",
+      20: estimated_stats (struct) = TExecStats {
+        03: cardinality (i64) = 3563107,
+        04: memory_used (i64) = 369098752,
+      },
+    },
+  },
+}
+W0228 11:09:46.702389 22379 DFSOutputStream.java:975] Slow ReadProcessor read fields took 65142ms (threshold=30000ms); ack: seqno: -2 reply: 0 reply: 0 reply: 1 downstreamAckTimeNanos: 0, targets: [DatanodeInfoWithStorage[192.168.25.27:50010,DS-d124cb4f-5a10-4f91-ba40-cf6a7857f039,DISK], DatanodeInfoWithStorage[192.168.25.22:50010,DS-1ab3ec2a-f988-468a-8ecc-4e3b1e80768f,DISK], DatanodeInfoWithStorage[192.168.25.21:50010,DS-9cebbdd7-f87a-4210-bc8e-a7ba8bdc0b9a,DISK]]
+W0228 11:09:46.715471 22379 DFSOutputStream.java:1064] DFSOutputStream ResponseProcessor exception  for block BP-1627101120-192.168.25.10-1460992050419:blk_1073776417_48637
+Java exception follows:
+java.io.IOException: Bad response ERROR for block BP-1627101120-192.168.25.10-1460992050419:blk_1073776417_48637 from datanode DatanodeInfoWithStorage[192.168.25.21:50010,DS-9cebbdd7-f87a-4210-bc8e-a7ba8bdc0b9a,DISK]
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:1002)
+W0228 11:09:46.729660 22309 DFSOutputStream.java:1362] Error Recovery for block BP-1627101120-192.168.25.10-1460992050419:blk_1073776417_48637 in pipeline DatanodeInfoWithStorage[192.168.25.27:50010,DS-d124cb4f-5a10-4f91-ba40-cf6a7857f039,DISK], DatanodeInfoWithStorage[192.168.25.22:50010,DS-1ab3ec2a-f988-468a-8ecc-4e3b1e80768f,DISK], DatanodeInfoWithStorage[192.168.25.21:50010,DS-9cebbdd7-f87a-4210-bc8e-a7ba8bdc0b9a,DISK]: bad datanode DatanodeInfoWithStorage[192.168.25.21:50010,DS-9cebbdd7-f87a-4210-bc8e-a7ba8bdc0b9a,DISK]
+E0308 11:24:15.741505 26118 data-stream-sender.cc:263] channel send status: 
+Sender timed out waiting for receiver fragment instance: b146050b54890da5:458dcdd20123c79e
+W0309 09:20:24.504693 21861 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/TMP/mrsq2/_impala_insert_staging/9f42b9257a40d433_9ad01896836e2099/.9f42b9257a40d433-9ad01896836e209e_290509356_dir/9f42b9257a40d433-9ad01896836e209e_515708962_data.0.parq (inode 259920): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+E0309 15:36:06.322681  2084 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0309 15:36:06.322684  2089 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0309 15:36:06.322746  1893 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0309 15:36:06.322755  2080 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0309 15:36:06.409628  2098 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0310 11:07:58.001236 11046 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn6.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0313 10:37:10.517611  8759 data-stream-sender.cc:263] channel send status: 
+Sender timed out waiting for receiver fragment instance: db41439e193b0cd2:120c9462586eadb7
+E0316 11:42:42.826484  8398 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0316 11:42:42.826498  8399 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0316 11:42:42.826553  8397 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0316 11:42:42.826571  8396 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0316 11:42:42.826581  8404 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn5.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+W0316 15:16:52.006486  3546 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/Resiliation/TMP/sinmrsq/_impala_insert_staging/eb469e312582916c_a6eaf0ff0b5d90b4/.eb469e312582916c-a6eaf0ff0b5d90b8_383570410_dir/eb469e312582916c-a6eaf0ff0b5d90b8_677087331_data.0.parq (inode 268464): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+W0320 15:40:22.890224 27124 DFSOutputStream.java:1064] DFSOutputStream ResponseProcessor exception  for block BP-1627101120-192.168.25.10-1460992050419:blk_1073781666_54627
+Java exception follows:
+java.net.SocketTimeoutException: 75000 millis timeout while waiting for channel to be ready for read. ch : java.nio.channels.SocketChannel[connected local=/192.168.25.27:53806 remote=/192.168.25.27:50010]
+	at org.apache.hadoop.net.SocketIOWithTimeout.doIO(SocketIOWithTimeout.java:164)
+	at org.apache.hadoop.net.SocketInputStream.read(SocketInputStream.java:161)
+	at org.apache.hadoop.net.SocketInputStream.read(SocketInputStream.java:131)
+	at org.apache.hadoop.net.SocketInputStream.read(SocketInputStream.java:118)
+	at java.io.FilterInputStream.read(FilterInputStream.java:83)
+	at java.io.FilterInputStream.read(FilterInputStream.java:83)
+	at org.apache.hadoop.hdfs.protocolPB.PBHelper.vintPrefixed(PBHelper.java:2239)
+	at org.apache.hadoop.hdfs.protocol.datatransfer.PipelineAck.readFields(PipelineAck.java:235)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:971)
+W0320 15:40:22.970813 27119 DFSOutputStream.java:1362] Error Recovery for block BP-1627101120-192.168.25.10-1460992050419:blk_1073781666_54627 in pipeline DatanodeInfoWithStorage[192.168.25.27:50010,DS-d124cb4f-5a10-4f91-ba40-cf6a7857f039,DISK], DatanodeInfoWithStorage[192.168.25.21:50010,DS-9cebbdd7-f87a-4210-bc8e-a7ba8bdc0b9a,DISK], DatanodeInfoWithStorage[192.168.25.20:50010,DS-e31ff2e0-044b-4000-a2bc-41f1547fc299,DISK]: bad datanode DatanodeInfoWithStorage[192.168.25.27:50010,DS-d124cb4f-5a10-4f91-ba40-cf6a7857f039,DISK]
+W0322 14:48:31.064075  4541 DFSOutputStream.java:975] Slow ReadProcessor read fields took 32699ms (threshold=30000ms); ack: seqno: 3877 reply: 0 reply: 0 reply: 0 downstreamAckTimeNanos: 37926745826, targets: [DatanodeInfoWithStorage[192.168.25.27:50010,DS-d124cb4f-5a10-4f91-ba40-cf6a7857f039,DISK], DatanodeInfoWithStorage[192.168.25.25:50010,DS-8b73ec4a-2941-4ba6-a972-46845ee88957,DISK], DatanodeInfoWithStorage[192.168.25.24:50010,DS-41a179c6-1243-4ea7-a62f-f87d25e4ab72,DISK]]
+W0322 17:06:14.126507 28004 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/Resiliation/TMP/dataset/_impala_insert_staging/cf44b1f30deeeb1e_ae23a3c87e208e8f/.cf44b1f30deeeb1e-ae23a3c87e208e94_267862821_dir/cf44b1f30deeeb1e-ae23a3c87e208e94_2056076325_data.0.parq (inode 279104): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+W0323 09:26:04.996973 17307 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/Resiliation/TMP/dataset/_impala_insert_staging/c945990888130628_365b12de98f265b8/.c945990888130628-365b12de98f265bd_246215019_dir/c945990888130628-365b12de98f265bd_1940197686_data.0.parq (inode 279533): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+W0323 17:23:31.771219 20256 DFSOutputStream.java:790] DataStreamer Exception
+Java exception follows:
+org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /Data/UseCase/Resiliation/TMP/dataset_test/_impala_insert_staging/84fafe1ee43b63e_cc6bb4913a58b0bb/.84fafe1ee43b63e-cc6bb4913a58b0bd_2021762466_dir/84fafe1ee43b63e-cc6bb4913a58b0bd_1415718797_data.0.parq (inode 280877): File does not exist. Holder DFSClient_NONMAPREDUCE_598386862_1 does not have any open files.
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.checkLease(FSNamesystem.java:3597)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.analyzeFileState(FSNamesystem.java:3400)
+	at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:3256)
+	at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:677)
+	at org.apache.hadoop.hdfs.server.namenode.AuthorizationProviderProxyClientProtocol.addBlock(AuthorizationProviderProxyClientProtocol.java:213)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:485)
+	at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:617)
+	at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1073)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2086)
+	at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2082)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1693)
+	at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2080)
+
+	at org.apache.hadoop.ipc.Client.call(Client.java:1471)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1408)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:230)
+	at com.sun.proxy.$Proxy9.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:404)
+	at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:256)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)
+	at com.sun.proxy.$Proxy10.addBlock(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1704)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1500)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:668)
+E0329 14:47:38.539018 20360 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.755203 20372 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.759373 20361 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.760314 20375 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.760362 20363 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.760422 20377 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.761149 20368 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.761900 20376 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0329 14:47:39.763665 20381 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 11:55:01.081962  9579 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn7.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.472648 21633 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.472923 21762 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.472962 21712 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.472988 21743 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.473184 21719 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.473193 21708 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.617038 21649 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.617090 21644 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.617451 21651 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.626022 21675 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:15.668742 21780 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:16.223103 21400 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:16.245774 21657 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0403 17:14:16.246182 21663 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn1.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0404 10:33:46.837141 17498 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn4.poc.matmut.saagie.io:22000 (Could not resolve host for client socket.)
+
+E0404 10:33:46.921382 17494 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn6.poc.matmut.saagie.io:22000 (Could not resolve host for client socket.)
+
+W0404 10:34:07.637334  1904 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:34:11.671890  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:34:12.293650  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:34:27.708684  6230 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:34:50.726950  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:34:53.724853  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:35:08.993041  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:35:32.009047  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:35:35.008728  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:35:48.968286  6230 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:36:11.984931  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:36:14.041291  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:36:29.897122  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:36:52.914722  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:36:59.797170  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:37:10.430634  6230 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:37:33.397584  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (Could not resolve host for client socket.)
+
+W0404 10:37:33.448195  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:37:51.294401  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:38:07.980427  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:38:10.981238  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:38:11.420395  6230 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:38:13.981227  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:38:54.420037  6230 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:39:02.102032  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:39:05.100741  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:39:14.212090  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:39:37.229437  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:39:59.252445  1904 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:40:11.609836  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:40:14.608916  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:40:28.643406  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:40:51.652698  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:40:54.652873  6230 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:41:01.811738  1904 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:41:23.684576  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:41:24.829375  1904 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:41:25.569032  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (Could not resolve host for client socket.)
+
+W0404 10:41:27.828917  1908 Client.java:576] Address change detected. Old: nn1/192.168.25.10:8020 New: nn1:8020
+W0404 10:41:46.288100  6230 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+W0404 10:41:46.382324  1908 RetryInvocationHandler.java:170] A failover has occurred since the start of this method invocation attempt.
+E0404 10:43:40.737262 17478 data-stream-sender.cc:263] channel send status: 
+Sender timed out waiting for receiver fragment instance: ea4e74a19239f069:9149dfd8d0c74bf7
+E0404 10:43:40.954777 17480 data-stream-sender.cc:263] channel send status: 
+Sender timed out waiting for receiver fragment instance: ea4e74a19239f069:9149dfd8d0c74c05
+E0404 10:43:41.033538 17497 data-stream-sender.cc:263] channel send status: 
+Sender timed out waiting for receiver fragment instance: ea4e74a19239f069:9149dfd8d0c74c49
+E0406 14:10:08.145946 19325 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn6.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+E0406 14:10:08.145989 19149 data-stream-sender.cc:263] channel send status: RPC client failed to connect: Couldn't open transport for dn6.poc.matmut.saagie.io:22000 (connect() failed: Connexion refusée)
+
+W0406 15:14:22.558668  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:14:54.571117  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:15:26.585345  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:15:58.595415  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:16:30.609112  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:17:02.621234  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:17:34.632994  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:18:06.643457  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:18:38.654681  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:19:10.666478  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:19:42.679437  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:20:14.692734  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:20:46.707401  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:21:18.720024  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:21:50.735144  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:22:22.748435  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:22:54.762238  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:23:26.775809  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:23:58.788281  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:24:30.801180  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:25:02.814808  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:25:34.828737  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:26:06.842119  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:26:38.856660  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:27:10.870362  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:27:42.882329  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:28:14.895812  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:28:46.909153  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:29:18.919884  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:29:50.931895  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:30:22.945678  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:30:54.958261  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:31:26.971276  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:31:58.984369  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:32:30.995924  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:33:03.008824  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:33:35.021308  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:34:07.034226  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:34:39.046044  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:35:11.059864  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:35:43.072342  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:36:15.087255  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:36:47.099225  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:37:19.112685  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:37:51.125958  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:38:23.136818  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:38:55.146659  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:39:27.158339  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:39:59.169687  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:40:31.185585  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:41:03.199779  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:41:35.212218  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:42:07.226650  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:42:39.239581  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:43:11.253821  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:43:43.266520  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:44:15.276635  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:44:47.287067  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:45:19.298200  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:45:51.308912  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:46:23.320426  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:46:55.332223  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:47:27.343578  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:47:59.355151  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:48:31.367240  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:49:03.381165  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:49:35.394354  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:50:07.406457  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:50:39.417069  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:51:11.428666  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:51:43.439183  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:52:15.449707  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:52:47.459250  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:53:19.470073  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:53:51.479902  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:54:23.490746  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:54:55.500772  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:55:27.512492  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:55:59.524000  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:56:31.535498  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:57:03.545779  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:57:35.558854  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:58:07.570010  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:58:39.581804  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:59:11.594321  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 15:59:43.606153  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:00:15.619588  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:00:47.631539  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:01:19.685437  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:01:51.697484  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:02:23.710067  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:02:55.722232  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:03:27.734634  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:03:59.747725  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:04:31.760077  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:05:03.774637  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:05:35.787319  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:06:07.799621  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:06:39.812618  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:07:11.825801  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:07:43.838901  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:08:15.851429  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:08:47.862851  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:09:19.874410  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:09:51.887966  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:10:23.901435  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:10:55.913460  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:11:27.926820  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:11:59.939483  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:12:31.951234  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:13:03.963320  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:13:35.976150  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:14:07.987916  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:14:39.999775  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:15:12.011821  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:15:44.022328  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:16:16.031886  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:16:48.044808  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:17:20.055769  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:17:52.066026  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:18:24.077698  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:18:56.090410  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:19:28.101758  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:20:00.111886  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:20:32.123493  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:21:04.135663  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:21:36.810156  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:22:08.822645  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:22:40.834237  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:23:12.846873  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:23:44.860363  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:24:16.873404  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:24:48.885608  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:25:20.895946  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:25:52.907754  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:26:24.920302  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:26:56.929813  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:27:28.940492  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:28:00.952558  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:28:32.963907  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:29:04.977195  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:29:36.987560  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:30:08.999459  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:30:41.010143  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:31:13.023274  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:31:45.035063  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:32:17.088948  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:32:49.100147  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:33:21.112639  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:33:53.123368  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:34:25.134439  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:34:57.143995  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:35:29.154673  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:36:01.164916  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:36:33.177947  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:37:05.192142  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:37:37.205358  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:38:09.218442  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:38:41.231199  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:39:13.244648  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:39:45.258559  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:40:17.270800  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:40:49.282171  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:41:21.293617  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:41:53.308292  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:42:25.319958  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:42:57.332096  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:43:29.345489  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:44:01.358420  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:44:33.371310  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:45:05.385702  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:45:37.395661  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:46:09.407714  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:46:41.420588  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:47:13.431874  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:47:45.445976  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:48:17.458793  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:48:49.474655  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:49:21.491454  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:49:53.503759  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:50:25.516427  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:50:57.530599  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:51:29.540879  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:52:01.551730  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:52:33.564098  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:53:05.577585  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:53:37.590425  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:54:09.603408  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:54:41.616472  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:55:13.628785  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:55:45.638680  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:56:17.650696  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:56:49.662739  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:57:21.675010  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+W0406 16:57:53.689007  1932 statestore-subscriber.cc:238] Failed to re-register with statestore: RPC client failed to connect: Couldn't open transport for nn1:24000 (connect() failed: Connexion refusée)
+
+E0406 17:01:41.996129  9377 impala-server.cc:1325] There was an error processing the impalad catalog update. Requesting a full topic update to recover: CatalogException: Detected catalog service ID change. Aborting updateCatalog()
