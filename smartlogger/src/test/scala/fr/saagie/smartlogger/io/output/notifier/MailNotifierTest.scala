@@ -20,7 +20,7 @@ class MailNotifierTest extends FeatureSpec with GivenWhenThen with Matchers {
       recipient = recipient.+:("madzinah@gmail.com")
 
       val notifier: MailNotifier = new MailNotifier
-      notifier.setText("<p>Email with body</p>")
+      notifier.setText("Email with body")
       notifier.setRecipients(recipient)
 
       When("send email")

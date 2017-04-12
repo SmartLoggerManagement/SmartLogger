@@ -1,15 +1,13 @@
 package fr.saagie.smartlogger.io.output
 
-import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{INotifier, MailNotifier, SlackNotifier}
 import org.easymock.EasyMock
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{BeforeAndAfter, FeatureSpec, GivenWhenThen, Matchers}
 
-
 /**
-  * @author Nicolas Gille
+  * @author Nicolas Gille, Jordan Baudin
   * @since SmartLogger 0.2
   * @version 1.0
   */

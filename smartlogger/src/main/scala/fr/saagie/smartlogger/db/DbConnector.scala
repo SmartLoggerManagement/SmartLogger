@@ -2,56 +2,52 @@ package fr.saagie.smartlogger.db
 
 import java.sql.{Connection, DriverManager}
 
+import fr.saagie.smartlogger.utils.Properties
+
 /**
-  * DbConnector is a class use to connect SmartLogger with a Database.
-  * This class is composed by two methods use to open
-  * and close Connection with a Database.
+  * DbConnector is an object used to connect SmartLogger with an
+  * external Database.
   *
-  * @author Nicolas GILLE
+  * @author Nicolas GILLE, Franck CARON
   * @since SmartLogger 0.2
   * @version 1.0
   */
 object DbConnector {
-  // ATTRIBUTE
-  /**
-    * Object Connection at return when you open a connection on a Database.
-    */
-  private var connection : Connection = _
-
   // COMMANDS
   /**
-    * Method use to open a connection on a Database.
+    * Establishes a new connection with the database
     *
-    * This method retrieve information from the correct bundle properties.
-    * These informations are :
+    * Retrieves information from the correct bundle properties :
     * <ul>
     *   <li>driver : the complete driver use in DriverManager with the following format : <pre>com.mysql.jdbc.Driver</pre>.</li>
-    *   <li>url : URL of the Database, with this format for mysql connection : <pre>jdbc:mysql://localhost/mysql</pre>.</li>
-    *   <li>username : Username of the user register on Database.</li>
-    *   <li>password : Password of the user register on Database.</li>
+    *   <li>url : URL of the Database, formatted for mysql connection : <pre>jdbc:mysql://localhost/mysql</pre>.</li>
+    *   <li>username : Username of resgistered database's user</li>
+    *   <li>password : Password of resgistered database's user</li>
     * </ul>
-    * If the connection is possible, the DriverManager return an instance of Connection.
     *
     * @return
     *   Return the connection of the database.
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def openConnection: Connection = {
-    // connect to the database named "mysql" on the localhost
-    val driver   = "com.mysql.jdbc.Driver"
-    val url      = "jdbc:mysql://localhost/mysql"
-    val username = "root"
-    val password = "root"
+  def connect(): Connection = {
+    // Retrieve all connection properties
+    val properties = Properties.DB_TEST
 
-   // make the connection
+    // Connect to database
+    val driver   = properties.get("driver")
+    val url      = properties.get("url")
+    val username = properties.get("username")
+    val password = properties.get("password")
+
+   // Building the connection
     Class.forName(driver)
-    connection = DriverManager.getConnection(url, username, password)
+    val connection = DriverManager.getConnection(url, username, password)
     return connection
   }
 
   /**
-    * Method use to close Connection when the request is completed.
+    * Close the connection.
     *
     * This method close the Database connection if the connection is previously open by the method openConnection.
     * In other case, this method has no effect.
@@ -59,7 +55,7 @@ object DbConnector {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  def closeConnection : Unit = {
+  def close(connection: Connection): Unit = {
     if (connection != null) {
       connection.close()
     }

@@ -1,15 +1,17 @@
 package fr.saagie.smartlogger
 
+import java.util.UUID
+
+import fr.saagie.smartlogger.db.model.Log
+import fr.saagie.smartlogger.db.mysql.{AttrMySQLFactory, LogDAO}
 import fr.saagie.smartlogger.io.input.{InputManager, LogBatch, LogParser}
 import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{MailNotifier, SlackNotifier}
-import fr.saagie.smartlogger.ml.SmartAnalyzer
-import fr.saagie.smartlogger.utils.EncryptedPropertiesManager
+import fr.saagie.smartlogger.ml.AnalyzerBuilder
+import fr.saagie.smartlogger.utils.Properties
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
-import scala.concurrent.ExecutionContext
-import ExecutionContext.Implicits.global
-import scala.io.Source
 import scala.util.Sorting
 
 /**
@@ -23,42 +25,64 @@ import scala.util.Sorting
 object SmartLogger {
   // MAIN
   def main(args: Array[String]): Unit = {
-    val smartAnalyzer = new SmartAnalyzer(new NaiveBayes)
+    // Build table if necessary.
+    LogDAO.build()
 
-    // Open file and retrieve data.
-    val source = Source.fromFile("src/test/resources/TrainData.txt")
-    val data = source.mkString
-    source.close()
+    // Instantiate algorithm used by SmartLogger
+    val smartAnalyzer = AnalyzerBuilder.getNaiveBayes
+
+    // Get logs stored in Database.
+    val dbLogs = LogDAO.get()
+
+    // Concat all logs into a string where each logs were separated by "line.separator"
+    val data = new String
+    for (dbLog <- dbLogs) {
+      data.concat(dbLog.getContent)
+      data.concat(System.getProperty("line.separator"))
+    }
 
     // Train Machine Learning.
     val trainSeq = LogParser.parseTrainingData(data)
     smartAnalyzer.train(trainSeq)
 
     // Open server.
-    val input = new IInputManager
+    val input = new InputManager()
     input.open()
 
-    // Configuring the outputs
-    val alerter = new Alerter()
+    // Retrieve contacts from properties mail file and add it on sequence of recipients.
     var recipient: Seq[String] = Seq.empty
-    recipient = recipient.+:("franck.caron76@gmail.com")
-    recipient = recipient.+:("nic.gille@gmail.com")
-    recipient = recipient.+:("gregoire.pommier@etu.univ-rouen.fr")
-    recipient = recipient.+:("madzinah@gmail.com")
+    val emailProperties = Properties.MAIL
+    var contactSplit = emailProperties.get("contact").split(",")
+    for (c <- contactSplit) {
+      recipient = recipient.+:(c)
+    }
 
-    val notifier = new MailNotifier("Alerte !")
-    notifier.setRecipients(recipient)
-    alerter.addNotifier(notifier)
+    // Prepare email subject and set recipients
+    val emailSubject = Properties.MAIL.get("subject")
+    val emailNotifier = new MailNotifier(emailSubject)
+    emailNotifier.setRecipients(recipient)
 
-    val properties = new EncryptedPropertiesManager
-    properties.load("src/test/resources/bundle.properties")
-    val apiKey = properties.get("$apiKey")
+    // Add mail notifier on alerter to send email when problems occurred.
+    val alerter = new Alerter()
+    alerter.addNotifier(emailNotifier)
 
+    // Initialize Slack properties.
+    val slackProperties = Properties.SLACK
+    val apiKey = slackProperties.get("$apiKey")
     val slackSender = new SlackNotifier(apiKey)
 
-    testSlackSender setChannel "#testsmartlogger"
-    testSlackSender setRecipients Seq("@madzinah", "@kero76")
+    // Retrieve channel and contacts
+    val channel = slackProperties.get("thread")
+    slackSender setChannel channel
 
+    recipient = Seq.empty
+    contactSplit = slackProperties.get("contact").split(",")
+    for (c <- contactSplit) {
+      recipient = recipient.+:(c)
+    }
+    slackSender setRecipients recipient
+
+    // Add slack notifier on alerter to send message on Slack when problems occurred
     alerter.addNotifier(slackSender)
 
     // Execute on each X seconds the same part of code.
@@ -67,20 +91,28 @@ object SmartLogger {
     system.scheduler.schedule(0 seconds, 10 seconds) {
 
       // Getting batch and using it to predict
-      val batch = LogBatch.getBatch()
+      val batch  = LogBatch.getBatch()
       var result = smartAnalyzer.predict(batch)
+
+      // Loop on each logs received and insert logs on Database.
+      for (r <- result) {
+        val log = new Log(AttrMySQLFactory)
+        log.setId(UUID.randomUUID())
+        log.setContent(r._2)
+        LogDAO.insert(log)
+      }
 
       // Sorting to put the biggest critically at firsts positions
       result = Sorting.stableSort(result,
-        (e1: (Long, String, Double), e2: (Long, String, Double))
-        => e1._3 > e2._3)
+      (e1: (Long, String, Double), e2: (Long, String, Double))
+      => e1._3 > e2._3)
 
       // Getting into a message all the critically above the
       // limit chosen beforehand
       var counter = 0
       var message = new String
       while (counter < result.size && result(counter)._3 >= 2.0) {
-        message = message ++ result(counter)._2 ++ "\n"
+        message = message ++ result(counter)._2 ++ System.getProperty("line.separator")
         counter += 1
       }
 

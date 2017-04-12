@@ -22,8 +22,9 @@ dependencies {
             'javax.mail:mail:1.4.7',
             // Slack API
             'com.github.ponkotuy:scala-slack:0.4.0',
-            //Db
-            'mysql:mysql-connector-java:6.0.6'
+            // Database
+            'org.apache.hive:hive-jdbc:2.1.0',
+            'org.postgresql:postgresql:42.0.0',
     )
 
     // Test execution
@@ -35,7 +36,6 @@ dependencies {
             'org.mockito:mockito-core:2.+',
             'org.easymock:easymock:3.4',
 
-
             // Other librairies used in environment.
             'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
             'org.apache.spark:spark-core_2.11:2.1.0',
@@ -43,7 +43,8 @@ dependencies {
             'com.typesafe.akka:akka-http-core_2.11:10.0.3',
             'com.typesafe.akka:akka-http_2.11:10.0.3',
             'javax.mail:mail:1.4.7',
-            'mysql:mysql-connector-java:6.0.6'
+            'org.apache.hive:hive-jdbc:2.1.1',
+            'org.postgresql:postgresql:42.0.0',
     )
 }
 
@@ -51,41 +52,29 @@ sourceSets {
     main {
         scala {
             srcDirs = [
-                    'src/main/scala/fr/saagie/smartlogger/db',
-                    'src/main/scala/fr/saagie/smartlogger/db/model',
-                    'src/main/scala/fr/saagie/smartlogger/io/input',
-                    'src/main/scala/fr/saagie/smartlogger/io/output',
-                    'src/main/scala/fr/saagie/smartlogger/ml',
-                    'src/main/scala/fr/saagie/smartlogger/utils'
+                    'src/main/scala/',
             ]
         }
     }
     test {
         scala {
             srcDirs = [
-//                    'src/test/scala/fr/saagie/smartlogger/benchmark',
-//                    'src/test/scala/fr/saagie/smartlogger/db',
-//                    'src/test/scala/fr/saagie/smartlogger/db/model',
-                    'src/test/scala/fr/saagie/smartlogger/io/input',
-//                    'src/test/scala/fr/saagie/smartlogger/io/output',
-//                    'src/test/scala/fr/saagie/smartlogger/io/output/notifier',
-//                    'src/test/scala/fr/saagie/smartlogger/ml',
-//                    'src/test/scala/fr/saagie/smartlogger/simulation',
-//                    'src/test/scala/fr/saagie/smartlogger/utils',
+                    'src/test/scala',
             ]
         }
     }
 }
 
-//jar {
-//    from {
-//        configurations.compile.collect {
-//            zip64 = true
-//            it.isDirectory() ? it : zipTree(it)
-//        }
-//        configurations.runtime.collect {
-//            zip64 = true
-//            it.isDirectory() ? it : zipTree(it)
-//        }
-//    }
-//}
+jar {
+    archiveName = "SmartLogger-SNAPSHOT-0.2.jar"
+    from {
+        configurations.compile.collect {
+            zip64 = true
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            zip64 = true
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}

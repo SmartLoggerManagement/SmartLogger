@@ -2,6 +2,7 @@ package fr.saagie.smartlogger.db.model
 
 import java.util.UUID
 
+import fr.saagie.smartlogger.db.pgsql.AttrPGSQLFactory
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
@@ -23,13 +24,15 @@ class LogTest extends FeatureSpec with Matchers with GivenWhenThen {
       val message: String = "My name is Log, James Log"
 
       When("Fill the Log with id and message previously retrieve.")
-      val log = new Log(id, message)
+      val log = new Log(AttrPGSQLFactory)
+        log.setId(id)
+        log.setContent(message)
 
       Then("The log id must be equal to 123456789")
-      log.getId should equal(id)
+      assert(log.getId.equals(id))
 
       And("the message must equal at 'My name is Log, James Log'")
-      log.getLog should equal(message)
+      assert(log.getContent.equals(message))
     }
   }
 }

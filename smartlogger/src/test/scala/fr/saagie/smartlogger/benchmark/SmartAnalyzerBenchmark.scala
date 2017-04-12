@@ -4,7 +4,7 @@ import fr.saagie.smartlogger.io.input.LogParser
 import fr.saagie.smartlogger.ml.{IAnalyzer, SmartAnalyzer}
 import org.apache.spark.ml.classification.{DecisionTreeClassifier, LogisticRegression, NaiveBayes, RandomForestClassifier}
 import org.junit.runner.RunWith
-import org.scalatest.FeatureSpec
+import org.scalatest.{FeatureSpec, GivenWhenThen}
 import org.scalatest.junit.JUnitRunner
 
 import scala.io.Source
