@@ -34,7 +34,7 @@ class LogDAOTest extends FeatureSpec with Matchers with GivenWhenThen with Befor
       When("Query the Database with the insert query")
       LogDAO.insert(log)
     }
-//
+
     scenario("A get query is sent to the database. The database responds with the appropriate answer.") {
       Given("Retrieve information from persistence system.")
 

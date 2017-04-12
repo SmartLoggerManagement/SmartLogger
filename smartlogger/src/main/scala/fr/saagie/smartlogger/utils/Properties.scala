@@ -14,7 +14,6 @@ object Properties {
     */
   private val PROPERTIES_DIRECTORY = "src/main/resources/"
 
-
   // PROPERTIES MANAGERS
   /**
     * The property manager associated with mail properties
