@@ -32,7 +32,7 @@ object DbConnector {
     */
   def connect(): Connection = {
     // Retrieve all connection properties
-    val properties = Properties.DB_TEST
+    val properties = Properties.DB
 
     // Connect to database
     val driver   = properties.get("driver")
