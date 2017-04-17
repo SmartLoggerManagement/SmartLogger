@@ -1,5 +1,6 @@
 group 'SmartLogger'
 version '1.0'
+
 apply plugin: 'scala'
 
 repositories {
@@ -23,8 +24,8 @@ dependencies {
             // Slack API
             'com.github.ponkotuy:scala-slack:0.4.0',
             // Database
-            'org.apache.hive:hive-jdbc:2.1.0',
-            'org.postgresql:postgresql:42.0.0',
+//            'org.apache.hive:hive-jdbc:2.1.0',
+//            'org.postgresql:postgresql:42.0.0',
     )
 
     // Test execution
@@ -36,15 +37,15 @@ dependencies {
             'org.mockito:mockito-core:2.+',
             'org.easymock:easymock:3.4',
 
-            // Other librairies used in environment.
+            // Other libraries used in environment.
             'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
             'org.apache.spark:spark-core_2.11:2.1.0',
             'org.apache.spark:spark-mllib_2.11:2.1.0',
             'com.typesafe.akka:akka-http-core_2.11:10.0.3',
             'com.typesafe.akka:akka-http_2.11:10.0.3',
             'javax.mail:mail:1.4.7',
-            'org.apache.hive:hive-jdbc:2.1.1',
-            'org.postgresql:postgresql:42.0.0',
+//            'org.apache.hive:hive-jdbc:2.1.1',
+//            'org.postgresql:postgresql:42.0.0',
     )
 }
 
@@ -59,7 +60,7 @@ sourceSets {
     test {
         scala {
             srcDirs = [
-                    'src/test/scala',
+//                    'src/test/scala',
             ]
         }
     }
@@ -67,6 +68,11 @@ sourceSets {
 
 jar {
     archiveName = "SmartLogger-SNAPSHOT-0.2.jar"
+    manifest {
+        attributes (
+                'Main-Class': "fr.saagie.smartlogger.SmartLogger",
+        )
+    }
     from {
         configurations.compile.collect {
             zip64 = true
@@ -78,3 +84,17 @@ jar {
         }
     }
 }
+
+//task fatJar(type: Jar) {
+//    manifest.from jar.manifest
+//    classifier = 'all'
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//        configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) }
+//    } {
+//        exclude "META-INF/*.SF"
+//        exclude "META-INF/*.DSA"
+//        exclude "META-INF/*.RSA"
+//    }
+//    with jar
+//}
