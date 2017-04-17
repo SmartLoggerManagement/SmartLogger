@@ -11,6 +11,8 @@ SmartLogger is an application use to predict potential problems from Server.
 
 ## Main commands
 * `$ gradle build` : compile source, generate .jar and execute unit test.
+* `$ gradle assemble` : compile source and generate JAR/WAR without launch unit tests.
+* `$ gradle clean` : remove build folder.
  
 ## Team
 - Franck Caron : Team Manager, Client Manager and Developer
