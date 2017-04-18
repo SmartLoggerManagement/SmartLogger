@@ -4,7 +4,7 @@ version 'SNAPSHOT-0.2'
 
 
 //// Variables define ////
-def jarVersion = 16
+def jarVersion = 21
 def mainClass = "fr.saagie.smartlogger.SmartLogger"
 def jarName   = "smartLogger-" + version + "." + jarVersion + ".jar"
 def appName   = "SmartLogger"
@@ -94,8 +94,9 @@ jar {
         }
     }
 
+    // Add resources on fatJar.
     from('src/main/resources') {
         include("*.properties")
-        into("fr/saagie/resources/")
+        into("fr/saagie/smartlogger/utils/resources/")
     }
 }

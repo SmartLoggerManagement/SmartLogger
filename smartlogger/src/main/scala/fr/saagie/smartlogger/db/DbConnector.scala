@@ -21,8 +21,8 @@ object DbConnector {
     * <ul>
     *   <li>driver : the complete driver use in DriverManager with the following format : <pre>com.mysql.jdbc.Driver</pre>.</li>
     *   <li>url : URL of the Database, formatted for mysql connection : <pre>jdbc:mysql://localhost/mysql</pre>.</li>
-    *   <li>username : Username of resgistered database's user</li>
-    *   <li>password : Password of resgistered database's user</li>
+    *   <li>username : Username of registered database's user</li>
+    *   <li>password : Password of registered database's user</li>
     * </ul>
     *
     * @return

@@ -12,7 +12,7 @@ object Properties {
   /**
     * The directory containing all .properties files
     */
-  private val PROPERTIES_DIRECTORY = "fr/saagie/resources/"
+  private val PROPERTIES_DIRECTORY = "resources/"
 
   // PROPERTIES MANAGERS
   /**
