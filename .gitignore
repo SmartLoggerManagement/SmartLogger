@@ -25,3 +25,4 @@ smartlogger/.idea/
 smartlogger/.gradle/*
 smartlogger/build/*
 smartlogger/out/*
+smartlogger/logs/*

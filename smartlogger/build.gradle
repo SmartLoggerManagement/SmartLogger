@@ -1,12 +1,29 @@
-group 'SmartLogger'
-version '1.0'
-apply plugin: 'scala'
+////  Main information ////
+group 'smartLogger'
+version 'SNAPSHOT-0.2'
 
+
+//// Variables define ////
+def jarVersion = 21
+def mainClass = "fr.saagie.smartlogger.SmartLogger"
+def jarName   = "smartLogger-" + version + "." + jarVersion + ".jar"
+def appName   = "SmartLogger"
+def vendor    = "Team SmartLogger"
+
+
+// Plugins using by gradle.
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+
+////  Repositories to search dependencies ////
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' } // Use to call github project.
 }
 
+
+////  Dependencies used in project ////
 dependencies {
     compile(
             // Scala
@@ -22,9 +39,6 @@ dependencies {
             'javax.mail:mail:1.4.7',
             // Slack API
             'com.github.ponkotuy:scala-slack:0.4.0',
-            // Database
-            'org.apache.hive:hive-jdbc:2.1.0',
-            'org.postgresql:postgresql:42.0.0',
     )
 
     // Test execution
@@ -36,37 +50,39 @@ dependencies {
             'org.mockito:mockito-core:2.+',
             'org.easymock:easymock:3.4',
 
-            // Other librairies used in environment.
+            // Other libraries used in environment.
             'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
             'org.apache.spark:spark-core_2.11:2.1.0',
             'org.apache.spark:spark-mllib_2.11:2.1.0',
             'com.typesafe.akka:akka-http-core_2.11:10.0.3',
             'com.typesafe.akka:akka-http_2.11:10.0.3',
             'javax.mail:mail:1.4.7',
-            'org.apache.hive:hive-jdbc:2.1.1',
-            'org.postgresql:postgresql:42.0.0',
     )
 }
 
-sourceSets {
-    main {
-        scala {
-            srcDirs = [
-                    'src/main/scala/',
-            ]
-        }
-    }
-    test {
-        scala {
-            srcDirs = [
-                    'src/test/scala',
-            ]
-        }
-    }
-}
 
+////  JAR settings ////
 jar {
-    archiveName = "SmartLogger-SNAPSHOT-0.2.jar"
+    // Name of the archive.
+    archiveName = jarName
+
+    // Manifest for the .jar configuration.
+    manifest {
+        attributes(
+                "Main-Class": mainClass,
+                "Implementation-Title": appName,
+                "Implementation-Version": version,
+                "Created-By" : vendor,
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' '),
+        )
+    }
+
+    // Exclude others Manifest
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+
+    // FatJar building settings.
     from {
         configurations.compile.collect {
             zip64 = true
@@ -76,5 +92,11 @@ jar {
             zip64 = true
             it.isDirectory() ? it : zipTree(it)
         }
+    }
+
+    // Add resources on fatJar.
+    from('src/main/resources') {
+        include("*.properties")
+        into("fr/saagie/smartlogger/utils/resources/")
     }
 }
