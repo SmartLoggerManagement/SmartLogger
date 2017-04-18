@@ -31,10 +31,27 @@ class MailNotifierTest extends FeatureSpec with GivenWhenThen with Matchers {
     }
 
     scenario("Send a mail to an invalid address.") {
-      Given("Declare list of the invalid user.")
+      Given("Declare list of invalid users.")
       var recipient: Seq[String] = Seq.empty
       recipient = recipient.+:("IamInvalidUsermail")
       recipient = recipient.+:("InvalidUserMail.check.check@gmail.com")
+
+      val notifier: MailNotifier = new MailNotifier
+      notifier.setText("<p>Email with body</p>")
+      notifier.setRecipients(recipient)
+
+      Then("Mail can't be sent. Error")
+      intercept[Exception] {
+
+        When("Send mail")
+        notifier.send()
+
+      }
+    }
+
+    scenario("Send a mail to mail-less user.") {
+      Given("Declare list of empty user mails.")
+      var recipient: Seq[String] = Seq.empty
 
       val notifier: MailNotifier = new MailNotifier
       notifier.setText("<p>Email with body</p>")
