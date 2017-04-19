@@ -35,6 +35,7 @@ protected[utils] class PropertiesManager {
 
   // Commands
   def load(filepath: String): PropertiesManager = {
+    println(Paths.get(".").toAbsolutePath())
     // Reinitialisation
     this.filepath = filepath
     this.data = Map.empty
