@@ -1,5 +1,6 @@
 package fr.saagie.smartlogger.io.output.notifier
 
+import fr.saagie.smartlogger.utils.Properties
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
@@ -14,14 +15,11 @@ class MailNotifierTest extends FeatureSpec with GivenWhenThen with Matchers {
   feature("This class test the MailNotifier by sending 3 e-mails") {
     scenario("Send a mail at 3 users.") {
       Given("Declare list of users to send email.")
-      var recipient: Seq[String] = Seq.empty
-      recipient = recipient.+:("franck.caron76@gmail.com")
-      recipient = recipient.+:("nic.gille@gmail.com")
-      recipient = recipient.+:("madzinah@gmail.com")
+      val recipients = Properties.MAIL.get("contact").split(",").toSeq
 
       val notifier: MailNotifier = new MailNotifier
       notifier.setText("Email with body")
-      notifier.setRecipients(recipient)
+      notifier.setRecipients(recipients)
 
       When("send email")
       notifier.send()
