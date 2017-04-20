@@ -39,6 +39,9 @@ dependencies {
             'javax.mail:mail:1.4.7',
             // Slack API
             'com.github.ponkotuy:scala-slack:0.4.0',
+            // DB
+            'mysql:mysql-connector-java:6.0.6',
+            'org.postgresql:postgresql:42.0.0',
     )
 
     // Test execution
@@ -97,6 +100,6 @@ jar {
     // Add resources on fatJar.
     from('src/main/resources') {
         include("*.properties")
-        into("fr/saagie/smartlogger/utils/resources/")
+        into("resources/")
     }
 }

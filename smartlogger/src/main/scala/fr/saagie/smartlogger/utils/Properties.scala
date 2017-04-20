@@ -12,7 +12,7 @@ object Properties {
   /**
     * The directory containing all .properties files
     */
-  private val PROPERTIES_DIRECTORY = "resources/"
+  private val PROPERTIES_DIRECTORY = "build/resources/main/"
 
   // PROPERTIES MANAGERS
   /**
@@ -36,9 +36,14 @@ object Properties {
   val DB = load("db.properties")
 
   /**
-    * The property manager associated with test database properties
+    * The property manager associated with database tests on PGSQL
     */
   val DB_TEST = load("dbtest.properties")
+
+  /**
+    * The property manager associated with database tests on MySQL
+    */
+  val DB_TEST2 = load("dbtest2.properties")
 
 
   // TOOL
@@ -46,6 +51,6 @@ object Properties {
     * Loads the PropertiesManager associated with the given
     * file, which must be located in PROPERTIES_DIRECTORY
     */
-  private def load(filename:String) = new EncryptedPropertiesManager()
+  private def load(filename:String): IPropertiesManager = new EncryptedPropertiesManager()
     .load(PROPERTIES_DIRECTORY + filename)
 }

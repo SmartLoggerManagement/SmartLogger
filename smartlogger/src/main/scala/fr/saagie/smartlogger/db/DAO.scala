@@ -2,6 +2,7 @@ package fr.saagie.smartlogger.db
 
 import fr.saagie.smartlogger.db.model.DAOData
 import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
+import fr.saagie.smartlogger.utils.IPropertiesManager
 
 import scala.collection.mutable.Map
 
@@ -24,9 +25,22 @@ trait DAO[T <: DAOData] {
   def getTableName(): String
 
   /**
+    * Provides the properties manager, which contains all relative data in
+    * order to establish connections.
+    */
+  def getProperties(): IPropertiesManager
+
+  /**
     * Provides the name of kind of factor, which is used to build new attributes
     */
   def getAttributeFactory(): AttributeFactory
+
+
+  /**
+    * Tells if the table used to store all data managed through this DAO,
+    * is already defined in the database
+    */
+  def exists(): Boolean
 
   /**
     * Returns all pieces of data contained in the database
@@ -43,7 +57,7 @@ trait DAO[T <: DAOData] {
     * @param args The attributes as (label, data) pairs,
     *             used to complete the prepared statement
     */
-  def get(condition: String, args: Map[String, Attribute[_ <: Object]]): Seq[T]
+  def get(condition: String, args: Seq[Attribute[_ <: Object]]): Seq[T]
 
 
   // COMMANDS
@@ -59,13 +73,27 @@ trait DAO[T <: DAOData] {
 
   /**
     * Insert a new element in the DAO's associated table
+    *
+    * @param elt The element to insert inside the table
     */
   def insert(elt: T): Unit
 
   /**
-    * Update an existing element in the DAO's associated table
+    * Update some elements in the DAO's associated table
+    *
+    * Elements are chosen by describing a WHERE clause.
+    *
+    * @param set A map of all element's attributes which will be altered to
+    *            have the same value as the one specified in this map
+    *            (Defines the SET part of the query)
+    * @param condition Defines the condition in order to alter a specific part
+    *                  of all elements stored in the table. Arguments are specified later
+    *                  in the where parameter, and need to be represented in the query
+    *                  as a '?' (Because of the use of prepared statements)
+    * @param where Defines all values in the condition, values needs to be defined
+    *              in the order of values's definition
     */
-  def update(elt: T, args: Map[String, Attribute[_ <: Object]]): Unit
+  def update(set: Map[String, Attribute[_ <: Object]], condition: String, where: Seq[Attribute[_ <: Object]]): Unit
 
 
   // TOOLS
@@ -91,21 +119,17 @@ trait DAO[T <: DAOData] {
     *   of the query.
     * @return
     *   Return an instance of Seq who contain all logs retrieve from the Database or an empty Sequence.
-    * @since SmartLogger 0.2
-    * @version 1.0
     */
-  protected def executeQuery(query: String, args: Map[String, Attribute[_ <: Object]]): Seq[T] = {
-    println(query)
-
+  protected def executeQuery(query: String, args: Seq[Attribute[_ <: Object]]): Seq[T] = {
     // Initialize Database connection, create the statement, and run the query
-    val connection = DbConnector.connect()
+    val connection = DbConnector.connect(getProperties())
     val statement = connection.prepareStatement(query)
 
     // Adding arguments to statement
     if (args != null) {
       var k = 1
-      for (key <- args.keys) {
-        args(key).write(statement, k)
+      for (arg <- args) {
+        arg.write(statement, k)
         k += 1
       }
     }
@@ -150,20 +174,17 @@ trait DAO[T <: DAOData] {
     * @param args
     *   All arguments which will be used to complete the "prepared" part
     *   of the query.
-    * @since SmartLogger 0.2
-    * @version 1.0
     */
-  protected def execute(query: String, args: Map[String, Attribute[_ <: Object]]): Unit = {
-    println(query)
+  protected def execute(query: String, args: Seq[Attribute[_ <: Object]]): Unit = {
     // Initializing statement.
-    val connection = DbConnector.connect()
+    val connection = DbConnector.connect(getProperties())
     val statement = connection.prepareStatement(query)
 
     // Adding arguments to statement
     if (args != null) {
       var k = 1
-      for (key <- args.keys) {
-        args(key).write(statement, k)
+      for (arg <- args) {
+        arg.write(statement, k)
         k += 1
       }
     }

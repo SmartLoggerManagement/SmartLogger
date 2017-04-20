@@ -5,22 +5,43 @@ import java.sql.ResultSet
 import fr.saagie.smartlogger.db.DAO
 import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
 import fr.saagie.smartlogger.db.model.DAOData
+import fr.saagie.smartlogger.utils.Properties
 
 import scala.collection.mutable.Map
 
+/**
+  * Default implementation of a DAO, which is connected to
+  * a PGSQL database system.
+  *
+  * @tparam T The type of the manipulated data
+  * @author Franck CARON
+  * @since SmartLogger 0.2
+  * @version 1.0
+  */
 abstract protected[pgsql] class AbstractPGDAO[T <: DAOData] extends DAO[T] {
   // REQUESTS
   /**
-    * Provides the name of kind of factor, which is used to build new attributes
+    * @inheritdoc
     */
-  def getAttributeFactory(): AttributeFactory = AttrPGSQLFactory
+  override def getProperties() = Properties.DB_TEST
 
   /**
     * @inheritdoc
     */
-  override def get(condition: String, args: Map[String, Attribute[_ <: Object]]): Seq[T] = {
+  override def getAttributeFactory(): AttributeFactory = AttrPGSQLFactory
+
+  /**
+    * @inheritdoc
+    */
+  override def exists(): Boolean = {
+    throw new UnsupportedOperationException
+  }
+
+  /**
+    * @inheritdoc
+    */
+  override def get(condition: String, args: Seq[Attribute[_ <: Object]]): Seq[T] = {
     // Retrieving data
-    var resultSet:ResultSet = null
     var sql = "SELECT * FROM " + getTableName()
 
     // Adding condition, if the condition was defined
@@ -87,41 +108,43 @@ abstract protected[pgsql] class AbstractPGDAO[T <: DAOData] extends DAO[T] {
     sql.append(");")
 
     // Building table
-    execute(sql.toString(), elt.attributes)
+    execute(sql.toString(), elt.attributes.values.toSeq)
   }
 
   /**
     * @inheritdoc
     */
-  override def update(elt: T, args: Map[String, Attribute[_ <: Object]]): Unit = {
+  override def update(set: Map[String, Attribute[_ <: Object]], condition: String, where: Seq[Attribute[_ <: Object]]): Unit = {
+    // Filtering input with defined keys
+    val obj = newInstance()
+    set.filterKeys(key => obj.attributes.contains(key))
+
     // Controls if the number of parameters is correct
-    if (elt.attributes.size >= args.size) return
+    if (set.isEmpty) return
 
     // Building request
     val sql = new StringBuilder
     sql.append("UPDATE ").append(getTableName()).append(" SET ")
+    var args: Seq[Attribute[_ <: Object]] = Seq.empty
 
     // Defining SET part of the request
-    var attrs = elt.attributes.filterKeys(key => !args.contains(key))
-    var keys = attrs.keys.iterator
+    val keys = set.keys.iterator
     while (keys.hasNext) {
       val key = keys.next()
       sql.append(key).append("=?")
+      args = args.+:(set(key))
+
+      // Adding delimeter if it isn't the last argument
       if (keys.hasNext) sql.append(", ")
     }
 
-    // Adding condition
-    sql.append(" WHERE ")
-    keys = elt.attributes.keys.iterator
-    while (keys.hasNext) {
-      val key = keys.next()
-      sql.append(key).append("=?")
-      if (keys.hasNext) sql.append(" AND ")
+    // Adding condition to define WHERE part of the request
+    if (condition != null && where != null) {
+      sql.append(" WHERE ").append(condition)
+      args = args.++(where)
     }
-    sql.append(");")
 
     // Executing request
-    val temp = Map.empty
-    execute(sql.toString(), temp.++(elt.attributes).++(attrs))
+    execute(sql.toString(), args)
   }
 }
