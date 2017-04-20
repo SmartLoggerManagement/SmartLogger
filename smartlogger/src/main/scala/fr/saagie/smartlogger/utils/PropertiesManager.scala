@@ -12,7 +12,7 @@ import scala.collection.mutable.Map
   * @since SmartLogger 0.2
   * @version 1.0
   */
-protected[utils] class PropertiesManager {
+protected[utils] class PropertiesManager extends IPropertiesManager {
   // ATTRIBUTES
   /**
     * Name of the property file associate at the manager.
@@ -35,7 +35,6 @@ protected[utils] class PropertiesManager {
 
   // Commands
   def load(filepath: String): PropertiesManager = {
-    println(Paths.get(".").toAbsolutePath())
     // Reinitialisation
     this.filepath = filepath
     this.data = Map.empty

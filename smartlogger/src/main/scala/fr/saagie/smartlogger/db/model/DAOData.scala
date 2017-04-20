@@ -7,6 +7,10 @@ import scala.collection.mutable.Map
   * Represents an object that can be stored in the database,
   * through the use of a specific DAO.
   *
+  * Such an object is represented as a composition of attributes,
+  * which are labelled and built according to the wanted type.
+  *
+  * @see Attribute
   * @author Franck CARON
   * @since SmartLogger 0.2
   * @version 1.0
@@ -24,7 +28,8 @@ trait DAOData {
 
   // TOOLS
   /**
-    * Initializes the attributes' map
+    * Initializes the attributes' map.
+    * Aims at building all attributes managed in this object.
     */
   protected def initialize(): Map[String, Attribute[_ <: Object]]
 }

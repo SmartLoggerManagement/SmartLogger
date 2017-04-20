@@ -3,7 +3,8 @@ package fr.saagie.smartlogger
 import java.util.UUID
 
 import fr.saagie.smartlogger.db.model.Log
-import fr.saagie.smartlogger.db.mysql.{AttrMySQLFactory, LogDAO}
+import fr.saagie.smartlogger.db.mysql.AttrMySQLFactory
+import fr.saagie.smartlogger.db.pgsql.PGDAOBuilder
 import fr.saagie.smartlogger.io.input.{InputManager, LogBatch, LogParser}
 import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{MailNotifier, SlackNotifier}
@@ -25,14 +26,17 @@ import scala.util.Sorting
 object SmartLogger {
   // MAIN
   def main(args: Array[String]): Unit = {
+    // Initializing DAO
+    val DAO = PGDAOBuilder.getLogDAO()
+
     // Build table if necessary.
-    LogDAO.build()
+    DAO.build()
 
     // Instantiate algorithm used by SmartLogger
     val smartAnalyzer = AnalyzerBuilder.getNaiveBayes
 
     // Get logs stored in Database.
-    val dbLogs = LogDAO.get()
+    val dbLogs = DAO.get()
 
     // Concat all logs into a string where each logs were separated by "line.separator"
     val data = new String
@@ -99,7 +103,7 @@ object SmartLogger {
         val log = new Log(AttrMySQLFactory)
         log.setId(UUID.randomUUID())
         log.setContent(r._2)
-        LogDAO.insert(log)
+        DAO.insert(log)
       }
 
       // Sorting to put the biggest critically at firsts positions
