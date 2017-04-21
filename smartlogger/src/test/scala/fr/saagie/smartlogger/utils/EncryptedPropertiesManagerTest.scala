@@ -59,6 +59,25 @@ class EncryptedPropertiesManagerTest extends FeatureSpec with Matchers with Give
 
       Files.deleteIfExists(Paths.get(filepath))
     }
+
+    scenario("An empty file can be loaded, the data should be empty") {
+      Given("An existing file")
+      val filepath = "src/test/resources/emptyTest.properties"
+      And("A PropertiesManager with the file loaded")
+      val propertiesManager = new EncryptedPropertiesManager
+      propertiesManager.load(filepath)
+      And("A set of values")
+      propertiesManager.set("valueTest1", "name")
+      propertiesManager.set("$valueTest2", "password")
+      And("Saved")
+      propertiesManager.save()
+
+      When("The file is loaded")
+      propertiesManager.load(filepath)
+
+      Then("The properties should be empty")
+      assert(propertiesManager.getProperties().isEmpty)
+    }
   }
 }
 
