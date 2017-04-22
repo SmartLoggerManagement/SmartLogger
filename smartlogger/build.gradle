@@ -42,6 +42,8 @@ dependencies {
             // DB
             'mysql:mysql-connector-java:6.0.6',
             'org.postgresql:postgresql:42.0.0',
+            //scalafx
+            'org.scalafx:scalafx_2.11:8.0.102-R11'
     )
 
     // Test execution
