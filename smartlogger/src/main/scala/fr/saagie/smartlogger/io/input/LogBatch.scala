@@ -13,7 +13,7 @@ package fr.saagie.smartlogger.io.input
 object LogBatch {
   // ATTRIBUTES
   /** All stored logs */
-  private var sequence: Seq[(Long, String)] = Seq.empty
+  private var sequence: Seq[String] = Seq.empty
 
   // COMMANDS
   /**
@@ -24,22 +24,20 @@ object LogBatch {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def add(log: Seq[(Long, String)]): Unit = {
+  def add(log: Seq[String]): Unit = {
     sequence = sequence.++(log)
   }
 
   /**
     * Function adding an id with its log to the batch.
     *
-    * @param id
-    * id corresponding to the log
     * @param log
     * log to add to the batch
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def add(id: Long, log: String): Unit = {
-    sequence = sequence.:+((id, log))
+  def add(log: String): Unit = {
+    sequence = sequence.:+(log)
   }
 
   /**
@@ -51,7 +49,7 @@ object LogBatch {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def getBatch(): Seq[(Long, String)] = {
+  def getBatch(): Seq[String] = {
     this.synchronized {
       val batch = sequence
       sequence = Seq.empty

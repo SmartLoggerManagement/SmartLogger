@@ -52,12 +52,12 @@ class SmartAnalyzerBenchmark extends FeatureSpec with GivenWhenThen {
     }
     var count = 0.0
     for ((elemResult, elemData) <- result zip testingPredictData) {
-      if (elemData._3 != elemResult._3) {
+      if (elemData._2 != elemResult._2) {
         count += 1
       }
     }
 
-    val nbElem = result.last._1
+    val nbElem = result.size
     val rate = count / nbElem * 100
 
     println(str + " algorithm failed " + count + " times of "

@@ -23,21 +23,20 @@ class LogBatchTest extends FeatureSpec with GivenWhenThen with Matchers {
 
     scenario("Add 1 log on LogBatch") {
       Given("Add a Log on LogBatch")
-      LogBatch.add(0L, "Log1")
+      LogBatch.add("Log1")
 
       When("Retrieve LogBatch content")
       val sq = LogBatch.getBatch()
 
-      Then("Batch should return '0L, Log1'")
-      sq.head._1 should equal(0L)
-      sq.head._2 should equal("Log1")
+      Then("Batch should return 'Log1'")
+      sq.head should equal("Log1")
     }
 
     scenario("Add 2 Logs on LogBatch") {
       Given("Instantiate a Seq with some log.")
-      var sequence: Seq[(Long, String)] = Seq.empty
+      var sequence: Seq[String] = Seq.empty
       for (i <- 0L until 2L) {
-        sequence = sequence.:+(i, "Log" + i)
+        sequence = sequence.:+("Log" + i)
       }
       LogBatch.add(sequence)
 
@@ -48,8 +47,7 @@ class LogBatchTest extends FeatureSpec with GivenWhenThen with Matchers {
       sq.length should equal(2)
       And("and the result is equal to i and 'Log' + i")
       for (i <- 0 until 2) {
-        sq(i)._1 should equal(i)
-        sq(i)._2 should equal("Log" + i)
+        sq(i) should equal("Log" + i)
       }
     }
   }

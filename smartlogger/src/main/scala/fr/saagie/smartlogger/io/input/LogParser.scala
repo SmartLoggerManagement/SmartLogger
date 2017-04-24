@@ -21,21 +21,18 @@ object LogParser {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def parseTrainingData(data: String): Seq[(Long, String, Double)] = {
+  def parseTrainingData(data: String): Seq[(String, Double)] = {
     if (data == null) {
       return null
     }
 
-    var sequence: Seq[(Long, String, Double)] = Seq.empty
+    var sequence: Seq[(String, Double)] = Seq.empty
     val logs = data.split("\n")
-
-    var count = 0L
 
     for (line <- logs) {
       if (line.contains(" ") && line.matches("^[0-9]* .*$")) {
         val result = line.split(" ", 2)
-        sequence = sequence.:+(count, result(1), result(0).toDouble)
-        count += 1
+        sequence = sequence.:+(result(1), result(0).toDouble)
       }
     }
 
@@ -54,19 +51,16 @@ object LogParser {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def parsePredictData(data: String): Seq[(Long, String)] = {
+  def parsePredictData(data: String): Seq[String] = {
     if (data == null) {
       return null
     }
 
-    var sequence: Seq[(Long, String)] = Seq.empty
+    var sequence: Seq[String] = Seq.empty
     val logs = data.split("\n")
 
-    var count = 0L
-
     for (line <- logs) {
-      sequence = sequence.:+(count, line)
-      count += 1
+      sequence = sequence.:+(line)
     }
 
     return sequence

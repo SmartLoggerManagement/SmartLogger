@@ -20,7 +20,7 @@ import scala.util.Sorting
   */
 class StubMainIntegrationML_I_O {
 
-  var resultt : Seq[(Long, String, Double)] = Seq.empty
+  var resultt : Seq[(String, Double)] = Seq.empty
   var sched : Cancellable = _
   var input : InputManager = _
 
@@ -39,7 +39,7 @@ class StubMainIntegrationML_I_O {
   /**
     * @TODO Add comments
     */
-  def getResult : Seq[(Long, String, Double)] = resultt
+  def getResult : Seq[(String, Double)] = resultt
 
   /**
     * @TODO Add comments
@@ -83,15 +83,15 @@ class StubMainIntegrationML_I_O {
 
       // Sorting to put the biggest critically at firsts positions
       result = Sorting.stableSort(result,
-        (e1: (Long, String, Double), e2: (Long, String, Double))
-        => e1._3 > e2._3)
+        (e1: (String, Double), e2: (String, Double))
+        => e1._2 > e2._2)
 
       // Getting into a message all the critically above the
       // limit chosen beforehand
       var counter = 0
       var message = new String
-      while (counter < result.size && result(counter)._3 >= 1.0) {
-        message = message ++ result(counter)._2 ++ "\n"
+      while (counter < result.size && result(counter)._2 >= 1.0) {
+        message = message ++ result(counter)._1 ++ "\n"
         counter += 1
       }
 
