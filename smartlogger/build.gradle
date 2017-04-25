@@ -44,6 +44,10 @@ dependencies {
             'org.postgresql:postgresql:42.0.0',
             //scalafx
             'org.scalafx:scalafx_2.11:8.0.102-R11'
+            // Database
+            "org.apache.hadoop:hadoop-client:2.8.0",
+            "org.apache.hive:hive-jdbc:2.1.1",
+            "log4j:log4j:1.2.17",
     )
 
     // Test execution
