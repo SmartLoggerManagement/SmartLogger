@@ -4,9 +4,9 @@ version 'SNAPSHOT-0.2'
 
 
 //// Variables define ////
-def jarVersion = 3
+def jarVersion = 22
 def mainClass  = "fr.saagie.smartlogger.SmartLogger"
-def jarName    = "smartLogger-" + version + ".F" + jarVersion + ".jar"
+def jarName    = "smartLogger-" + version + "." + jarVersion + ".jar"
 def appName    = "SmartLogger"
 def vendor     = "Team SmartLogger"
 
