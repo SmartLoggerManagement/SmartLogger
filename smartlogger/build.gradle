@@ -4,7 +4,7 @@ version 'SNAPSHOT-0.2'
 
 
 //// Variables define ////
-def jarVersion = 2
+def jarVersion = 3
 def mainClass  = "fr.saagie.smartlogger.SmartLogger"
 def jarName    = "smartLogger-" + version + ".F" + jarVersion + ".jar"
 def appName    = "SmartLogger"
@@ -41,8 +41,9 @@ dependencies {
             'com.github.ponkotuy:scala-slack:0.4.0',
             // DB
             'mysql:mysql-connector-java:6.0.6',
-            // Scala FX
-            'org.scalafx:scalafx_2.11:8.0.102-R11',
+            "org.apache.hadoop:hadoop-client:2.8.0",
+            "org.apache.hive:hive-jdbc:2.1.1",
+            "log4j:log4j:1.2.17",
     )
 
     // Test execution
