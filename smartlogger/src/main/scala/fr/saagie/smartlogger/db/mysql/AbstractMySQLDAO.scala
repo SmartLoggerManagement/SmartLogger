@@ -21,7 +21,7 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
   /**
     * @inheritdoc
     */
-  override def getProperties() = Properties.DB_TEST2
+  override def getProperties() = Properties.DB
 
   /**
     * @inheritdoc

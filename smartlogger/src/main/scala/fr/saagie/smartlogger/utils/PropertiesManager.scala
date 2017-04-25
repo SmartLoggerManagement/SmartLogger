@@ -1,5 +1,7 @@
 package fr.saagie.smartlogger.utils
 
+import java.io.{File, FileInputStream, FileNotFoundException, InputStream}
+import java.net.URL
 import java.nio.file.{Files, Paths}
 import java.util.PropertyResourceBundle
 
@@ -35,21 +37,26 @@ protected[utils] class PropertiesManager extends IPropertiesManager {
 
   // Commands
   def load(filepath: String): PropertiesManager = {
+    println(filepath)
+
     // Reinitialisation
     this.filepath = filepath
     this.data = Map.empty
 
-    if (!Files.exists(Paths.get(filepath))) {
-      Files.createFile(Paths.get(filepath))
-      return this
+    // Loading properties from file
+    var is:InputStream = null
+    try {
+      is = new FileInputStream(new File(filepath))
+    } catch {
+      case exc: FileNotFoundException => Files.createFile(Paths.get(filepath)); return this
+      case e: Exception => throw e
     }
 
-    // Loading properties
-    val bundle = new PropertyResourceBundle(Files.newBufferedReader(Paths.get(filepath)))
+    // Defining bundle
+    val bundle = new PropertyResourceBundle(is)
 
-    val iterator = bundle.keySet()
-      .iterator()
-
+    // Writing into data structure
+    val iterator = bundle.keySet().iterator()
     while (iterator.hasNext) {
       val key = iterator.next
       data update(key, bundle.getString(key))
