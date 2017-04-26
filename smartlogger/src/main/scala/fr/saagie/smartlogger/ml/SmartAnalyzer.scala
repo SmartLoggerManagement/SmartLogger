@@ -2,12 +2,9 @@ package fr.saagie.smartlogger.ml
 
 import java.rmi.NotBoundException
 
-import fr.saagie.smartlogger.utils.Properties
-import org.apache.spark.SparkContext
 import org.apache.spark.ml.classification._
 import org.apache.spark.ml.feature._
 import org.apache.spark.ml.{Pipeline, PipelineModel}
-import org.apache.spark.sql.catalyst.expressions.Hour
 import org.apache.spark.sql.{Row, SparkSession}
 
 /**
@@ -20,13 +17,15 @@ import org.apache.spark.sql.{Row, SparkSession}
 class SmartAnalyzer[Vector,
 E <: ProbabilisticClassifier[Vector, E, M],
 M <: ProbabilisticClassificationModel[Vector, M]]
-(var algo: Classifier[Vector, E, M]) extends IAnalyzer {
+(var algo: Classifier[Vector, E, M]) {
   var model: PipelineModel = _
+
+
 
   /**
     * @inheritdoc
     */
-  override def train(data: Seq[(String, Double)]): Unit = {
+  def train(data: Seq[(String, Double)]): Unit = {
     if (data == null) {
       throw new IllegalArgumentException("data shouldn't be null")
     }
@@ -38,33 +37,42 @@ M <: ProbabilisticClassificationModel[Vector, M]]
       .appName("SmartLogger")
       .getOrCreate()
 
-    val logs = buildingDataFrame(data.map(_._1))
+    val logs = buildingDataFrameWithLabels(data)
 
-    val document = spark.createDataFrame(logs zip data.map(_._2))
-      .toDF("errorLevel", "date", "hour", "threadId", "filename", "line", "message", "criticality")
+    val document = spark.createDataFrame(logs).toDF
 
-    println(document)
+    document show
 
     // Creating the Pipeline doing the conversion
 
+    val tokenizer = new Tokenizer()
+      .setInputCol("message")
+      .setOutputCol("words")
+    val hashingTF = new HashingTF()
+      .setNumFeatures(1000)
+      .setInputCol(tokenizer.getOutputCol)
+      .setOutputCol("wordsFeatures")
+
     val formula = new RFormula()
-      .setFormula("criticality ~ errorLevel + date + hour + threadId + filename + line + message")
+      .setFormula("criticality ~ errorLevel + date + hour + threadId + filename + line + " + hashingTF.getOutputCol)
       .setFeaturesCol("features")
       .setLabelCol("label")
 
     val pipeline = new Pipeline()
-      .setStages(Array.apply(formula, algo))
+      .setStages(Array.apply(tokenizer, hashingTF, formula, algo))
 
     // Train the model
 
     model = pipeline.fit(document)
+
+    spark.close()
 
   }
 
   /**
     * @inheritdoc
     */
-  override def predict(data: Seq[String]): Seq[(String, Double)] = {
+  def predict(data: Seq[String]): Seq[(String, Double)] = {
     if (model == null) {
       throw new NotBoundException("The fr.saagie.smartlogger.ml.SmartAnalyzer didn't train before")
     }
@@ -82,13 +90,16 @@ M <: ProbabilisticClassificationModel[Vector, M]]
     val logs = buildingDataFrame(data)
 
     val document = spark.createDataFrame(logs)
-      .toDF("errorLevel", "date", "hour", "threadId", "filename", "line", "message")
+      .toDF
+
+    document.show
 
 
     // Making the predictions according to the model and the DataFrame
-    val result = model.transform(document)
-      .select("message", "label")
-      .collect()
+    val result1 = model.transform(document)
+      .select("message", "prediction")
+    result1.show
+    val result = result1.collect()
 
     // Seq meant to be returned to inform of the result
     var sequence: Seq[(String, Double)] = Seq.empty
@@ -102,24 +113,58 @@ M <: ProbabilisticClassificationModel[Vector, M]]
       sequence = sequence.:+((text, prediction))
     }
 
+    spark.close()
+
     return sequence
 
   }
 
-  case class Log(errorLevel: String, date: Int, hour:String, threadId: Int, filename: String, line: Int, message: String)
+  case class Log(errorLevel: String, date: Int,
+                 hour:String, threadId: Int, filename: String, line: Int, message: String)
+
+  case class LogWithLabel(errorLevel: String, date: Int,
+                          hour:String, threadId: Int, filename: String,
+                          line: Int, message: String, criticality: Double)
+
+
+
+  // TODO Extract date or hour even if it doesn't match the format.
+  private def buildingDataFrameWithLabels(data: Seq[(String, Double)]):Seq[LogWithLabel] = {
+
+    var resultSeq:Seq[LogWithLabel] = Seq.empty
+
+    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) ([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) ([0-9]*) ([^:]*):([0-9])*\\] (.*)".r
+
+    var i = 0
+
+    for (line <- data.map(_._1)) {
+
+      line match {
+        case logFormat(errorLevel, date, hour, threadId, filename, number, message) =>
+          resultSeq = resultSeq :+ LogWithLabel(errorLevel, date.toInt, hour, threadId.toInt, filename, number.toInt, message, data(i)._2)
+        case _ =>
+          resultSeq = resultSeq :+ LogWithLabel("noErrorLevel", -1, "NoHour", -2, "NoFileName", -3, line, data(i)._2)
+      }
+
+      i += 1
+    }
+
+    return resultSeq
+
+  }
 
   private def buildingDataFrame(data:Seq[String]):Seq[Log] = {
     var resultSeq:Seq[Log] = Seq.empty
 
-    val logFormat = Properties.FEATURES.get("logFormat").r
+    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) ([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) ([0-9]*) ([^:]*):([0-9])*\\] (.*)".r
 
     for (line <- data) {
 
       line match {
-        case logFormat(errorLevel, date, hour, threadId, filename, line, message) =>
-          resultSeq = resultSeq :+ Log(errorLevel, date.toInt, hour, threadId.toInt, filename, line.toInt, message)
+        case logFormat(errorLevel, date, hour, threadId, filename, number, message) =>
+          resultSeq = resultSeq :+ Log(errorLevel, date.toInt, hour, threadId.toInt, filename, number.toInt, message)
         case _ =>
-          resultSeq = resultSeq :+ Log(null, -1, null, -1, null, -1, line)
+          resultSeq = resultSeq :+ Log("noErrorLevel", -1, "NoHour", -2, "NoFileName", -3, line)
       }
 
     }
