@@ -17,7 +17,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 class SmartAnalyzer[Vector,
 E <: ProbabilisticClassifier[Vector, E, M],
 M <: ProbabilisticClassificationModel[Vector, M]]
-(var algo: Classifier[Vector, E, M]) {
+(var algo: Classifier[Vector, E, M]) extends IAnalyzer {
   var model: PipelineModel = _
 
 
