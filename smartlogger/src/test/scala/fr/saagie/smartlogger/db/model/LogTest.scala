@@ -2,7 +2,7 @@ package fr.saagie.smartlogger.db.model
 
 import java.util.UUID
 
-import fr.saagie.smartlogger.db.pgsql.AttrPGSQLFactory
+import fr.saagie.smartlogger.db.mysql.{AttrMySQLFactory}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
@@ -24,7 +24,7 @@ class LogTest extends FeatureSpec with Matchers with GivenWhenThen {
       val message: String = "My name is Log, James Log"
 
       When("Fill the Log with id and message previously retrieve.")
-      val log = new Log(AttrPGSQLFactory)
+      val log = new Log(AttrMySQLFactory)
         log.setId(id)
         log.setContent(message)
 

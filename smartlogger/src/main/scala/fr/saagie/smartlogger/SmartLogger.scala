@@ -3,8 +3,7 @@ package fr.saagie.smartlogger
 import java.util.UUID
 
 import fr.saagie.smartlogger.db.model.Log
-import fr.saagie.smartlogger.db.mysql.AttrMySQLFactory
-import fr.saagie.smartlogger.db.pgsql.PGDAOBuilder
+import fr.saagie.smartlogger.db.mysql.MySQLDAOBuilder
 import fr.saagie.smartlogger.io.input.{InputManager, LogBatch, LogParser}
 import fr.saagie.smartlogger.io.output.Alerter
 import fr.saagie.smartlogger.io.output.notifier.{MailNotifier, SlackNotifier}
@@ -27,10 +26,10 @@ object SmartLogger {
   // MAIN
   def main(args: Array[String]): Unit = {
     // Initializing DAO
-    val DAO = PGDAOBuilder.getLogDAO()
+    val DAO = MySQLDAOBuilder.getLogDAO()
 
     // Build table if necessary.
-    DAO.build()
+    if (!DAO.exists()) DAO.build()
 
     // Instantiate algorithm used by SmartLogger
     val smartAnalyzer = AnalyzerBuilder.getNaiveBayes
@@ -100,7 +99,7 @@ object SmartLogger {
 
       // Loop on each logs received and insert logs on Database.
       for (r <- result) {
-        val log = new Log(AttrMySQLFactory)
+        val log = new Log(DAO.getAttributeFactory())
         log.setId(UUID.randomUUID())
         log.setContent(r._1)
         DAO.insert(log)

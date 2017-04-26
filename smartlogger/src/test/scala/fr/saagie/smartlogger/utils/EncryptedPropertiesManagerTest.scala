@@ -65,12 +65,6 @@ class EncryptedPropertiesManagerTest extends FeatureSpec with Matchers with Give
       val filepath = "src/test/resources/emptyTest.properties"
       And("A PropertiesManager with the file loaded")
       val propertiesManager = new EncryptedPropertiesManager
-      propertiesManager.load(filepath)
-      And("A set of values")
-      propertiesManager.set("valueTest1", "name")
-      propertiesManager.set("$valueTest2", "password")
-      And("Saved")
-      propertiesManager.save()
 
       When("The file is loaded")
       propertiesManager.load(filepath)

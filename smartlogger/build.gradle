@@ -4,14 +4,14 @@ version 'SNAPSHOT-0.2'
 
 
 //// Variables define ////
-def jarVersion = 21
-def mainClass = "fr.saagie.smartlogger.SmartLogger"
-def jarName   = "smartLogger-" + version + "." + jarVersion + ".jar"
-def appName   = "SmartLogger"
-def vendor    = "Team SmartLogger"
+def jarVersion = 22
+def mainClass  = "fr.saagie.smartlogger.SmartLogger"
+def jarName    = "smartLogger-" + version + "." + jarVersion + ".jar"
+def appName    = "SmartLogger"
+def vendor     = "Team SmartLogger"
 
 
-// Plugins using by gradle.
+// Plugins used by gradle.
 apply plugin: 'scala'
 apply plugin: 'idea'
 
@@ -41,9 +41,9 @@ dependencies {
             'com.github.ponkotuy:scala-slack:0.4.0',
             // DB
             'mysql:mysql-connector-java:6.0.6',
-            'org.postgresql:postgresql:42.0.0',
-            //scalafx
-            'org.scalafx:scalafx_2.11:8.0.102-R11'
+            "org.apache.hadoop:hadoop-client:2.8.0",
+            "org.apache.hive:hive-jdbc:2.1.1",
+            "log4j:log4j:1.2.17",
     )
 
     // Test execution
@@ -54,6 +54,7 @@ dependencies {
             'junit:junit:4.12',
             'org.mockito:mockito-core:2.+',
             'org.easymock:easymock:3.4',
+            'org.springframework.boot:spring-boot-starter-test:1.5.3.RELEASE',
 
             // Other libraries used in environment.
             'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
@@ -100,7 +101,7 @@ jar {
     }
 
     // Add resources on fatJar.
-    from('src/main/resources') {
+    from('resources') {
         include("*.properties")
         into("resources/")
     }
