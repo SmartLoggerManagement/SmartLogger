@@ -37,8 +37,6 @@ protected[utils] class PropertiesManager extends IPropertiesManager {
 
   // Commands
   def load(filepath: String): PropertiesManager = {
-    println(filepath)
-
     // Reinitialisation
     this.filepath = filepath
     this.data = Map.empty

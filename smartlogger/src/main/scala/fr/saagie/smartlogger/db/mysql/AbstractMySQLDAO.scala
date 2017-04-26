@@ -11,7 +11,7 @@ import scala.collection.mutable.Map
   * Default implementation of a DAO, which is connected to
   * a MySQL database system.
   *
-  * @tparam T The type of the manipulated data
+  * @tparam T The type of manipulated data
   * @author Franck CARON, Nicolas GILLE
   * @since SmartLogger 0.2
   * @version 1.0

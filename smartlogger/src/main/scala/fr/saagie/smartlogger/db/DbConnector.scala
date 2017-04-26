@@ -41,7 +41,7 @@ object DbConnector {
     val driver   = properties.get("driver")
     val url      = properties.get("url")
     val username = properties.get("username")
-    val password = properties.get("password")
+    val password = properties.get("$password")
 
    // Building the connection
     Class.forName(driver)
