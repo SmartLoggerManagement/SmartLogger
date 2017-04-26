@@ -101,21 +101,21 @@ object SmartLogger {
       for (r <- result) {
         val log = new Log(DAO.getAttributeFactory())
         log.setId(UUID.randomUUID())
-        log.setContent(r._2)
+        log.setContent(r._1)
         DAO.insert(log)
       }
 
       // Sorting to put the biggest critically at firsts positions
       result = Sorting.stableSort(result,
-      (e1: (Long, String, Double), e2: (Long, String, Double))
-      => e1._3 > e2._3)
+      (e1: (String, Double), e2: (String, Double))
+      => e1._2 > e2._2)
 
       // Getting into a message all the critically above the
       // limit chosen beforehand
       var counter = 0
       var message = new String
-      while (counter < result.size && result(counter)._3 >= 2.0) {
-        message = message ++ result(counter)._2 ++ System.getProperty("line.separator")
+      while (counter < result.size && result(counter)._2 >= 2.0) {
+        message = message ++ result(counter)._1 ++ System.getProperty("line.separator")
         counter += 1
       }
 

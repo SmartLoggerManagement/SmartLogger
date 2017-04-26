@@ -36,15 +36,13 @@ class LogParserTest extends FeatureSpec with GivenWhenThen with Matchers {
       And("and the size is equal 2")
       ret.size should equal(2)
 
-      And("and the id of the first element is 0L, content ., and 1")
-      ret.head._1 should equal(0L)
-      ret.head._2 should equal("content .")
-      ret.head._3 should equal(1)
+      And("and the id of the first element is content ., and 1")
+      ret.head._1 should equal("content .")
+      ret.head._2 should equal(1)
 
-      And("and the id of the last element is 1L, expected ., and 2")
-      ret(1)._1 should equal(1L)
-      ret(1)._2 should equal("expected .")
-      ret(1)._3 should equal(2)
+      And("and the id of the last element is expected ., and 2")
+      ret(1)._1 should equal("expected .")
+      ret(1)._2 should equal(2)
     }
 
     scenario("Parse a huge String (1 billion characters)") {
@@ -64,10 +62,9 @@ class LogParserTest extends FeatureSpec with GivenWhenThen with Matchers {
       And("and the size of the Seq is 1")
       ret.size should equal(1)
 
-      And("and the id of the first element is 0L, aaaa(1B) ., and 1")
-      ret.head._1 should equal(0L)
-      ret.head._2 should equal(sb.toString() + " .")
-      ret.head._3 should equal(1)
+      And("and the id of the first element is aaaa(1B) ., and 1")
+      ret.head._1 should equal(sb.toString() + " .")
+      ret.head._2 should equal(1)
     }
 
     scenario("Parse datab with invalid format.") {
@@ -95,11 +92,9 @@ class LogParserTest extends FeatureSpec with GivenWhenThen with Matchers {
       And("and contains 2 elements")
       ret.size should equal(2)
 
-      And("and the id of the first element is '0L, content .' and second element is equal to '1L, expected .'")
-      ret.head._1 should equal(0L)
-      ret.head._2 should equal("content .")
-      ret(1)._1 should equal(1L)
-      ret(1)._2 should equal("expected .")
+      And("and the id of the first element is 'content .' and second element is equal to 'expected .'")
+      ret.head should equal("content .")
+      ret(1) should equal("expected .")
     }
   }
 }

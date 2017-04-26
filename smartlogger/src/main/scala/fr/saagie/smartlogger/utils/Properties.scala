@@ -40,6 +40,10 @@ object Properties {
     */
   val DB_TEST = load("dbtest.properties")
 
+  /**
+    * The property manager associated with features properties
+    */
+  val FEATURES = load("features.properties")
 
   // TOOL
   /**

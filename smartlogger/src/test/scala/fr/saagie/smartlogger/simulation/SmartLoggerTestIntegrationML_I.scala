@@ -45,19 +45,19 @@ class SmartLoggerTestIntegrationML_I extends FeatureSpec with GivenWhenThen with
 
       Then("The result should not be empty")
       res should not be empty
-      res = res.sortWith(_._3 > _._3)
+      res = res.sortWith(_._2 > _._2)
 
       And ("and it contain 5 elements")
       res.size should equal(5)
 
       And("and 2 logs have a level of criticality at 1")
-      res.head._3 should equal(1.0)
-      res(1)._3 should equal(1.0)
+      res.head._2 should equal(1.0)
+      res(1)._2 should equal(1.0)
 
       And ("and 3 logs have a level of criticality at 0")
-      res(2)._3 should equal(0.0)
-      res(3)._3 should equal(0.0)
-      res(4)._3 should equal(0.0)
+      res(2)._2 should equal(0.0)
+      res(3)._2 should equal(0.0)
+      res(4)._2 should equal(0.0)
     }
   }
 }

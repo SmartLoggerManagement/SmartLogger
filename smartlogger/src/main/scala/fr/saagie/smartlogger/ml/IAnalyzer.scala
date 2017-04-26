@@ -23,7 +23,7 @@ trait IAnalyzer {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def train(data: Seq[(Long, String, Double)]): Unit
+  def train(data: Seq[(String, Double)]): Unit
 
   /**
     * Method used to predict result.
@@ -40,5 +40,5 @@ trait IAnalyzer {
     * @since SmartLogger 0.1
     * @version 1.0
     */
-  def predict(data: Seq[(Long, String)]): Seq[(Long, String, Double)]
+  def predict(data: Seq[(String)]): Seq[(String, Double)]
 }

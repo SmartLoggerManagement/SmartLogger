@@ -32,9 +32,9 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
       Given("Instantiate class SmartAnalyzer with NaivesBayes algorithm, define a Sequence who contains the new training model and stored the previous model.")
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
-        (0L, "X totally sucks :-(", 0.0),
-        (1L, "Today was kind of meh", 1.0),
-        (2L, "I'm so happy :-)", 2.0)
+        ("X totally sucks :-(", 0.0),
+        ("Today was kind of meh", 1.0),
+        ("I'm so happy :-)", 2.0)
       )
       val oldModel = analy.model
 
@@ -49,9 +49,9 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
       Given("Instantiate class SmartAnalyzer with NaivesBayes algorithmn and train with the specific model.")
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
-        (0L, "X totally sucks :-(", 0.0),
-        (1L, "Today was kind of meh", 1.0),
-        (2L, "I'm so happy :-)", 2.0)
+        ("X totally sucks :-(", 0.0),
+        ("Today was kind of meh", 1.0),
+        ("I'm so happy :-)", 2.0)
       )
       analy.train(seq)
       try {
@@ -69,14 +69,14 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
       Given("Instantiate class SmartAnalyzer with NaivesBayes algorithmn and train with the specific model.")
       val analy = new SmartAnalyzer(new NaiveBayes)
       val seq = Seq.apply(
-        (0L, "X totally sucks :-(", 0.0),
-        (1L, "Today was kind of meh", 1.0),
-        (2L, "I'm so happy :-)", 2.0)
+        ("X totally sucks :-(", 0.0),
+        ("Today was kind of meh", 1.0),
+        ("I'm so happy :-)", 2.0)
       )
       val predi = Seq.apply(
-        (0L, "X totally sucks :-("),
-        (1L, "Today was kind of meh"),
-        (2L, "I'm so happy :-)")
+        ("X totally sucks :-("),
+        ("Today was kind of meh"),
+        ("I'm so happy :-)")
       )
 
       When("Train the analyzer with the model.")

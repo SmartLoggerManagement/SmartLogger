@@ -32,7 +32,7 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
 
       And("and check the result.")
       batchContent should not be empty
-      batchContent.head._2 should equal("Test Data")
+      batchContent.head should equal("Test Data")
       input close
     }
 
@@ -45,13 +45,9 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       }
       Thread.sleep(SLEEP_TIME)
       var batchContent = LogBatch.getBatch()
-      batchContent = batchContent.sortWith {
-        _._2.toInt < _._2.toInt
-      }
       println(batchContent)
       for (i <- 0 until maxOpenedFiles) {
-        batchContent(i)._2 should equal("" + i)
-
+        batchContent(i) should equal("" + i)
       }
       batchContent.length shouldBe maxOpenedFiles
       input close
@@ -102,9 +98,9 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       println(batchContent)
       batchContent should not be empty
       batchContent.size shouldBe (3)
-      batchContent.head._2 shouldBe ("Test Data1")
-      batchContent(1)._2 shouldBe ("Test Data2")
-      batchContent(2)._2 shouldBe ("Test Data3")
+      batchContent.head shouldBe ("Test Data1")
+      batchContent(1) shouldBe ("Test Data2")
+      batchContent(2) shouldBe ("Test Data3")
 
       input close
     }
