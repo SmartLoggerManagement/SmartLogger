@@ -1,6 +1,6 @@
 package fr.saagie.smartlogger.ml
 
-import org.apache.spark.ml.classification.NaiveBayes
+import org.apache.spark.ml.classification.DecisionTreeClassifier
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
@@ -16,8 +16,8 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
     info("more in depth test is done in the benchmark package")
 
     scenario("Try to execute method train with a null model object.") {
-      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithm.")
-      val analy = new SmartAnalyzer(new NaiveBayes)
+      Given("Instantiate class SmartAnalyzer with DecisionTreeClassifier algorithm.")
+      val analy = new SmartAnalyzer(new DecisionTreeClassifier)
       try {
         When("Train with a null model object")
         analy.train(null)
@@ -29,12 +29,12 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
     }
 
     scenario("Change the training model before process.") {
-      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithm, define a Sequence who contains the new training model and stored the previous model.")
-      val analy = new SmartAnalyzer(new NaiveBayes)
+      Given("Instantiate class SmartAnalyzer with DecisionTreeClassifier algorithm, define a Sequence who contains the new training model and stored the previous model.")
+      val analy = new SmartAnalyzer(new DecisionTreeClassifier)
       val seq = Seq.apply(
-        ("X totally sucks :-(", 0.0),
-        ("Today was kind of meh", 1.0),
-        ("I'm so happy :-)", 2.0)
+        ("Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg", 0.0),
+        ("W0404 10:34:11.671890  1908 Client.java:576] Address change detected. ", 1.0),
+        ("E0216 16:37:23.511729  1693 logging.cc:120] stderr will be logged to this file.", 2.0)
       )
       val oldModel = analy.model
 
@@ -46,12 +46,12 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
     }
 
     scenario("Call predict method on a null object.") {
-      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithmn and train with the specific model.")
-      val analy = new SmartAnalyzer(new NaiveBayes)
+      Given("Instantiate class SmartAnalyzer with DecisionTreeClassifier algorithmn and train with the specific model.")
+      val analy = new SmartAnalyzer(new DecisionTreeClassifier)
       val seq = Seq.apply(
-        ("X totally sucks :-(", 0.0),
-        ("Today was kind of meh", 1.0),
-        ("I'm so happy :-)", 2.0)
+        ("Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg", 0.0),
+        ("W0404 10:34:11.671890  1908 Client.java:576] Address change detected. ", 1.0),
+        ("E0216 16:37:23.511729  1693 logging.cc:120] stderr will be logged to this file.", 2.0)
       )
       analy.train(seq)
       try {
@@ -66,24 +66,24 @@ class SmartAnalyzerTest extends FeatureSpec with GivenWhenThen with Matchers {
     }
 
     scenario("Predict same result with the same model") {
-      Given("Instantiate class SmartAnalyzer with NaivesBayes algorithmn and train with the specific model.")
-      val analy = new SmartAnalyzer(new NaiveBayes)
+      Given("Instantiate class SmartAnalyzer with DecisionTreeClassifier algorithmn and train with the specific model.")
+      val analy = new SmartAnalyzer(new DecisionTreeClassifier)
       val seq = Seq.apply(
-        ("X totally sucks :-(", 0.0),
-        ("Today was kind of meh", 1.0),
-        ("I'm so happy :-)", 2.0)
+        ("Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg", 0.0),
+        ("W0404 10:34:11.671890 1908 Client.java:576] Address change detected. ", 1.0),
+        ("E0216 16:37:23.511729 1693 logging.cc:120] stderr will be logged to this file.", 2.0)
       )
       val predi = Seq.apply(
-        ("X totally sucks :-("),
-        ("Today was kind of meh"),
-        ("I'm so happy :-)")
+        "Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg",
+        "W0404 10:34:11.671890 1908 Client.java:576] Address change detected. ",
+        "E0216 16:37:23.511729 1693 logging.cc:120] stderr will be logged to this file."
       )
 
       When("Train the analyzer with the model.")
       analy.train(seq)
 
       Then("Prediction should stay the same")
-      analy.predict(predi) should equal(seq)
+      analy.predict(predi).map(_._2) should equal(seq.map(_._2))
     }
   }
 }

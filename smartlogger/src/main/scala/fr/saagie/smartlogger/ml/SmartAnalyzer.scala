@@ -123,10 +123,10 @@ M <: ProbabilisticClassificationModel[Vector, M]]
   }
 
   case class Log(errorLevel: String, date: Int,
-                 hour:String, threadId: Int, filename: String, line: Int, message: String)
+                 hour:Long, threadId: Int, filename: String, line: Int, message: String)
 
   case class LogWithLabel(errorLevel: String, date: Int,
-                          hour:String, threadId: Int, filename: String,
+                          hour:Long, threadId: Int, filename: String,
                           line: Int, message: String, criticality: Double)
 
 
@@ -136,7 +136,7 @@ M <: ProbabilisticClassificationModel[Vector, M]]
 
     var resultSeq:Seq[LogWithLabel] = Seq.empty
 
-    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) ([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) ([0-9]*) ([^:]*):([0-9])*\\] (.*)".r
+    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) *([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) *([0-9]*) *([^:]*):([0-9])*\\] (.*)".r
 
     var i = 0
 
@@ -144,9 +144,11 @@ M <: ProbabilisticClassificationModel[Vector, M]]
 
       line match {
         case logFormat(errorLevel, date, hour, threadId, filename, number, message) =>
-          resultSeq = resultSeq :+ LogWithLabel(errorLevel, date.toInt, hour, threadId.toInt, filename, number.toInt, message, data(i)._2)
+          var hourArray = hour.split(":")
+          var newHour = hourArray(0).toLong * 60 + hourArray(1).toLong
+          resultSeq = resultSeq :+ LogWithLabel(errorLevel, date.toInt, newHour, threadId.toInt, filename, number.toInt, message, data(i)._2)
         case _ =>
-          resultSeq = resultSeq :+ LogWithLabel("noErrorLevel", -1, "NoHour", -2, "NoFileName", -3, line, data(i)._2)
+          resultSeq = resultSeq :+ LogWithLabel("noErrorLevel", -1, 0, -2, "NoFileName", -3, line, data(i)._2)
       }
 
       i += 1
@@ -159,15 +161,17 @@ M <: ProbabilisticClassificationModel[Vector, M]]
   private def buildingDataFrame(data:Seq[String]):Seq[Log] = {
     var resultSeq:Seq[Log] = Seq.empty
 
-    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) ([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) ([0-9]*) ([^:]*):([0-9])*\\] (.*)".r
+    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) *([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) *([0-9]*) *([^:]*):([0-9])*\\] (.*)".r
 
     for (line <- data) {
 
       line match {
         case logFormat(errorLevel, date, hour, threadId, filename, number, message) =>
-          resultSeq = resultSeq :+ Log(errorLevel, date.toInt, hour, threadId.toInt, filename, number.toInt, message)
+          var hourArray = hour.split(":")
+          var newHour = hourArray(0).toLong * 60 + hourArray(1).toLong
+          resultSeq = resultSeq :+ Log(errorLevel, date.toInt, newHour, threadId.toInt, filename, number.toInt, message)
         case _ =>
-          resultSeq = resultSeq :+ Log("noErrorLevel", -1, "NoHour", -2, "NoFileName", -3, line)
+          resultSeq = resultSeq :+ Log("noErrorLevel", -1, 0, -2, "NoFileName", -3, line)
       }
 
     }

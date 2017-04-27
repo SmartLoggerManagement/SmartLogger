@@ -32,12 +32,12 @@ class SmartAnalyzerBenchmark extends FeatureSpec with GivenWhenThen {
   //  & testing if the result is good & transmitting
   //  the false results to track.
   def benchmark(analy: IAnalyzer, str: String): Unit = {
-    var source = Source.fromFile("src/test/resources/TrainData.txt")
+    var source = Source.fromFile("src/test/resources/TrainDataSaagie.txt")
     val data = source.mkString
 
     source.close()
 
-    val index = data.indexOf('\n', data.length / 2)
+    val index = data.indexOf('\n', 5900)
 
     val trainData = LogParser.parseTrainingData(data.substring(0, index))
     val predictData = LogParser.parsePredictData(data.substring(index)).drop(2)
