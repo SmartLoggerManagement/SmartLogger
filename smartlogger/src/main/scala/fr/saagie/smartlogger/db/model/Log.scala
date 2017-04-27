@@ -88,7 +88,7 @@ class Log(factory: AttributeFactory) extends DAOData {
   override protected def initialize(): Map[String, Attribute[_]] = {
     val result: Map[String, Attribute[_]] = Map.empty
     result.put("id", factory.newUUID(UUID.randomUUID()))
-    result.put("content", factory.newString("", 512))
+    result.put("content", factory.newCLOB(""))
     result.put("label", factory.newDouble(.0))
     return result
   }

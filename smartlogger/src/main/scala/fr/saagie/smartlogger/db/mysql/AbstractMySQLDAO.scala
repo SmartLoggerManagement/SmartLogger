@@ -37,12 +37,14 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
     val sql = "SHOW TABLES FROM " + getProperties().get("dbname") + " LIKE \'" + getTableName() + "\';"
 
     // Initialize Database connection, create the statement
-    val connection = DbConnector.connect(getProperties())
-    val statement = connection.createStatement()
+    val statement = getConnection().createStatement()
 
     // Executing the query
     val result = statement.executeQuery(sql)
-    return result.first()
+    val test = result.first()
+
+    result.close()
+    return test
   }
 
   /**

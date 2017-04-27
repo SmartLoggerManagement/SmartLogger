@@ -1,6 +1,8 @@
 package fr.saagie.smartlogger.db.mysql
 
-import java.sql.{PreparedStatement, ResultSet, Timestamp}
+import java.io.{BufferedInputStream, BufferedReader}
+import java.nio.CharBuffer
+import java.sql.{Clob, PreparedStatement, ResultSet, Timestamp}
 import java.util.UUID
 import javax.sql.rowset.serial.SerialClob
 
@@ -23,13 +25,25 @@ object AttrMySQLFactory extends AttributeFactory {
     /**
       * @inheritdoc
       */
-    override def getType(): String = "STRING"
+    override def getType(): String = "TEXT"
 
     /**
       * @inheritdoc
       */
     override def read(result: ResultSet, columnLabel: String): Unit = {
-      obj = result.getClob(columnLabel).toString
+      // Retrieving
+      val reader = new BufferedReader(result.getCharacterStream(columnLabel))
+      val text = new StringBuilder
+
+      // Reading text from reader
+      val it = reader.lines().iterator()
+      while (it.hasNext) {
+        text.append(it.next())
+      }
+      reader.close()
+
+      // Assigning text to the attribute's value
+      obj = text.toString
     }
 
     // COMMAND

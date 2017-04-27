@@ -2,6 +2,7 @@ package fr.saagie.smartlogger.ml
 
 import java.rmi.NotBoundException
 
+import org.apache.hadoop.conf.Configuration
 import org.apache.spark.ml.classification._
 import org.apache.spark.ml.feature._
 import org.apache.spark.ml.{Pipeline, PipelineModel}
@@ -36,6 +37,7 @@ M <: ProbabilisticClassificationModel[Vector, M]]
       .master("local")
       .appName("SmartLogger")
       .getOrCreate()
+
 
     val logs = buildingDataFrameWithLabels(data)
 
@@ -86,6 +88,7 @@ M <: ProbabilisticClassificationModel[Vector, M]]
       .master("local")
       .appName("SmartLogger")
       .getOrCreate()
+
 
     val logs = buildingDataFrame(data)
 
@@ -172,7 +175,4 @@ M <: ProbabilisticClassificationModel[Vector, M]]
     return resultSeq
 
   }
-
-
-
 }

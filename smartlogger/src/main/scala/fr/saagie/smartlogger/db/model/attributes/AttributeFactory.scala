@@ -20,7 +20,7 @@ trait AttributeFactory {
   def newCLOB(text: String): Attribute[String]
 
   /**
-    * Creates a new attribute to store CLOBs (Texts without size limits)
+    * Creates a new attribute to store UUIDs
     */
   def newUUID(value: UUID): Attribute[UUID]
 

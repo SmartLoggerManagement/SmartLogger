@@ -1,5 +1,7 @@
 package fr.saagie.smartlogger.db
 
+import java.sql.Connection
+
 import fr.saagie.smartlogger.db.model.DAOData
 import fr.saagie.smartlogger.db.model.attributes.{Attribute, AttributeFactory}
 import fr.saagie.smartlogger.utils.IPropertiesManager
@@ -62,6 +64,12 @@ trait DAO[T <: DAOData] {
 
   // COMMANDS
   /**
+    * Method call to build a new instance of type T.
+    * Used for query calls, in order to build the resulting sequence.
+    */
+  def newInstance(): T
+
+  /**
     * Builds the DAO's associated table
     */
   def build(): Unit
@@ -98,11 +106,22 @@ trait DAO[T <: DAOData] {
 
   // TOOLS
   /**
-    * Method call to build a new instance of type T.
-    * Used for query calls, in order to build the resulting
-    * sequence.
+    * The actual connection used for requests to the DBMS
     */
-  protected def newInstance(): T
+  protected var connection: Connection = null
+
+  /**
+    * Provides the connection used for requests to the DBMS.
+    * Defines a new one, if the last is now unusable
+    *
+    * @return A connection to the extern DBMS
+    */
+  protected def getConnection(): Connection = {
+    if (connection == null || !connection.isValid(1)) {
+      connection = DbConnector.connect(getProperties())
+    }
+    return connection
+  }
 
   /**
     * Method call when you request the Database.
@@ -122,8 +141,7 @@ trait DAO[T <: DAOData] {
     */
   protected def executeQuery(query: String, args: Seq[Attribute[_]]): Seq[T] = {
     // Initialize Database connection, create the statement, and run the query
-    val connection = DbConnector.connect(getProperties())
-    val statement = connection.prepareStatement(query)
+    val statement = getConnection().prepareStatement(query)
 
     // Adding arguments to statement
     if (args != null) {
@@ -149,10 +167,7 @@ trait DAO[T <: DAOData] {
       seq = seq.+:(obj)
     }
 
-    // Finally, we close the connection
     result.close()
-    DbConnector.close(connection)
-
     return seq
   }
   protected def executeQuery(query: String): Seq[T] = executeQuery(query, null)
@@ -177,8 +192,7 @@ trait DAO[T <: DAOData] {
     */
   protected def execute(query: String, args: Seq[Attribute[_]]): Unit = {
     // Initializing statement.
-    val connection = DbConnector.connect(getProperties())
-    val statement = connection.prepareStatement(query)
+    val statement = getConnection().prepareStatement(query)
 
     // Adding arguments to statement
     if (args != null) {
@@ -191,9 +205,6 @@ trait DAO[T <: DAOData] {
 
     // Executing the query
     statement.execute()
-
-    // Finally, we close the connection
-    DbConnector.close(connection)
   }
   protected def execute(query: String): Unit = execute(query, null)
 }

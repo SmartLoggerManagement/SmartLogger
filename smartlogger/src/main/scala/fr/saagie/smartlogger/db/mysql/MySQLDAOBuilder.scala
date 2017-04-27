@@ -16,7 +16,7 @@ object MySQLDAOBuilder extends DAOBuilder {
     * Produces a new DAO in order to handle Logs.
     */
   override def getLogDAO(): DAO[Log] = new AbstractMySQLDAO[Log] {
-    override protected def newInstance(): Log = new Log(getAttributeFactory())
+    override def newInstance(): Log = new Log(getAttributeFactory())
     override def getTableName(): String = "Log"
   }
 }
