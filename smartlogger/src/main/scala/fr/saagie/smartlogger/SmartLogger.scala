@@ -33,7 +33,7 @@ object SmartLogger {
   /**
     * The analyzer used for Analysis and Predicting.
     */
-  private val smartAnalyzer = AnalyzerBuilder.getNaiveBayes
+  private val smartAnalyzer = AnalyzerBuilder.getDecisionTreeClassifier
 
   /**
     * The alerter used by the system
@@ -127,7 +127,7 @@ object SmartLogger {
     println("Step 1 completed : The DAO has been initialized")
 
     // Extracting useful informations to train the system
-    // trainSystem()
+    trainSystem()
     println("Step 2 completed : The train model has been created")
 
     // Opening server
