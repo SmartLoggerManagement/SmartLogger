@@ -1,11 +1,14 @@
 package fr.saagie.smartlogger.io.input
 
+import java.io._
+
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model._
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
+import fr.saagie.smartlogger.SmartLogger
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
@@ -14,7 +17,16 @@ import fr.saagie.smartlogger.utils.Properties
 /**
   * Standard implementation of the InputManager
   *
-  * @author Jordan Baudin
+  * Handled requests :
+  *   (GET)
+  *   - /smartlogger/properties/{name} : Returns the property file associated with the given "name"
+  *
+  *   (PUT)
+  *   - /smartlogger/analyze : Analyzes all logs provided by the request
+  *   - /smartlogger/train : An order to force the system to train
+  *   - /smartlogger/properties/{name} : Alter the content of the associated property file
+  *
+  * @author Jordan BAUDIN, Franck CARON
   * @since SmartLogger 0.1
   * @version 1.0
   */
@@ -47,16 +59,21 @@ class InputManager extends IInputManager {
 
     // Defining the requestHandler to get the logs received from HTTP requests
     val requestHandler: HttpRequest => HttpResponse = {
-      // The PUT Request will give the logs, it needs to give them to the Batch
-      case r @ HttpRequest(PUT, Uri.Path("/smartlogger"), _, _, _) =>
-      val result = r.entity.toStrict(timeout).map { _.data }.map(_.utf8String)
-        for {res <- result } yield {
+      // The PUT Request to analyze logs
+      case r @ HttpRequest(PUT, Uri.Path("/smartlogger/analyze"), _, _, _) => analyze(r)
 
-          LogBatch.add(LogParser.parsePredictData(res))
+      // The PUT Request to train the system
+      case r @ HttpRequest(PUT, Uri.Path("/smartlogger/train"), _, _, _) => train(r)
 
-        }
-        HttpResponse(200, entity = "Data received !")
+      // The PUT Request to alter a properties file
+      case r @ HttpRequest(PUT, uri, _, _, _)
+        if uri.path.startsWith(Uri.Path("/smartlogger/properties")) => putProperties(r)
 
+      // The GET Request to read a properties file
+      case r @ HttpRequest(GET, uri, _, _, _)
+        if uri.path.startsWith(Uri.Path("/smartlogger/properties") )=> getProperties(r)
+
+      // Unknown request type
       case r: HttpRequest =>
         r.discardEntityBytes() // important to drain incoming HTTP Entity stream
         HttpResponse(404, entity = "Unknown resource!")
@@ -76,5 +93,80 @@ class InputManager extends IInputManager {
     materializer.shutdown()
     Await.result(system.terminate(), 1 second)
     serverSource = null
+  }
+
+
+  // ACTIONS
+  /**
+    * Handles /smartlogger/analyze PUT requests
+    * Adds all logs received to the batch, in order to be analyzed later.
+    */
+  def analyze(httpRequest: HttpRequest): HttpResponse = {
+    val result = httpRequest.entity.toStrict(timeout).map { _.data }.map(_.utf8String)
+    for {res <- result } yield {
+      LogBatch.add(LogParser.parsePredictData(res))
+    }
+
+    HttpResponse(200, entity = "Data received ! Sent to be analyzed")
+  }
+
+  /**
+    * Handles /smartlogger/train PUT requests
+    * Adds all logs received to the batch, in order to be analyzed later.
+    */
+  def train(httpRequest: HttpRequest): HttpResponse = {
+    SmartLogger.trainSystem()
+    HttpResponse(200, entity = "Order received ! The system has been trained")
+  }
+
+  /**
+    * Handles /smartlogger/properties/{name} PUT requests
+    * Returns all logs received to the batch, in order to be analyzed later.
+    */
+  def putProperties(httpRequest: HttpRequest): HttpResponse = {
+    // Extracting filename
+    val path = httpRequest.uri.path.toString()
+    val filename = path.split("/").last
+
+    // Writing content of .properties file
+    try {
+      val writer = new BufferedWriter(new FileWriter(new File(Properties.DIRECTORY + filename)))
+      val result = httpRequest.entity.toStrict(timeout).map { _.data }.map(_.utf8String)
+      for {res <- result } yield {
+        writer.write(res)
+      }
+      writer.close()
+    } catch {
+      case e:Exception => return HttpResponse(404, entity = "Properties file not found")
+    }
+
+    // Returning answer
+    HttpResponse(200, entity = "File received ! The properties has been updated")
+  }
+
+  /**
+    * Handles /smartlogger/properties/{name} GET requests
+    * Returns all logs received to the batch, in order to be analyzed later.
+    */
+  def getProperties(httpRequest: HttpRequest): HttpResponse = {
+    // Extracting filename
+    val path = httpRequest.uri.path.toString()
+    val filename = path.split("/").last
+
+    // Reading content of .properties file
+    val content = new StringBuilder
+    try {
+      val reader = new BufferedReader(new FileReader(new File(Properties.DIRECTORY + filename)))
+      val it = reader.lines().iterator()
+      while (it.hasNext) {
+        content.append(it.next())
+      }
+      reader.close()
+    } catch {
+      case e:Exception => return HttpResponse(404, entity = "Properties file not found")
+    }
+
+    // Returning answer
+    HttpResponse(200, entity = content.toString)
   }
 }

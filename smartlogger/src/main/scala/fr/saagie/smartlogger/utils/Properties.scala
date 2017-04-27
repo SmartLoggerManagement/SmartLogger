@@ -12,7 +12,7 @@ object Properties {
   /**
     * The directory containing all .properties files
     */
-  private val PROPERTIES_DIRECTORY = "resources/"
+  val DIRECTORY = "resources/"
 
   // PROPERTIES MANAGERS
   /**
@@ -51,5 +51,5 @@ object Properties {
     * file, which must be located in PROPERTIES_DIRECTORY
     */
   private def load(filename:String): IPropertiesManager = new EncryptedPropertiesManager()
-    .load(PROPERTIES_DIRECTORY + filename)
+    .load(DIRECTORY + filename)
 }

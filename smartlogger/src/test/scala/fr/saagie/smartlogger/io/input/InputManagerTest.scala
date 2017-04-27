@@ -12,6 +12,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
   private val SLEEP_TIME = 1000
+  private val SERVER_URL = "http://127.0.0.1:8088/smartlogger/"
 
   private val input = new InputManager
 
@@ -24,7 +25,7 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
 
 
       When("Send a log by PUT")
-      clt.sendPutRequest("Test Data", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPutRequest("Test Data", SERVER_URL + "analyze")
       Thread.sleep(SLEEP_TIME)
 
       Then("Retrieve log from LogBatch")
@@ -41,7 +42,7 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       val clt: ClientTest = new ClientTest()
       val maxOpenedFiles = 200 // max number of files that can be opened on test environment at one time
       for (i <- 0 until maxOpenedFiles) {
-        clt.sendPutRequest("" + i, "http://127.0.0.1:8088/smartlogger")
+        clt.sendPutRequest("" + i, SERVER_URL + "analyze")
       }
       Thread.sleep(SLEEP_TIME)
       var batchContent = LogBatch.getBatch()
@@ -59,7 +60,7 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       val clt: ClientTest = new ClientTest()
 
       When("Send a request POST")
-      clt.sendPostRequest("Test Data", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPostRequest("Test Data", SERVER_URL + "analyze")
 
       Then("Retrieve information from LogBatch")
       Thread.sleep(SLEEP_TIME)
@@ -77,17 +78,17 @@ class InputManagerTest extends FeatureSpec with GivenWhenThen with Matchers {
       val clt: ClientTest = new ClientTest()
 
       When("Send three PUT requests")
-      clt.sendPutRequest("Test Data1", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPutRequest("Test Data1", SERVER_URL + "analyze")
       Thread.sleep(SLEEP_TIME)
       input.close()
       Thread.sleep(SLEEP_TIME)
-      clt.sendPutRequest("Closed Request", "http://127.0.0.1:8088/smartlogger")
-      clt.sendPutRequest("Closed Request2", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPutRequest("Closed Request", SERVER_URL + "analyze")
+      clt.sendPutRequest("Closed Request2", SERVER_URL + "analyze")
       Thread.sleep(SLEEP_TIME)
       input.open()
       Thread.sleep(SLEEP_TIME)
-      clt.sendPutRequest("Test Data2", "http://127.0.0.1:8088/smartlogger")
-      clt.sendPutRequest("Test Data3", "http://127.0.0.1:8088/smartlogger")
+      clt.sendPutRequest("Test Data2", SERVER_URL + "analyze")
+      clt.sendPutRequest("Test Data3", SERVER_URL + "analyze")
       Thread.sleep(SLEEP_TIME)
 
       Then("Retrieve information from LogBatch")

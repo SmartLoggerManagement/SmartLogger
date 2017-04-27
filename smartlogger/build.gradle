@@ -1,10 +1,10 @@
 ////  Main information ////
 group 'smartLogger'
-version 'SNAPSHOT-0.2'
+version 'SNAPSHOT-0.3'
 
 
 //// Variables define ////
-def jarVersion = 23
+def jarVersion = 1
 def mainClass  = "fr.saagie.smartlogger.SmartLogger"
 def jarName    = "smartLogger-" + version + "." + jarVersion + ".jar"
 def appName    = "SmartLogger"

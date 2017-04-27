@@ -47,7 +47,7 @@ object SmartLogger {
     * If the table hasn't been built yet, it is created with the initial content
     * which is located inside the file resources/TrainData.txt
     */
-  private def initializeDAO(): Unit = {
+  def initializeDAO(): Unit = {
     if (!DAO.exists()) {
       DAO.build()
 
@@ -74,11 +74,21 @@ object SmartLogger {
   }
 
   /**
+    * Defines a new analysis's model by training the system with
+    * all data inside the Log's table
+    */
+  def trainSystem(): Unit = {
+    val dbLogs = DAO.get()
+    val data: Seq[(String, Double)] = dbLogs.map(log => (log.getContent, log.getLabel))
+    smartAnalyzer.train(data)
+  }
+
+  /**
     * Defines an alerter which will be used for alerts. Consists at
     * creating its notifiers (Slack, Mail, ...), which will do the alert
     * for a given situation.
     */
-  private def initializeAlerter(): Unit = {
+  def initializeAlerter(): Unit = {
     // Adding MAIL notifier
     // -- Retrieve infos from properties mail file.
     val mailProps = Properties.MAIL
@@ -117,9 +127,7 @@ object SmartLogger {
     println("Step 1 completed : The DAO has been initialized")
 
     // Extracting useful informations to train the system
-    val dbLogs = DAO.get()
-    val data: Seq[(String, Double)] = dbLogs.map(log => (log.getContent, log.getLabel))
-    smartAnalyzer.train(data)
+    // trainSystem()
     println("Step 2 completed : The train model has been created")
 
     // Opening server
