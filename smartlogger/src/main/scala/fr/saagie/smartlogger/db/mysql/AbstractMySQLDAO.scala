@@ -21,7 +21,7 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
   /**
     * @inheritdoc
     */
-  override def getProperties() = Properties.DB
+  override def getProperties() = Properties.DB_TEST
 
   /**
     * @inheritdoc
@@ -48,7 +48,7 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
   /**
     * @inheritdoc
     */
-  override def get(condition: String, args: Seq[Attribute[_ <: Object]]): Seq[T] = {
+  override def get(condition: String, args: Seq[Attribute[_]]): Seq[T] = {
     // Retrieving data
     var sql = "SELECT * FROM " + getFullName()
 
@@ -122,7 +122,7 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
   /**
     * @inheritdoc
     */
-  override def update(set: Map[String, Attribute[_ <: Object]], condition: String, where: Seq[Attribute[_ <: Object]]): Unit = {
+  override def update(set: Map[String, Attribute[_]], condition: String, where: Seq[Attribute[_]]): Unit = {
     // Filtering input with defined keys
     val obj = newInstance()
     set.filterKeys(key => obj.attributes.contains(key))
@@ -133,7 +133,7 @@ abstract protected[mysql] class AbstractMySQLDAO[T <: DAOData] extends DAO[T] {
     // Building request
     val sql = new StringBuilder
     sql.append("UPDATE ").append(getFullName()).append(" SET ")
-    var args: Seq[Attribute[_ <: Object]] = Seq.empty
+    var args: Seq[Attribute[_]] = Seq.empty
 
     // Defining SET part of the request
     val keys = set.keys.iterator

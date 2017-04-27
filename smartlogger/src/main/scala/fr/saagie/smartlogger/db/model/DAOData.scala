@@ -24,12 +24,12 @@ trait DAOData {
     *
     * @return Returns the corresponding map
     */
-  val attributes: Map[String, Attribute[_ <: Object]] = initialize()
+  val attributes: Map[String, Attribute[_]] = initialize()
 
   // TOOLS
   /**
     * Initializes the attributes' map.
     * Aims at building all attributes managed in this object.
     */
-  protected def initialize(): Map[String, Attribute[_ <: Object]]
+  protected def initialize(): Map[String, Attribute[_]]
 }

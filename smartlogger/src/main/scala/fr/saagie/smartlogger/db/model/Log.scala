@@ -30,6 +30,17 @@ class Log(factory: AttributeFactory) extends DAOData {
   def getId: UUID = attributes("id").asInstanceOf[Attribute[UUID]].value
 
   /**
+    * Get the label of the Log (The flag value which has been defined by
+    * the analysis system, to describes the log's content)
+    *
+    * @return
+    *   Return the label of the log.
+    * @since SmartLogger 0.2
+    * @version 1.0
+    */
+  def getLabel: Double = attributes("label").asInstanceOf[Attribute[Double]].value
+
+  /**
     * Get the content of the log.
     *
     * @return
@@ -47,7 +58,7 @@ class Log(factory: AttributeFactory) extends DAOData {
     * @since SmartLogger 0.2
     * @version 1.0
     */
-  override def toString: String = this.getId.toString + " : " + this.getContent
+  override def toString: String = getId.toString + "(" + getLabel + ") : " + getContent
 
 
   // COMMANDES
@@ -65,12 +76,20 @@ class Log(factory: AttributeFactory) extends DAOData {
     attributes("content").asInstanceOf[Attribute[String]].set(text)
   }
 
+  /**
+    * Set's the log's label
+    */
+  def setLabel(value: Double) = {
+    attributes("label").asInstanceOf[Attribute[Double]].set(value)
+  }
+
 
   // TOOLS
-  override protected def initialize(): Map[String, Attribute[_ <: Object]] = {
-    val result: Map[String, Attribute[_ <: Object]] = Map.empty
+  override protected def initialize(): Map[String, Attribute[_]] = {
+    val result: Map[String, Attribute[_]] = Map.empty
     result.put("id", factory.newUUID(UUID.randomUUID()))
     result.put("content", factory.newString("", 512))
+    result.put("label", factory.newDouble(.0))
     return result
   }
 }

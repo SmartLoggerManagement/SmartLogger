@@ -57,7 +57,7 @@ trait DAO[T <: DAOData] {
     * @param args The attributes as (label, data) pairs,
     *             used to complete the prepared statement
     */
-  def get(condition: String, args: Seq[Attribute[_ <: Object]]): Seq[T]
+  def get(condition: String, args: Seq[Attribute[_]]): Seq[T]
 
 
   // COMMANDS
@@ -93,7 +93,7 @@ trait DAO[T <: DAOData] {
     * @param where Defines all values in the condition, values needs to be defined
     *              in the order of values's definition
     */
-  def update(set: Map[String, Attribute[_ <: Object]], condition: String, where: Seq[Attribute[_ <: Object]]): Unit
+  def update(set: Map[String, Attribute[_]], condition: String, where: Seq[Attribute[_]]): Unit
 
 
   // TOOLS
@@ -120,7 +120,7 @@ trait DAO[T <: DAOData] {
     * @return
     *   Return an instance of Seq who contain all logs retrieve from the Database or an empty Sequence.
     */
-  protected def executeQuery(query: String, args: Seq[Attribute[_ <: Object]]): Seq[T] = {
+  protected def executeQuery(query: String, args: Seq[Attribute[_]]): Seq[T] = {
     // Initialize Database connection, create the statement, and run the query
     val connection = DbConnector.connect(getProperties())
     val statement = connection.prepareStatement(query)
@@ -175,7 +175,7 @@ trait DAO[T <: DAOData] {
     *   All arguments which will be used to complete the "prepared" part
     *   of the query.
     */
-  protected def execute(query: String, args: Seq[Attribute[_ <: Object]]): Unit = {
+  protected def execute(query: String, args: Seq[Attribute[_]]): Unit = {
     // Initializing statement.
     val connection = DbConnector.connect(getProperties())
     val statement = connection.prepareStatement(query)

@@ -77,7 +77,7 @@ class DAOTest extends FeatureSpec with Matchers with GivenWhenThen with BeforeAn
       val dao = DAOBuilder.getLogDAO()
 
       When("Query the Database with the query and analyse the result")
-      var seq: Seq[Attribute[_ <: Object]] = Seq.empty
+      var seq: Seq[Attribute[_]] = Seq.empty
         seq = seq.+:(dao.getAttributeFactory().newUUID(invalidUuid))
 
       val result = dao.get("id = ?", seq)
@@ -93,7 +93,7 @@ class DAOTest extends FeatureSpec with Matchers with GivenWhenThen with BeforeAn
       val newContent = "Updated content"
 
       // Defining SET part
-      val set:Map[String, Attribute[_ <: Object]] = Map.empty
+      val set:Map[String, Attribute[_]] = Map.empty
         set.put("content", dao.getAttributeFactory().newString(newContent, 16))
       val where = Seq.empty.+:(dao.getAttributeFactory().newUUID(defaultId))
 
