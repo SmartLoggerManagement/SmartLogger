@@ -2,11 +2,14 @@ package fr.saagie.smartlogger.ml
 
 import java.rmi.NotBoundException
 
+import fr.saagie.smartlogger.utils.Properties
 import org.apache.hadoop.conf.Configuration
 import org.apache.spark.ml.classification._
 import org.apache.spark.ml.feature._
 import org.apache.spark.ml.{Pipeline, PipelineModel}
 import org.apache.spark.sql.{Row, SparkSession}
+
+import scala.util.matching.Regex
 
 /**
   * Standard implementation of an analyzer.
@@ -54,14 +57,22 @@ M <: ProbabilisticClassificationModel[Vector, M]]
       .setNumFeatures(1000)
       .setInputCol(tokenizer.getOutputCol)
       .setOutputCol("wordsFeatures")
+    val tokenizerEnvironment = new Tokenizer()
+      .setInputCol("environment")
+      .setOutputCol("wordsEnvironment")
+    val hashingTFEnvironment = new HashingTF()
+      .setNumFeatures(1000)
+      .setInputCol(tokenizerEnvironment.getOutputCol)
+      .setOutputCol("wordsFeaturesEnvironment")
 
     val formula = new RFormula()
-      .setFormula("criticality ~ errorLevel + date + hour + threadId + filename + line + " + hashingTF.getOutputCol)
+      .setFormula("criticality ~ errorLevel + date + hour + threadId + filename + line + "
+        + hashingTF.getOutputCol + " + " + hashingTFEnvironment.getOutputCol)
       .setFeaturesCol("features")
       .setLabelCol("label")
 
     val pipeline = new Pipeline()
-      .setStages(Array.apply(tokenizer, hashingTF, formula, algo))
+      .setStages(Array.apply(tokenizer, hashingTF, tokenizerEnvironment, hashingTFEnvironment, formula, algo))
 
     // Train the model
 
@@ -123,11 +134,14 @@ M <: ProbabilisticClassificationModel[Vector, M]]
   }
 
   case class Log(errorLevel: String, date: Int,
-                 hour:Long, threadId: Int, filename: String, line: Int, message: String)
+                 hour:Long, threadId: Int, filename: String,
+                 line: Int, message: String,
+                 environment: String)
 
   case class LogWithLabel(errorLevel: String, date: Int,
                           hour:Long, threadId: Int, filename: String,
-                          line: Int, message: String, criticality: Double)
+                          line: Int, message: String,
+                          environment: String, criticality: Double)
 
 
 
@@ -136,7 +150,7 @@ M <: ProbabilisticClassificationModel[Vector, M]]
 
     var resultSeq:Seq[LogWithLabel] = Seq.empty
 
-    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) *([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) *([0-9]*) *([^:]*):([0-9])*\\] (.*)".r
+    val logFormat = Properties.FEATURES.get("logFormat").r
 
     var i = 0
 
@@ -146,9 +160,26 @@ M <: ProbabilisticClassificationModel[Vector, M]]
         case logFormat(errorLevel, date, hour, threadId, filename, number, message) =>
           var hourArray = hour.split(":")
           var newHour = hourArray(0).toLong * 60 + hourArray(1).toLong
-          resultSeq = resultSeq :+ LogWithLabel(errorLevel, date.toInt, newHour, threadId.toInt, filename, number.toInt, message, data(i)._2)
+          val environmentPattern = Properties.FEATURES.get("exception").r
+          var environment:String = ""
+          message match {
+            case environmentPattern(element) =>
+              environment = element
+            case _ =>
+              environment = "noEnvironment"
+          }
+
+          resultSeq = resultSeq :+ LogWithLabel(errorLevel, date.toInt, newHour, threadId.toInt, filename, number.toInt, message, environment, data(i)._2)
         case _ =>
-          resultSeq = resultSeq :+ LogWithLabel("noErrorLevel", -1, 0, -2, "NoFileName", -3, line, data(i)._2)
+          var environment:String = ""
+          val environmentPattern = Properties.FEATURES.get("exception").r
+          line match {
+            case environmentPattern(element) =>
+              environment = element
+            case _ =>
+              environment = "noEnvironment"
+          }
+          resultSeq = resultSeq :+ LogWithLabel("noErrorLevel", 1, 2, 3, "NoFileName", 0, line, environment, data(i)._2)
       }
 
       i += 1
@@ -161,7 +192,7 @@ M <: ProbabilisticClassificationModel[Vector, M]]
   private def buildingDataFrame(data:Seq[String]):Seq[Log] = {
     var resultSeq:Seq[Log] = Seq.empty
 
-    val logFormat = "([IWEF])([0-1][0-9][0-3][0-9]) *([0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]*) *([0-9]*) *([^:]*):([0-9])*\\] (.*)".r
+    val logFormat = Properties.FEATURES.get("logFormat").r
 
     for (line <- data) {
 
@@ -169,9 +200,27 @@ M <: ProbabilisticClassificationModel[Vector, M]]
         case logFormat(errorLevel, date, hour, threadId, filename, number, message) =>
           var hourArray = hour.split(":")
           var newHour = hourArray(0).toLong * 60 + hourArray(1).toLong
-          resultSeq = resultSeq :+ Log(errorLevel, date.toInt, newHour, threadId.toInt, filename, number.toInt, message)
+          var environment:String = ""
+          val environmentPattern = Properties.FEATURES.get("exception").r
+          message match {
+            case environmentPattern(element) =>
+              environment = element
+            case _ =>
+              environment = "noEnvironment"
+          }
+
+          resultSeq = resultSeq :+ Log(errorLevel, date.toInt, newHour, threadId.toInt,
+            filename, number.toInt, message, environment)
         case _ =>
-          resultSeq = resultSeq :+ Log("noErrorLevel", -1, 0, -2, "NoFileName", -3, line)
+          var environment:String = ""
+          val environmentPattern = Properties.FEATURES.get("exception").r
+          line match {
+            case environmentPattern(element) =>
+              environment = element
+            case _ =>
+              environment = "noEnvironment"
+          }
+          resultSeq = resultSeq :+ Log("noErrorLevel", 1, 2, 3, "NoFileName", 0, line, environment)
       }
 
     }
