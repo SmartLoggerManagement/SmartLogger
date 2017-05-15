@@ -77,7 +77,7 @@ Afin de gérer l'apprentissage automatique de l'application, notre client nous a
 Après des essais, il était assez clair que l'un ou l'autre était parfaitement adapté à notre besoin, le changement n'apportant simplement que des optimisations temporels et visuels dans le code.
 
 #### Une librairie pour l'API Slack : Scala-Slack
-Concernant le contact auprès de l'API Slack, il était nécessaire de faire des recherches auprès du 
+Concernant le contact auprès de l'*API Slack*, il était nécessaire de faire des recherches auprès du site de celui-ci. *Slack* étant utilisé par de plus en plus de développeurs, nous avons pu utiliser une bibliothèque dédié à la communication entre une application et l'*API Slack*.
 
 #### Un gestionnaire de dépendance : Gradle
 
