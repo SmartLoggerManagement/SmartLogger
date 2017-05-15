@@ -25,13 +25,14 @@ Pour cela, il utilise un _Batch_  se vidant toutes les X secondes, afin de stock
 #### Module de Conversion / Vérification
 Ce module permet de "nettoyer" les logs reçu afin de garder uniquement les données valides, dont a besoin SmartLogger pour fonctionner. Il est constitué d'une classe `LogParser` permettant de parser et de nettoyer les logs reçu afin de ne garder le contenu nécessaire au fonctionnement du module analytique.
 
-####Module Analytique
+#### Module Analytique
 Le module analytique représente le coeur de l'application, celui-ci est constitué de 2 classes. 
 La première : `AnalyzerBuilder` permet de facilement changer l'algorithme utilisé par l'analyseur. Cette classe permet l'implémentation des algorithmes suivant : 
 - NaiveBayes
 - LogisticRegression
 - DecisionTreeClassifier
 - RandomForestClassifier
+
 La classe principale du module est la classe `SmartAnalyzer`, celle-ci a pour rôle de représenter la partie analytique de SmartLogger. Utilisant les algorithmes issues du framework _Apache Spark_, cette classe est capable de prédire des évenements en fonction d'un modèle prédéfini par l'utilisateur de l'application. Son rôle dans le projet consiste, à partir d'un ensemble de logs reçu du _Batch_ du module d'entrée, à prédire si ceux-ci sont _critique_ dans le cadre de sa génération ou bien si ceux-ci sont routinier est n'indique aucun problème de fonctionnement du serveur ou du service externe.
 
 #### Module de Base de Données
@@ -56,9 +57,19 @@ Ces classes permettent ainsi de charger des fichiers properties afin d'intégrer
 Maintenant que nous avons défini ensemble les différentes modules et les technologies liées.
 Nous allons revenir sur les technologies de manière plus détaillé, afin notamment d'expliquer l'intérêt de celles-ci dans le cadre de SmartLogger, ainsi que les technologies potentielles qui auraient pu être mis en place en remplacement de ce qui est présent actuellement. 
 
-#### Un langage : Scala
+#### Un langage pour tout unifier : Scala (et dans les ténèbres les liés)
+Scala est un surcouche du langage de développement Java. Scala est un langage multi-paradigme permettant le développement via le paradigme objet ainsi que fonctionnelle. Nous avons choisi d'utiliser Scala dans l'entièreté du projet, car celui-ci procure un ensemble d'avantages non négligeables.
+
+Celui-ci étant principalement rédigé en Scala, nous avons souhaité poursuivre entièrement en Scala, car celui-ci présente quelques avantages notamment le fait qu'il est moins _verbeux_ que le Java, allégant ainsi le code produit. De plus, il est plus performant que le Java lors d'opération _multi_threader_, chose essentielle pour le module Analytique de SmartLogger. Pour finir, sur un plan purement didactique, la manipulation de ce nouveau langage nous a permis de nous confronter à de nouveaux mode de développement, ce qui accentue encore l'utilité du Scala dans le projet.
+
 
 #### Un framework de gestion des flux HTTP : Akka
+Ici, afin de suivre la continuité de développement en Scala, nous avons opté pour le framework _Akka_ afin de gérer les requêtes HTTP reçu depuis les services et systèmes externes. 
+En effet, en plus de répondre au besoin que nous avons, celui-ci se révèle apte à supporter un ensemble de requête bien plus important que ce que nous lui imposons pour le projet SmartLogger. Concrétement, en cas de passage a une échelle supérieur de l'application, avec la réception de plusieurs milliers de logs à la seconde. Nous savons que SmartLogger pourra supporter le choc sans devoir revoir le fonctionnement du module d'entrée.
+
+Les flux HTTP auraient pu être gérer via le framework _Spring-Boot_, notamment via le principe de _RestController_ permettant, en fonction d'une _URL_ précise (une route), de définir des actions à effectuer sur SmartLogger, tels que la récupérer de l'ensembles des logs stockés dans la base de données, ou encore le ré-entrainement du modèle afin de le corriger. 
+Cependant, dans l'optique que nous avions définit, nous avons préféré utiliser _Akka_, car celui-ci permettais de faire évoluer les futur potentiels besoins de SmartLogger sur de gros volume de logs a traiter.
+
 
 #### Un framework pour la gestion de l'apprentissage : Apache Spark
 
