@@ -80,5 +80,10 @@ Après des essais, il était assez clair que l'un ou l'autre était parfaitement
 Concernant le contact auprès de l'*API Slack*, il était nécessaire de faire des recherches auprès du site de celui-ci. *Slack* étant utilisé par de plus en plus de développeurs, nous avons pu utiliser une bibliothèque dédié à la communication entre une application et l'*API Slack*.
 
 #### Un gestionnaire de dépendance : Gradle
+Afin de gérer les dépendances du projet, nous avons choisi d'utiliser *Gradle*. En effet, *Gradle* est un gestionnaire de dépendance utilisant le langage *Groovy* afin de gérer le téléchargement et l'utilisation des dépendances du projet SmartLogger. 
+
+Nous avons choisi d'utiliser *Gradle* car celui-ci est le gestionnaire le plus moderne, et celui qui semblait être le plus prometteur. Cependant, sa modernité rends la documentation de l'outil difficilement maniable due à une faible utilisation en comparaison avec des outils plus anciens tels que *Ant* ou encore *Maven*.
+
+De ce fait, nous aurions pu utliisé *Maven* comme gestionnaire de dépendance, mais au vu des technologies que nous utilisions, nous avons opté pour les technologies les plus récentes possible.
 
 ### Extensions des technologies
