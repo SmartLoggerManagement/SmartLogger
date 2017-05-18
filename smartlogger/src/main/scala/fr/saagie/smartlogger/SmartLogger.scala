@@ -28,7 +28,7 @@ object SmartLogger {
   /**
     * The DAO used for DBMS interaction with SmartLogger
     */
-  private val DAO = MySQLDAOBuilder.getLogDAO()
+  val DAO = MySQLDAOBuilder.getLogDAO()
 
   /**
     * The analyzer used for Analysis and Predicting.

@@ -17,6 +17,6 @@ object MySQLDAOBuilder extends DAOBuilder {
     */
   override def getLogDAO(): DAO[Log] = new AbstractMySQLDAO[Log] {
     override def newInstance(): Log = new Log(getAttributeFactory())
-    override def getTableName(): String = "Log"
+    override def getTableName(): String = "log"
   }
 }

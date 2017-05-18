@@ -23,6 +23,7 @@ import fr.saagie.smartlogger.utils.Properties
   *
   *   (PUT)
   *   - /smartlogger/analyze : Analyzes all logs provided by the request
+  *   - /smartlogger/provide : Saves all labelled logs provided by the request
   *   - /smartlogger/train : An order to force the system to train
   *   - /smartlogger/properties/{name} : Alter the content of the associated property file
   *
@@ -61,6 +62,9 @@ class InputManager extends IInputManager {
     val requestHandler: HttpRequest => HttpResponse = {
       // The PUT Request to analyze logs
       case r @ HttpRequest(PUT, Uri.Path("/smartlogger/analyze"), _, _, _) => analyze(r)
+
+      // The PUT Request to store training data in the system
+      case r @ HttpRequest(PUT, Uri.Path("/smartlogger/provide"), _, _, _) => provide(r)
 
       // The PUT Request to train the system
       case r @ HttpRequest(PUT, Uri.Path("/smartlogger/train"), _, _, _) => train(r)
@@ -108,6 +112,28 @@ class InputManager extends IInputManager {
     }
 
     HttpResponse(200, entity = "Data received ! Sent to be analyzed")
+  }
+
+  /**
+    * Handles /smartlogger/provide PUT requests
+    * Adds all logs received to the database, as samples for coming trainings.
+    */
+  def provide(httpRequest: HttpRequest): HttpResponse = {
+    val result = httpRequest.entity.toStrict(timeout).map { _.data }.map(_.utf8String)
+    for {res <- result } yield {
+      val logs = LogParser.parseTrainingData(res)
+
+      // Inserting new parsed logs into the database
+      for ((content, label) <- logs) {
+        val log = SmartLogger.DAO.newInstance()
+        log.setLabel(label)
+        log.setContent(content)
+
+        SmartLogger.DAO.insert(log)
+      }
+    }
+
+    HttpResponse(200, entity = "Data received ! Saved for future trainings")
   }
 
   /**
