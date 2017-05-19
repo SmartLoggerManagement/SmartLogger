@@ -2,7 +2,7 @@
 
 Ce projet m'a permis de découvrir de nouvelles méthodes de travail, de nouvelles manières d'appréhender et de m'organiser pour un projet - les méthodes agiles.
 De plus, il m'a été possible de travailler sur de nouveaux aspects d'un projet, notamment les tests, étant donné que j'étais le responsable qualité de l'équipe SmartLogger. 
-Finalement, étant donné que l'ensemble des technologies que nous avons utilisés pour SmartLogger étaient des technologies nouvelles,tel que Spark ou Scalla m'a permis d'en apprendre plus sur la matière
+Finalement, étant donné que l'ensemble des technologies que nous avons utilisés pour SmartLogger étaient des technologies nouvelles,tel que Spark ou Scala m'a permis d'en apprendre plus sur la matière
 
 # II Difficultés rencontrés
 
