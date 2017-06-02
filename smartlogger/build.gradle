@@ -1,0 +1,108 @@
+////  Main information ////
+group 'smartLogger'
+version 'SNAPSHOT-0.3'
+
+
+//// Variables define ////
+def jarVersion = 1
+def mainClass  = "fr.saagie.smartlogger.SmartLogger"
+def jarName    = "smartLogger-" + version + "." + jarVersion + ".jar"
+def appName    = "SmartLogger"
+def vendor     = "Team SmartLogger"
+
+
+// Plugins used by gradle.
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+
+////  Repositories to search dependencies ////
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' } // Use to call github project.
+}
+
+
+////  Dependencies used in project ////
+dependencies {
+    compile(
+            // Scala
+            'org.scala-lang:scala-library:2.11',
+            // Spark
+            'org.apache.spark:spark-core_2.11:2.1.0',
+            'org.apache.spark:spark-mllib_2.11:2.1.0',
+            'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
+            // Akka
+            'com.typesafe.akka:akka-http-core_2.11:10.0.3',
+            'com.typesafe.akka:akka-http_2.11:10.0.3',
+            // Mail
+            'javax.mail:mail:1.4.7',
+            // Slack API
+            'com.github.ponkotuy:scala-slack:0.4.0',
+            // DB
+            'mysql:mysql-connector-java:6.0.6',
+            "org.apache.hadoop:hadoop-client:2.8.0",
+            "org.apache.hive:hive-jdbc:2.1.1",
+            "log4j:log4j:1.2.17",
+    )
+
+    // Test execution
+    testCompile(
+            // Test libraries used in project.
+            'org.scala-lang:scala-library:2.11',
+            'org.scalatest:scalatest_2.11:3.0.1',
+            'junit:junit:4.12',
+            'org.mockito:mockito-core:2.+',
+            'org.easymock:easymock:3.4',
+            'org.springframework.boot:spring-boot-starter-test:1.5.3.RELEASE',
+
+            // Other libraries used in environment.
+            'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.8.6',
+            'org.apache.spark:spark-core_2.11:2.1.0',
+            'org.apache.spark:spark-mllib_2.11:2.1.0',
+            'com.typesafe.akka:akka-http-core_2.11:10.0.3',
+            'com.typesafe.akka:akka-http_2.11:10.0.3',
+            'javax.mail:mail:1.4.7',
+    )
+}
+
+
+////  JAR settings ////
+jar {
+    // Name of the archive.
+    archiveName = jarName
+
+    // Manifest for the .jar configuration.
+    manifest {
+        attributes(
+                "Main-Class": mainClass,
+                "Implementation-Title": appName,
+                "Implementation-Version": version,
+                "Created-By" : vendor,
+                "Class-Path": jarName + " " + configurations.compile.collect { it.getName() }.join(' '),
+        )
+    }
+
+    // Exclude others Manifest
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+
+    // FatJar building settings.
+    from {
+        configurations.compile.collect {
+            zip64 = true
+            it.isDirectory() ? it : zipTree(it)
+        }
+        configurations.runtime.collect {
+            zip64 = true
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    // Add resources on fatJar.
+    from('resources') {
+        include("*")
+        into("resources/")
+    }
+}
